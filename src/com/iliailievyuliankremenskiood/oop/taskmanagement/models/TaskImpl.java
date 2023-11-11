@@ -6,7 +6,6 @@ import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public abstract class TaskImpl implements Task {
@@ -28,7 +27,7 @@ public abstract class TaskImpl implements Task {
         setDescription(description);
         this.comments = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
-        logCreation(id, title, description);
+        logCreation();
     }
 
 
@@ -66,7 +65,7 @@ public abstract class TaskImpl implements Task {
 
 
     private void setTitle(String title) {
-        if (validateName(title)) {
+        if (validateTitle(title)) {
             this.title = title;
         }
     }
@@ -80,18 +79,20 @@ public abstract class TaskImpl implements Task {
 
     /*<-------Behavioural Method(s)------->*/
     @Override /*Printable*/
-    abstract public void print();
+    abstract public String print();
 
     /*Different types of tasks will have different validations*/
-    abstract protected boolean validateName(String name);
+    abstract protected boolean validateTitle(String title);
 
     /*Different types of tasks will have different validations*/
     abstract protected boolean validateDescription(String description);
 
-    protected void logCreation(int id, String title, String description) {
+    private void logCreation() {
+        this.activityHistory.add(produceCreationLogString(id, title, description));
+    }
+    protected String produceCreationLogString(int id, String title, String description){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-
         StringBuilder eventSb = new StringBuilder();
         eventSb.append(String.format(
                 """
@@ -101,8 +102,7 @@ public abstract class TaskImpl implements Task {
                 title,
                 description,
                 dtf.format(now)));
-
-        this.activityHistory.add(eventSb.toString());
+        return eventSb.toString();
     }
 
     private void logEvent(String attributeForWhichWeAreLogging, String attributeContent) {
