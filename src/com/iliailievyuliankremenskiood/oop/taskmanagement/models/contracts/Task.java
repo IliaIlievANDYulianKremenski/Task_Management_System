@@ -1,10 +1,12 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts;
 
-public interface Task {
-    void getId();
-    void getTitle();
-    void getDescription();
-    void getComments();
-    void getActivityHistory();
+import java.util.List;
+
+public interface Task extends Printable {
+    int getId();
+    String getTitle();
+    String getDescription();
+    List<Comment> getComments();
+    List<String> getActivityHistory();
 
 }
