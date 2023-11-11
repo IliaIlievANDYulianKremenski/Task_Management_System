@@ -14,13 +14,13 @@ public class BugImpl extends TaskImpl implements Bug {
     private static final int MIN_TITE_LENGHT = 10;
     private static final int MAX_TITE_LENGHT = 100;
     private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
-            Title's length should be between %d and %d characters!
-            """, MIN_TITE_LENGHT, MAX_TITE_LENGHT);
+                    Bug's title's length should be between %d and %d characters!""",
+            MIN_TITE_LENGHT, MAX_TITE_LENGHT);
     private static final int MIN_DESCRIPTION_LENGHT = 10;
     private static final int MAX_DESCRIPTION_LENGHT = 500;
     private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
-            Description's length should be between %d and %d characters!
-            """, MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
+                    Bug's description's length should be between %d and %d characters!""",
+            MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
 
 
     /*<-------Field(s)------->*/
@@ -53,10 +53,10 @@ public class BugImpl extends TaskImpl implements Bug {
                    BugSeverityType severityType, Member assignee) {
         super(id, title, description);
         this.stepsToReproduce = new ArrayList<>();
-        this.priorityType = priorityType;
-        this.severityType = severityType;
-        this.statusType = BugStatusType.ACTIVE;
-        this.assignee = assignee;
+        setPriorityType(priorityType);
+        setSeverityType(severityType);
+        setBugStatusType(BugStatusType.ACTIVE);
+        setAssignee(assignee);
     }
 
 
@@ -85,7 +85,22 @@ public class BugImpl extends TaskImpl implements Bug {
     public Member getAssignee() {
         return this.assignee;
     }
+
+
     /*<-------Setter(s)------->*/
+    private void setAssignee(Member assignee) {
+        this.assignee = assignee;
+    }
+
+    private void setPriorityType(BigPriorityType priorityType){
+        this.priorityType = priorityType;
+    }
+
+    private void setSeverityType(BugSeverityType severityType){this.severityType = severityType;};
+
+    private void setBugStatusType(BugStatusType bugStatusType){
+        this.statusType = bugStatusType;
+    }
 
 
     /*<-------Behavioural Method(s)------->*/
@@ -112,7 +127,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
         eventSb.append(super.produceCreationLogString(id, title, description));
 
-        eventSb.append(String.format(" Priority type: '%s', SeverityType: '%s', StatusType: '%s', Assignee: '%s'.",
+        eventSb.append(String.format(" Priority: '%s', Severity: '%s', Status: '%s', Assignee: '%s'.",
                 this.priorityType.toString(),
                 this.severityType.toString(),
                 this.statusType.toString(),
@@ -150,5 +165,9 @@ public class BugImpl extends TaskImpl implements Bug {
         } else if (this.statusType == BugStatusType.DONE) {
             this.statusType = BugStatusType.ACTIVE;
         }
+    }
+
+    public void changeAssignee(Member assignee) {
+        setAssignee(assignee);
     }
 }

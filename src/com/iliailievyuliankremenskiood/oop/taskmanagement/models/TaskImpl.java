@@ -90,7 +90,8 @@ public abstract class TaskImpl implements Task {
     private void logCreation() {
         this.activityHistory.add(produceCreationLogString(id, title, description));
     }
-    protected String produceCreationLogString(int id, String title, String description){
+
+    protected String produceCreationLogString(int id, String title, String description) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         StringBuilder eventSb = new StringBuilder();
@@ -105,9 +106,12 @@ public abstract class TaskImpl implements Task {
         return eventSb.toString();
     }
 
-    private void logEvent(String attributeForWhichWeAreLogging, String attributeContent) {
+    protected void logEvent(String attributeForWhichWeAreLogging,
+                            String attributeOldContent,
+                            String attributeNewContent) {
         StringBuilder eventSb = new StringBuilder();
-        eventSb.append(String.format("The %s was set to: %s. ", attributeForWhichWeAreLogging, attributeContent));
+        eventSb.append(String.format("The %s was changed from: %s to: %s. ",
+                attributeForWhichWeAreLogging, attributeOldContent, attributeNewContent));
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
