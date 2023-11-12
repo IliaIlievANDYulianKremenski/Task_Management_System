@@ -24,10 +24,10 @@ public class TeamImpl implements Team {
     private static final String TEAM_NO_MEMBERS_MESSAGE = "Team %s has no members yet.";
     private static final String TEAM_NO_BOARDS_MESSAGE = "Team %s has no boards yet.";
     private static final String TEAM_CREATE_MESSAGE = "[%s] Team %s has been crated.";
-    private static final String ADD_MEMBER_MESSAGE = "%s joined team %s.";
-    private static final String REMOVE_MEMBER_MESSAGE = "%s has left team %s.";
-    private static final String CREATE_BOARD_MESSAGE = "%s team has created board %s.";
-    private static final String REMOVE_BOARD_MESSAGE = "%s team has removed board %s.";
+    private static final String ADD_MEMBER_MESSAGE = "[%s] %s joined team %s.";
+    private static final String REMOVE_MEMBER_MESSAGE = "[%s] %s has left team %s.";
+    private static final String CREATE_BOARD_MESSAGE = "[%s] %s team has created board %s.";
+    private static final String REMOVE_BOARD_MESSAGE = "[%s] %s team has removed board %s.";
 
 
     /*<-------Field(s)------->*/
@@ -47,8 +47,8 @@ public class TeamImpl implements Team {
 
         this.activityHistory = new ArrayList<>(
                 Arrays.asList(String.format(
-                        LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                         TEAM_CREATE_MESSAGE,
+                        LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                         name))
         );
     }
@@ -82,7 +82,8 @@ public class TeamImpl implements Team {
                 name,
                 TEAM_NAME_MIN_LEN,
                 TEAM_NAME_MAX_LEN,
-                TEAM_NAME_ERR_LEN);
+                String.format(TEAM_NAME_ERR_LEN,TEAM_NAME_MIN_LEN,TEAM_NAME_MAX_LEN)
+        );
         this.name = name;
     }
 
@@ -92,8 +93,8 @@ public class TeamImpl implements Team {
     public void addMember(Member member) {
         members.add(member);
         activityHistory.add(String.format(
-                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 ADD_MEMBER_MESSAGE,
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 member.getName(),
                 getName())
         );
@@ -103,8 +104,8 @@ public class TeamImpl implements Team {
     public void removeMember(Member member) {
         members.remove(member);
         activityHistory.add(String.format(
-                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 REMOVE_MEMBER_MESSAGE,
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 member.getName(),
                 getName())
         );
@@ -114,8 +115,8 @@ public class TeamImpl implements Team {
     public void createBoard(Board board) {
         boards.add(board);
         activityHistory.add(String.format(
-                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 CREATE_BOARD_MESSAGE,
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 getName(),
                 board.getName())
         );
@@ -125,8 +126,8 @@ public class TeamImpl implements Team {
     public void removeBoard(Board board) {
         boards.remove(board);
         activityHistory.add(String.format(
-                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 REMOVE_BOARD_MESSAGE,
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 getName(),
                 board.getName())
         );

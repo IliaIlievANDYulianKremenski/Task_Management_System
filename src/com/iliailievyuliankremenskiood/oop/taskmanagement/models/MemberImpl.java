@@ -40,8 +40,8 @@ public class MemberImpl implements Member {
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>(
                 Arrays.asList(String.format(
-                        LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                         PERSON_CREATE_MESSAGE,
+                        LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                         name))
         );
     }
@@ -73,7 +73,7 @@ public class MemberImpl implements Member {
                 name,
                 MEMBER_NAME_MIN_LEN,
                 MEMBER_NAME_MAX_LEN,
-                MEMBER_NAME_ERR_LEN
+                String.format(MEMBER_NAME_ERR_LEN,MEMBER_NAME_MIN_LEN,MEMBER_NAME_MAX_LEN)
         );
         this.name = name;
     }
@@ -83,8 +83,8 @@ public class MemberImpl implements Member {
     public void assignTask(Task task) {
         tasks.add(task);
         activityHistory.add(String.format(
-                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 TASK_ASSIGN_MESSAGE,
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 task.getTitle(),
                 getName())
         );
@@ -92,8 +92,8 @@ public class MemberImpl implements Member {
     public void unassignTask(Task task) {
         tasks.remove(task);
         activityHistory.add(String.format(
-                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 TASK_UNASSIGNED_MESSAGE,
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 getName(),
                 task.getTitle())
         );
