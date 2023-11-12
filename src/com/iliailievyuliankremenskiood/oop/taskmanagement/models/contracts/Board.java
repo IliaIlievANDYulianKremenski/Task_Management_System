@@ -1,7 +1,11 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts;
 
+import java.util.List;
+
 public interface Board {
-    void getName();
-    void getTasks();
-    void getActivityHistory();
+    String getName();
+    List<Task> getTasks();
+    List<String> getActivityHistory();
+
+
 }

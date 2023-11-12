@@ -14,22 +14,26 @@ import java.util.List;
 public class MemberImpl implements Member {
 
     /*<-------Constant(s)------->*/
-    public static final int MEMBER_NAME_MIN_LEN = 5;
-    public static final int MEMBER_NAME_MAX_LEN = 15;
-    public static final String MEMBER_NAME_ERR_LEN = "Content must be between %d and %d characters long!";
-    public static final String TASK_ASSIGN_MESSAGE = "[%s] The %s task has been assigned to %s.";
-    public static final String TASK_UNASSIGNED_MESSAGE = "[%s] %s's task %s has been unassigned.";
-    public static final String PERSON_CREATE_MESSAGE = "[%s] Person %s has been crated.";
-    public static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
-    public static final String NO_TASKS_MESSAGE = "No tasks are assigned to %s.";
-    public static final String TASK_INFO_HEADER = "--- %s Tasks ---";
-    public static final String SEPARATOR = "--------------\n";
+
+    private static final int MEMBER_NAME_MIN_LEN = 5;
+    private static final int MEMBER_NAME_MAX_LEN = 15;
+    private static final String MEMBER_NAME_ERR_LEN = "Member name must be between %d and %d characters long!";
+    private static final String TASK_ASSIGN_MESSAGE = "[%s] The %s task has been assigned to %s.";
+    private static final String TASK_UNASSIGNED_MESSAGE = "[%s] %s's task %s has been unassigned.";
+    private static final String PERSON_CREATE_MESSAGE = "[%s] Person %s has been crated.";
+    private static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
+    private static final String NO_TASKS_MESSAGE = "No tasks are assigned to %s.";
+    private static final String TASK_INFO_HEADER = "--- %s Tasks ---";
+    private static final String SEPARATOR = "--------------";
 
 
     /*<-------Field(s)------->*/
+
     private String name;
     private final List<Task> tasks;
     private final List<String> activityHistory;
+
+    /*<-------Constructor(s)------->*/
 
     public MemberImpl(String name) {
         setName(name);
@@ -109,15 +113,13 @@ public class MemberImpl implements Member {
                     getName())
             );
             taskInfo.append(System.lineSeparator());
-            taskInfo.append(SEPARATOR);
+            taskInfo.append(SEPARATOR).append(System.lineSeparator());;
             sortTasks();
             for (int i = 0; i < getTasks().size(); i++) {
-                taskInfo.append(getTasks().get(i));
-                if (i != getTasks().size()-1) {
-                    taskInfo.append(System.lineSeparator());
-                }
+                taskInfo.append(getTasks().get(i).getTitle());
+                taskInfo.append(System.lineSeparator());
             }
-            taskInfo.append(SEPARATOR);
+            taskInfo.append(SEPARATOR).append(System.lineSeparator());;
         }
         System.out.println(taskInfo.toString().trim());
     }
@@ -128,20 +130,20 @@ public class MemberImpl implements Member {
                 ACTIVITY_HISTORY_HEADER,
                 getName())
         );
-        activityInfo.append(SEPARATOR);
+        activityInfo.append(System.lineSeparator());
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
 
         for (int i = 0; i < getActivityHistory().size(); i++) {
             activityInfo.append(getActivityHistory().get(i));
-            if (i != getActivityHistory().size()-1) {
-                activityInfo.append(System.lineSeparator());
-            }
+            activityInfo.append(System.lineSeparator());
         }
-        activityInfo.append(SEPARATOR);
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
         System.out.println(activityInfo.toString().trim());
     }
 
 
     /*<-------Helper Method(s)------->*/
+
     private void sortTasks() {
         tasks.sort(Comparator.comparing(Task::getTitle));
     }
