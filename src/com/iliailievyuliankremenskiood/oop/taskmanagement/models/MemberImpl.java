@@ -2,8 +2,8 @@ package com.iliailievyuliankremenskiood.oop.taskmanagement.models;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Task;
-import utils.FormatterHelpers;
-import utils.ValidationHelpers;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.utils.FormatterHelpers;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.utils.ValidationHelpers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package utils;
+package com.iliailievyuliankremenskiood.oop.taskmanagement.utils;
 
-import exceptions.InvalidUserInputException;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.exceptions.InvalidUserInputException;
 
 public class ValidationHelpers {
 
