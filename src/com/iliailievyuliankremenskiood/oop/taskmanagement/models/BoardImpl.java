@@ -61,7 +61,7 @@ public class BoardImpl implements Board {
     //TODO
     /* Name must be unique in the whole system. Have to think how to implement it.
      * Probably this will be done in the repository.*/
-    public void setName(String name) {
+    private void setName(String name) {
         ValidationHelpers.validateStringLength(
                 name,
                 BOARD_NAME_MIN_LEN,
