@@ -13,6 +13,7 @@ public class CommentImpl implements Comment {
      */
 
     /*<-------Field(s)------->*/
+
     private String author;
     private String message;
 
@@ -22,6 +23,7 @@ public class CommentImpl implements Comment {
     }
 
     /*<-------Getter(s)------->*/
+
     public String getAuthor() {
         return author;
     }
@@ -29,6 +31,7 @@ public class CommentImpl implements Comment {
     public String getMessage() {
         return message;
     }
+
     /*<-------Setter(s)------->*/
 
     private void setAuthor(String author) {

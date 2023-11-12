@@ -15,4 +15,14 @@ public interface Loggable {
     * as the logs of the task.
     * With this in mind - should we have a method getLogs()???*/
     /*    void getLogs();*/
+
+    //TODO
+    /* My opinion is that we need a separate class to make history log objects, and
+    every clas that has this functionality will have a List of eventlogs and can choose
+    who will have access to it.
+     */
+
+    /* Now I've done MemberImpl with history log just like you have done in Task.
+    Maybe it is okay this way.
+     */
 }
