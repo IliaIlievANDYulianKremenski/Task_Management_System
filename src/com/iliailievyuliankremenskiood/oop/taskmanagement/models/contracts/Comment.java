@@ -1,6 +1,6 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts;
 
-public interface Comment {
-    void getAuthor();
-    void getMessage();
+public interface Comment extends Printable{
+     String getAuthor();
+     String getMessage();
 }
