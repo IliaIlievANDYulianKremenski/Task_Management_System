@@ -11,16 +11,6 @@ import java.util.List;
 
 public class BugImpl extends TaskImpl implements Bug {
     /*<-------Constant(s)------->*/
-    private static final int MIN_TITE_LENGHT = 10;
-    private static final int MAX_TITE_LENGHT = 100;
-    private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
-                    Bug's title's length should be between %d and %d characters!""",
-            MIN_TITE_LENGHT, MAX_TITE_LENGHT);
-    private static final int MIN_DESCRIPTION_LENGHT = 10;
-    private static final int MAX_DESCRIPTION_LENGHT = 500;
-    private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
-                    Bug's description's length should be between %d and %d characters!""",
-            MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
 
 
     /*<-------Field(s)------->*/
@@ -30,20 +20,12 @@ public class BugImpl extends TaskImpl implements Bug {
        3 - should we provide the option to delete an existing step?*/
     private List<String> stepsToReproduce;
 
-    /*TODO:
-     *  1 - should we provide the option to change the priority to w/e priority regardless of the current one?*/
     private BigPriorityType priorityType;
 
-    /*TODO:
-     *  1 - should we provide the option to change the severity to w/e severity regardless of the current one?*/
     private BugSeverityType severityType;
-
-    /*I have already implemented a method changeBugStatus(). It makes sense to at least be able to be able
-     * to do this.*/
+    
     private BugStatusType statusType;
 
-    /*TODO:
-     *  1 - should we provide the option to change the assignee of a Bug?*/
     private Member assignee;
 
 
@@ -57,6 +39,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setSeverityType(severityType);
         setBugStatusType(BugStatusType.ACTIVE);
         setAssignee(assignee);
+        logCreation();
     }
 
 
@@ -92,33 +75,22 @@ public class BugImpl extends TaskImpl implements Bug {
         this.assignee = assignee;
     }
 
-    private void setPriorityType(BigPriorityType priorityType){
+    private void setPriorityType(BigPriorityType priorityType) {
         this.priorityType = priorityType;
     }
 
-    private void setSeverityType(BugSeverityType severityType){this.severityType = severityType;};
+    private void setSeverityType(BugSeverityType severityType) {
+        this.severityType = severityType;
+    }
 
-    private void setBugStatusType(BugStatusType bugStatusType){
+    ;
+
+    private void setBugStatusType(BugStatusType bugStatusType) {
         this.statusType = bugStatusType;
     }
 
 
     /*<-------Behavioural Method(s)------->*/
-    @Override /*TaskImpl*/
-    protected boolean validateTitle(String title) {
-        if (title.length() < MIN_TITE_LENGHT || title.length() > MAX_TITE_LENGHT) {
-            throw new IllegalArgumentException(INVALID_TITLE_LENGTH_MESSAGE);
-        }
-        return true;
-    }
-
-    @Override /*TaskImpl*/
-    protected boolean validateDescription(String description) {
-        if (description.length() < MIN_DESCRIPTION_LENGHT || description.length() > MAX_DESCRIPTION_LENGHT) {
-            throw new IllegalArgumentException(INVALID_DESCRIPTION_LENGTH_MESSAGE);
-        }
-        return true;
-    }
 
 
     @Override /*TaskImpl*/
@@ -141,15 +113,13 @@ public class BugImpl extends TaskImpl implements Bug {
         return String.format("""
                         --------------
                         Bug:
-                            Id: %d
-                            Title: %s
-                            Description: %s
+                            %s
                             Priority: %s
                             Severity: %s
                             Status: %s
                             Assignee: %s
                         --------------""",
-                this.getId(), this.getTitle(), this.getDescription(),
+                super.print(),
                 this.priorityType, this.severityType, this.statusType, this.assignee.getName());
     }
 
@@ -159,6 +129,7 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
 
+    @Override /*Bug*/
     public void changeBugStatus() {
         if (this.statusType == BugStatusType.ACTIVE) {
             this.statusType = BugStatusType.DONE;
@@ -167,7 +138,20 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
 
+    @Override /*Bug*/
+    public void changeBugPriority(BigPriorityType bugPriority) {
+        setPriorityType(bugPriority);
+    }
+
+    @Override /*Bug*/
+    public void changeBugSeverity(BugSeverityType bugSeverityType) {
+        setSeverityType(bugSeverityType);
+    }
+
+    @Override /*Bug*/
     public void changeAssignee(Member assignee) {
         setAssignee(assignee);
     }
+
+
 }

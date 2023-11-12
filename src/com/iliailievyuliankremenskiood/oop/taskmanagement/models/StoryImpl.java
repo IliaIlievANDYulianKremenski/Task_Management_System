@@ -11,16 +11,6 @@ import java.time.format.DateTimeFormatter;
 
 public class StoryImpl extends TaskImpl implements Story {
     /*<-------Constant(s)------->*/
-    private static final int MIN_TITE_LENGHT = 10;
-    private static final int MAX_TITE_LENGHT = 100;
-    private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
-                    Story's title's length should be between %d and %d characters!""",
-            MIN_TITE_LENGHT, MAX_TITE_LENGHT);
-    private static final int MIN_DESCRIPTION_LENGHT = 10;
-    private static final int MAX_DESCRIPTION_LENGHT = 500;
-    private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
-                    Story's description's length should be between %d and %d characters!""",
-            MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
 
 
     /*<-------Field(s)------->*/
@@ -47,6 +37,7 @@ public class StoryImpl extends TaskImpl implements Story {
         this.sizeType = sizeType;
         this.statusType = statusType;
         setAssignee(assignee);
+        logCreation();
     }
 
 
@@ -94,39 +85,21 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override /*TaskImpl - Printable*/
     public String print() {
         return String.format("""
-                --------------
-                Story:
-                    Id: %d
-                    Title: %s
-                    Description: %s
-                    Priority: %s
-                    Size: %s
-                    Status: %s
-                    Assignee: %s
-                --------------""",
-                this.getId(), this.getTitle(), this.getDescription(),
+                        --------------
+                        Story:
+                            %s
+                            Priority: %s
+                            Size: %s
+                            Status: %s
+                            Assignee: %s
+                        --------------""",
+                super.print(),
                 this.priorityType.toString(), this.sizeType.toString(),
                 this.statusType.toString(), this.assignee.getName());
     }
 
-    @Override
-    protected boolean validateTitle(String title) {
-        if (title.length() < MIN_TITE_LENGHT || title.length() > MAX_TITE_LENGHT) {
-            throw new IllegalArgumentException(INVALID_TITLE_LENGTH_MESSAGE);
-        }
-        return true;
-    }
-
-    @Override
-    protected boolean validateDescription(String description) {
-        if (description.length() < MIN_DESCRIPTION_LENGHT || description.length() > MAX_DESCRIPTION_LENGHT) {
-            throw new IllegalArgumentException(INVALID_DESCRIPTION_LENGTH_MESSAGE);
-        }
-        return true;
-    }
-
     @Override /*TaskImpl*/
-    protected String produceCreationLogString(int id, String title, String description){
+    protected String produceCreationLogString(int id, String title, String description) {
         StringBuilder eventSb = new StringBuilder();
 
         eventSb.append(super.produceCreationLogString(id, title, description));
@@ -143,6 +116,21 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override /*Story - Assignable*/
     public void changeAssignee(Member assignee) {
         setAssignee(assignee);
+    }
+
+    @Override /*Story*/
+    public void changeSize(StorySizeType size) {
+        setSizeType(size);
+    }
+
+    @Override /*Story*/
+    public void changeStatus(StoryStatusType status) {
+        setStatusType(status);
+    }
+
+    @Override /*Story*/
+    public void changePriority(StoryPriorityType priority) {
+        setPriorityType(priority);
     }
 
 }

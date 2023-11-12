@@ -6,9 +6,19 @@ import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelate
 
 import java.util.List;
 
-public interface Bug extends Assignable{
+public interface Bug extends Task, Assignable {
     List<String> getStepsToReproduce();
+
     BigPriorityType getPriority();
+
     BugSeverityType getSeverity();
+
     BugStatusType getStatus();
+
+    void changeBugPriority(BigPriorityType bugPriority);
+
+    void changeBugSeverity(BugSeverityType bugSeverityType);
+
+    void changeBugStatus();
+
 }

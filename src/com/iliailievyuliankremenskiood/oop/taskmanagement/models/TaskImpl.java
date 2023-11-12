@@ -10,7 +10,16 @@ import java.util.List;
 
 public abstract class TaskImpl implements Task {
     /*<-------Constant(s)------->*/
-
+    private static final int MIN_TITE_LENGHT = 10;
+    private static final int MAX_TITE_LENGHT = 100;
+    private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
+                    title's length should be between %d and %d characters!""",
+            MIN_TITE_LENGHT, MAX_TITE_LENGHT);
+    private static final int MIN_DESCRIPTION_LENGHT = 10;
+    private static final int MAX_DESCRIPTION_LENGHT = 500;
+    private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
+                    description's length should be between %d and %d characters!""",
+            MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
 
     /*<-------Field(s)------->*/
     private int id;
@@ -27,7 +36,6 @@ public abstract class TaskImpl implements Task {
         setDescription(description);
         this.comments = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
-        logCreation();
     }
 
 
@@ -79,15 +87,32 @@ public abstract class TaskImpl implements Task {
 
     /*<-------Behavioural Method(s)------->*/
     @Override /*Printable*/
-    abstract public String print();
+    public String print() {
+        return String.format("""
+              Id: %d
+              \tTitle: %s
+              \tDescription: %s""",
+                this.id, this.title, this.description);
+    }
 
-    /*Different types of tasks will have different validations*/
-    abstract protected boolean validateTitle(String title);
 
-    /*Different types of tasks will have different validations*/
-    abstract protected boolean validateDescription(String description);
+    protected boolean validateTitle(String title) {
+        if (title.length() < MIN_TITE_LENGHT || title.length() > MAX_TITE_LENGHT) {
+            throw new IllegalArgumentException(String.format("%s' %s",
+                    this.getClass().getName(), INVALID_TITLE_LENGTH_MESSAGE));
+        }
+        return true;
+    }
 
-    private void logCreation() {
+    protected boolean validateDescription(String description) {
+        if (description.length() < MIN_DESCRIPTION_LENGHT || description.length() > MAX_DESCRIPTION_LENGHT) {
+            throw new IllegalArgumentException(String.format("%s' %s",
+                    this.getClass().getName(), INVALID_DESCRIPTION_LENGTH_MESSAGE));
+        }
+        return true;
+    }
+
+    protected void logCreation() {
         this.activityHistory.add(produceCreationLogString(id, title, description));
     }
 
@@ -95,10 +120,9 @@ public abstract class TaskImpl implements Task {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         StringBuilder eventSb = new StringBuilder();
-        eventSb.append(String.format(
-                """
-                A %s with ID: '%d', Title: '%s', Description: '%s' was created on the following date and time: %s.""",
-                this.getClass().getName(),
+        eventSb.append(String.format("""
+                        A %s with ID: '%d', Title: '%s', Description: '%s' was created on the following date and time: %s.""",
+                this.getClass().getSimpleName(),
                 id,
                 title,
                 description,
@@ -110,7 +134,7 @@ public abstract class TaskImpl implements Task {
                             String attributeOldContent,
                             String attributeNewContent) {
         StringBuilder eventSb = new StringBuilder();
-        eventSb.append(String.format("The %s was changed from: %s to: %s. ",
+        eventSb.append(String.format("The '%s' was changed from: '%s' to: '%s'. ",
                 attributeForWhichWeAreLogging, attributeOldContent, attributeNewContent));
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
