@@ -35,7 +35,7 @@ public class CommentImplTests {
         Assertions.assertEquals(VALID_MESSAGE,comment.getMessage());
     }
     @Test
-    public void Constructor_Should_ThrowError_When_ShorterNamePassed() {
+    public void constructor_Should_ThrowError_When_ShorterNamePassed() {
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
@@ -43,7 +43,7 @@ public class CommentImplTests {
         );
     }
     @Test
-    public void Constructor_Should_ThrowError_When_LongerNamePassed() {
+    public void constructor_Should_ThrowError_When_LongerNamePassed() {
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
@@ -51,7 +51,7 @@ public class CommentImplTests {
         );
     }
     @Test
-    public void Constructor_Should_ThrowError_When_ShorterMessagePassed() {
+    public void constructor_Should_ThrowError_When_ShorterMessagePassed() {
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
@@ -59,7 +59,7 @@ public class CommentImplTests {
         );
     }
     @Test
-    public void Constructor_Should_ThrowError_When_LongerMessagePassed() {
+    public void constructor_Should_ThrowError_When_LongerMessagePassed() {
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,

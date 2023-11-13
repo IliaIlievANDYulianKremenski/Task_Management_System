@@ -28,11 +28,11 @@ public class TeamImplTets {
 
     }
     @Test
-    public void Constructor_Should_ThrowError_When_ShorterNamePassed() {
+    public void constructor_Should_ThrowError_When_ShorterNamePassed() {
 
     }
     @Test
-    public void Constructor_Should_ThrowError_When_LongerNamePassed() {
+    public void constructor_Should_ThrowError_When_LongerNamePassed() {
 
     }
     @Test

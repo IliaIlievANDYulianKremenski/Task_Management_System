@@ -14,8 +14,8 @@ public class BoardImplTests {
     /*<-------Constant(s)------->*/
 
     public static final String VALID_NAME = "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN);
-    public static final String SHORTER_NAME = "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN - 1);
-    public static final String LONGER_NAME = "A".repeat(BoardImpl.BOARD_NAME_MAX_LEN + 1);
+    public static final String SHORTER_NAME = "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN-1);
+    public static final String LONGER_NAME = "A".repeat(BoardImpl.BOARD_NAME_MAX_LEN+1);
     
     /*<-------Field(s)------->*/
 
