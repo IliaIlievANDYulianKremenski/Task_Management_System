@@ -92,7 +92,7 @@ public class TeamImpl implements Team {
     @Override
     public void addMember(Member member) {
         members.add(member);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 ADD_MEMBER_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 member.getName(),
@@ -103,7 +103,7 @@ public class TeamImpl implements Team {
     @Override
     public void removeMember(Member member) {
         members.remove(member);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 REMOVE_MEMBER_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 member.getName(),
@@ -114,7 +114,7 @@ public class TeamImpl implements Team {
     @Override
     public void createBoard(Board board) {
         boards.add(board);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 CREATE_BOARD_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 getName(),
@@ -125,7 +125,7 @@ public class TeamImpl implements Team {
     @Override
     public void removeBoard(Board board) {
         boards.remove(board);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 REMOVE_BOARD_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 getName(),
@@ -183,5 +183,11 @@ public class TeamImpl implements Team {
             showBoards.append(SEPARATOR).append(System.lineSeparator());;
         }
         System.out.println(showBoards.toString().trim());
+    }
+
+    /*<-------Helper Method(s)------->*/
+    @Override
+    public void logCreation(String creationString) {
+        this.activityHistory.add(creationString);
     }
 }

@@ -82,7 +82,7 @@ public class MemberImpl implements Member {
 
     public void assignTask(Task task) {
         tasks.add(task);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 TASK_ASSIGN_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 task.getTitle(),
@@ -91,7 +91,7 @@ public class MemberImpl implements Member {
     }
     public void unassignTask(Task task) {
         tasks.remove(task);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 TASK_UNASSIGNED_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 getName(),
@@ -143,6 +143,10 @@ public class MemberImpl implements Member {
 
 
     /*<-------Helper Method(s)------->*/
+    @Override
+    public void logCreation(String creationString) {
+        this.activityHistory.add(creationString);
+    }
 
     private void sortTasks() {
         tasks.sort(Comparator.comparing(Task::getTitle));

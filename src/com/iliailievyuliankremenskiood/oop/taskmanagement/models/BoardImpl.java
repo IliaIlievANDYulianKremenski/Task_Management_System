@@ -76,7 +76,7 @@ public class BoardImpl implements Board {
     @Override
     public void createTaskInBoard(Task task) {
         tasks.add(task);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 TASK_CREATED_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 task.getClass().getSimpleName(),
@@ -86,12 +86,18 @@ public class BoardImpl implements Board {
     }
     public void removeTaskFromBoard(Task task) {
         tasks.remove(task);
-        activityHistory.add(String.format(
+        logCreation(String.format(
                 TASK_REMOVED_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 task.getClass().getSimpleName(),
                 task.getTitle(),
                 getName())
         );
+    }
+
+    /*<-------Helper Method(s)------->*/
+    @Override
+    public void logCreation(String creationString) {
+        this.activityHistory.add(creationString);
     }
 }

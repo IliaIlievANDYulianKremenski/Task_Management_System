@@ -2,7 +2,7 @@ package com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts;
 
 import java.util.List;
 
-public interface Member {
+public interface Member extends Loggable{
     String getName();
     List<Task> getTasks();
     List<String> getActivityHistory();
