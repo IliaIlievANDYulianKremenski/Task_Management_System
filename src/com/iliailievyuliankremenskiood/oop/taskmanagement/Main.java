@@ -1,8 +1,11 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement;
 
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.FeedbackImpl;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Feedback;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.feedbackrelatedtypes.FeedbackStatusType;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.BugImpl;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.MemberImpl;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Bug;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Member;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,6 +20,11 @@ public class Main {
         feedback.changeStatus(FeedbackStatusType.SCHEDULED);
         feedback.changeRating(1234567);
         System.out.println(feedback.getActivityHistory());*/
+
+/*      Member member = new MemberImpl("Юлиан Кременски");
+        Bug bug = new BugImpl(1, "The program freezes when the Log In button is clicked.",
+                "This needs to be fixed quickly!", BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
+        System.out.println(bug.print());*/
     }
 
 }

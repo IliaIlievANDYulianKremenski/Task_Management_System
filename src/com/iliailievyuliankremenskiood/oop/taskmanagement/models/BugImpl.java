@@ -2,7 +2,7 @@ package com.iliailievyuliankremenskiood.oop.taskmanagement.models;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BigPriorityType;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugStatusType;
 
@@ -20,7 +20,7 @@ public class BugImpl extends TaskImpl implements Bug {
        3 - should we provide the option to delete an existing step?*/
     private List<String> stepsToReproduce;
 
-    private BigPriorityType priorityType;
+    private BugPriorityType priorityType;
 
     private BugSeverityType severityType;
     
@@ -31,7 +31,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     /*<-------Constructor(s)------->*/
 
-    public BugImpl(int id, String title, String description, BigPriorityType priorityType,
+    public BugImpl(int id, String title, String description, BugPriorityType priorityType,
                    BugSeverityType severityType, Member assignee) {
         super(id, title, description);
         this.stepsToReproduce = new ArrayList<>();
@@ -50,7 +50,7 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override /*Bug*/
-    public BigPriorityType getPriority() {
+    public BugPriorityType getPriority() {
         return this.priorityType;
     }
 
@@ -75,7 +75,7 @@ public class BugImpl extends TaskImpl implements Bug {
         this.assignee = assignee;
     }
 
-    private void setPriorityType(BigPriorityType priorityType) {
+    private void setPriorityType(BugPriorityType priorityType) {
         this.priorityType = priorityType;
     }
 
@@ -139,7 +139,7 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override /*Bug*/
-    public void changeBugPriority(BigPriorityType bugPriority) {
+    public void changeBugPriority(BugPriorityType bugPriority) {
         setPriorityType(bugPriority);
     }
 
