@@ -8,5 +8,6 @@ public interface Task extends Printable, Loggable {
     String getDescription();
     List<Comment> getComments();
     List<String> getActivityHistory();
+    void addCommentToTask(Comment commentToBeAdded);
 
 }

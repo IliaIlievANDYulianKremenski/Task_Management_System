@@ -143,4 +143,9 @@ public abstract class TaskImpl implements Task {
         eventSb.append(String.format("The change was done on the following date and time: %s.", dtf.format(now)));
         activityHistory.add(eventSb.toString());
     }
+
+    /*TODO - make a test for this method.*/
+    public void addCommentToTask(Comment commentToBeAddedToTheTask){
+        this.comments.add(commentToBeAddedToTheTask);
+    }
 }

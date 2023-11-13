@@ -1,7 +1,9 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement.models;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Bug;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Comment;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Member;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugStatusType;
@@ -212,6 +214,19 @@ public class BugImplTests {
 
         /*Assert*/
         Assertions.assertEquals(VALID_MEMBER2_NAME, bug.getAssignee().getName());
+    }
+
+    @Test
+    public void addCommentToTask_Should_AddACommentToTheListOfComments(){
+        Comment comment = new CommentImpl(VALID_MEMBER_NAME, VALID_BUG_DESCRIPTION);
+        Member member = new MemberImpl(VALID_MEMBER_NAME);
+        Task bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
+                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
+
+        bug.addCommentToTask(comment);
+
+        Assertions.assertEquals(VALID_BUG_DESCRIPTION, bug.getComments().get(0).getMessage());
+
     }
 
 }
