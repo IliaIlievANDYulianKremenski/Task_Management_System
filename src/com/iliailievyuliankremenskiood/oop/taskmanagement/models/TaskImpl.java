@@ -10,11 +10,11 @@ import java.util.List;
 
 public abstract class TaskImpl implements Task {
     /*<-------Constant(s)------->*/
-    private static final int MIN_TITE_LENGHT = 10;
-    private static final int MAX_TITE_LENGHT = 100;
+    private static final int MIN_TITLE_LENGTH = 10;
+    private static final int MAX_TITLE_LENGTH = 100;
     private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
                     title's length should be between %d and %d characters!""",
-            MIN_TITE_LENGHT, MAX_TITE_LENGHT);
+            MIN_TITLE_LENGTH, MAX_TITLE_LENGTH);
     private static final int MIN_DESCRIPTION_LENGHT = 10;
     private static final int MAX_DESCRIPTION_LENGHT = 500;
     private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
@@ -97,7 +97,7 @@ public abstract class TaskImpl implements Task {
 
 
     protected boolean validateTitle(String title) {
-        if (title.length() < MIN_TITE_LENGHT || title.length() > MAX_TITE_LENGHT) {
+        if (title.length() < MIN_TITLE_LENGTH || title.length() > MAX_TITLE_LENGTH) {
             throw new IllegalArgumentException(String.format("%s' %s",
                     this.getClass().getName(), INVALID_TITLE_LENGTH_MESSAGE));
         }
@@ -112,7 +112,7 @@ public abstract class TaskImpl implements Task {
         return true;
     }
 
-    protected void logCreation() {
+    public void logCreation(String creationString) {
         this.activityHistory.add(produceCreationLogString(id, title, description));
     }
 
@@ -130,7 +130,7 @@ public abstract class TaskImpl implements Task {
         return eventSb.toString();
     }
 
-    protected void logEvent(String attributeForWhichWeAreLogging,
+    public void logEvent(String attributeForWhichWeAreLogging,
                             String attributeOldContent,
                             String attributeNewContent) {
         StringBuilder eventSb = new StringBuilder();

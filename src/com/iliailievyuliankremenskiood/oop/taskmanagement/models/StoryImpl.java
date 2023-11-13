@@ -37,7 +37,7 @@ public class StoryImpl extends TaskImpl implements Story {
         this.sizeType = sizeType;
         this.statusType = statusType;
         setAssignee(assignee);
-        logCreation();
+        logCreation(produceCreationLogString(id, title, description));
     }
 
 
@@ -115,22 +115,30 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override /*Story - Assignable*/
     public void changeAssignee(Member assignee) {
+        Member oldAssignee = this.getAssignee();
         setAssignee(assignee);
+        logEvent("Story Assignee", oldAssignee.getName(), assignee.getName());
     }
 
     @Override /*Story*/
     public void changeSize(StorySizeType size) {
+        StorySizeType oldSize = this.getSize();
         setSizeType(size);
+        logEvent("Story Size", oldSize.toString(), size.toString());
     }
 
     @Override /*Story*/
     public void changeStatus(StoryStatusType status) {
+        StoryStatusType oldStatus = this.getStatus();
         setStatusType(status);
+        logEvent("Story Status", oldStatus.toString(), status.toString());
     }
 
     @Override /*Story*/
     public void changePriority(StoryPriorityType priority) {
+        StoryPriorityType oldPriority = this.getPriority();
         setPriorityType(priority);
+        logEvent("Story Priority", oldPriority.toString(), priority.toString());
     }
 
 }

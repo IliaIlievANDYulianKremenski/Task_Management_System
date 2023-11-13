@@ -20,7 +20,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         super(id, title, description);
         setRating(rating);
         setStatus(status);
-        logCreation();
+        logCreation(produceCreationLogString(id, title, description));
     }
 
 

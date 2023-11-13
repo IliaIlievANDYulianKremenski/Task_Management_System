@@ -18,7 +18,7 @@ public class BugImpl extends TaskImpl implements Bug {
        1 - should we provide the option to substitute the current stepsToReproduce with a brand new List?
        2 - should we provide the option to modify a step in the already existing list of steps?
        3 - should we provide the option to delete an existing step?*/
-    private List<String> stepsToReproduce;
+    private final List<String> stepsToReproduce;
 
     private BugPriorityType priorityType;
 
@@ -39,7 +39,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setSeverityType(severityType);
         setBugStatusType(BugStatusType.ACTIVE);
         setAssignee(assignee);
-        logCreation();
+        logCreation(produceCreationLogString(id, title, description));
     }
 
 
@@ -124,33 +124,45 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     public void addStepsToReproduce(List<String> steps) {
+        String oldSteps = this.getStepsToReproduce().toString();
         for (String step : steps) {
             stepsToReproduce.add(step);
         }
+        logEvent("Bug Steps_To_Reproduce", oldSteps, steps.toString());
     }
 
     @Override /*Bug*/
     public void changeBugStatus() {
         if (this.statusType == BugStatusType.ACTIVE) {
             this.statusType = BugStatusType.DONE;
+            logEvent("Bug Status",
+                    BugStatusType.ACTIVE.toString(),BugStatusType.DONE.toString());
         } else if (this.statusType == BugStatusType.DONE) {
             this.statusType = BugStatusType.ACTIVE;
+            logEvent("Bug Status",
+                    BugStatusType.DONE.toString(),BugStatusType.ACTIVE.toString());
         }
     }
 
     @Override /*Bug*/
     public void changeBugPriority(BugPriorityType bugPriority) {
+        BugPriorityType oldPriority = this.getPriority();
         setPriorityType(bugPriority);
+        logEvent("Bug Priority", oldPriority.toString(), bugPriority.toString());
     }
 
     @Override /*Bug*/
     public void changeBugSeverity(BugSeverityType bugSeverityType) {
+        BugSeverityType oldSeverity = this.getSeverity();
         setSeverityType(bugSeverityType);
+        logEvent("Bug Severity", oldSeverity.toString(),bugSeverityType.toString());
     }
 
     @Override /*Bug*/
     public void changeAssignee(Member assignee) {
+        Member oldAssignee = this.getAssignee();
         setAssignee(assignee);
+        logEvent("Bug Assignee", oldAssignee.getName(), assignee.getName());
     }
 
 

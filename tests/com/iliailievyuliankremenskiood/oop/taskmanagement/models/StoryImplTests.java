@@ -2,24 +2,24 @@ package com.iliailievyuliankremenskiood.oop.taskmanagement.models;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Member;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugStatusType;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.storyrelatedtypes.StoryPriorityType;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.storyrelatedtypes.StorySizeType;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.storyrelatedtypes.StoryStatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class BugImplTests {
+public class StoryImplTests {
 
     /*<-------Constant(s)------->*/
-    private static final String VALID_BUG_TITLE = "The program freezes when the Log In button is clicked.";
-    private static final String VALID_BUG_DESCRIPTION = "This needs to be fixed quickly!";
+    private static final String VALID_STORY_TITLE = "The program freezes when the Log In button is clicked.";
+    private static final String VALID_STORY_DESCRIPTION = "This needs to be fixed quickly!";
     private static final String VALID_MEMBER_NAME = "Юлиан Кременски";
     private static final String VALID_MEMBER2_NAME = "Илия Илиев";
-    private static final String SHORTER_BUG_TITLE = "123";
-    private static final String LONGER_BUG_TITLE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+    private static final String SHORTER_STORY_TITLE = "123";
+    private static final String LONGER_STORY_TITLE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
             "Nulla vel mi ut quam rutrum vulputate. Ut in turpis luctus, elementum nisi sed, facilisis enim. " +
             "Duis porta quam orci, ac hendrerit enim molestie at. Sed pellentesque blandit ipsum. " +
             "Vivamus feugiat nibh nec nisl aliquam, sed bibendum lectus pharetra. Mauris iaculis suscipit sem " +
@@ -28,8 +28,8 @@ public class BugImplTests {
             "Quisque mattis purus lacus, a venenatis purus maximus ac. Suspendisse potenti. Nam placerat imperdiet " +
             "velit, ut efficitur ex accumsan id. Donec eu magna vel nunc porttitor viverra. In id vehicula. ";
 
-    private static final String SHORTER_BUG_DESCRIPTION = "123456789";
-    private static final String LONGER_BUG_DESCRIPTION =
+    private static final String SHORTER_STORY_DESCRIPTION = "123456789";
+    private static final String LONGER_STORY_DESCRIPTION =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tortor dolor, luctus lacinia elit quis, " +
                     "lacinia posuere mauris. Mauris ut purus euismod, sodales ligula quis, pretium orci. " +
                     "Aliquam a viverra mi, at elementum dolor. Ut finibus mi augue. Orci varius natoque penatibus " +
@@ -74,40 +74,33 @@ public class BugImplTests {
                     "amet. Suspendisse ex mauris, feugiat at porta eu, congue eu lectus. Curabitur posuere tempor " +
                     "bibendum. Nulla blandit, mauris placerat ultricies porttitor, ligula dolor consequat orci, vitae " +
                     "semper odio. ";
-    private static final String VALID_BUG_PRINT = String.format("""
-                    --------------
-                    Bug:
-                        Id: %d
-                    	Title: %s
-                    	Description: %s
-                        Priority: %s
-                        Severity: %s
-                        Status: %s
-                        Assignee: %s
-                    --------------""", 1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION, BugPriorityType.HIGH.toString(),
-            BugSeverityType.CRITICAL, BugStatusType.ACTIVE.toString(), VALID_MEMBER_NAME);
-    public static final String STEP_1 = "Step 1.";
-    public static final String STEP_2 = "Step 2.";
 
-    /*TODO - A valid implementation of the "Member" class is needed for the tests. @Ilia Iliev will implement it 👍*/
-    /*<-------Test(s)------->*/
+    private static final String VALID_STORY_PRINT = String.format("""
+            --------------
+            Story:
+                Id: %d
+            	Title: %s
+            	Description: %s
+                Priority: %s
+                Size: %s
+                Status: %s
+                Assignee: %s
+            --------------""", 1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH.toString(),
+                StorySizeType.LARGE.toString(),StoryStatusType.IN_PROGRESS.toString(), VALID_MEMBER_NAME);
+
     @Test
-    public void Constructor_Should_CreateNewBug_When_ValidArgumentsPassed() {
-        /*Arrange*/
+    public void constructor_Should_CreateAValidStory_When_ValidArgumentsPassed(){
         Member member = new MemberImpl(VALID_MEMBER_NAME);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS,member);
 
-        /*Act*/
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Assess*/
-        Assertions.assertNotNull(bug);
-        Assertions.assertEquals(1, bug.getId());
-        Assertions.assertEquals(VALID_BUG_TITLE, bug.getTitle());
-        Assertions.assertEquals(VALID_BUG_DESCRIPTION, bug.getDescription());
-        Assertions.assertEquals(BugPriorityType.HIGH.toString(), bug.getPriority().toString());
-        Assertions.assertEquals(BugSeverityType.CRITICAL.toString(), bug.getSeverity().toString());
-        Assertions.assertEquals(VALID_MEMBER_NAME, bug.getAssignee().getName());
+        Assertions.assertNotNull(story);
+        Assertions.assertEquals(1, story.getId());
+        Assertions.assertEquals(VALID_STORY_TITLE, story.getTitle());
+        Assertions.assertEquals(VALID_STORY_DESCRIPTION, story.getDescription());
+        Assertions.assertEquals(StoryPriorityType.HIGH.toString(), story.getPriority().toString());
+        Assertions.assertEquals(StorySizeType.LARGE.toString(), story.getSize().toString());
+        Assertions.assertEquals(VALID_MEMBER_NAME, story.getAssignee().getName());
     }
 
     @Test
@@ -119,7 +112,7 @@ public class BugImplTests {
         /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
-                    Bug bug = new BugImpl(1, SHORTER_BUG_TITLE, VALID_BUG_DESCRIPTION,
+                    Bug bug = new BugImpl(1, SHORTER_STORY_TITLE, VALID_STORY_DESCRIPTION,
                             BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
                 });
     }
@@ -133,7 +126,7 @@ public class BugImplTests {
         /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
-                    Bug bug = new BugImpl(1, LONGER_BUG_TITLE, VALID_BUG_DESCRIPTION,
+                    Bug bug = new BugImpl(1, LONGER_STORY_TITLE, VALID_STORY_DESCRIPTION,
                             BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
                 });
     }
@@ -147,13 +140,13 @@ public class BugImplTests {
         /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
-                    Bug bug = new BugImpl(1, VALID_BUG_TITLE, SHORTER_BUG_DESCRIPTION,
+                    Bug bug = new BugImpl(1, VALID_STORY_TITLE, SHORTER_STORY_DESCRIPTION,
                             BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
                 });
     }
 
     @Test
-    public void constructor_Should_ThrowError_When_LongerDescriptionPassed() {
+    public void Constructor_Should_ThrowError_When_LongerDescriptionPassed() {
         /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
 
@@ -161,109 +154,111 @@ public class BugImplTests {
         /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
-                    Bug bug = new BugImpl(1, VALID_BUG_TITLE, LONGER_BUG_DESCRIPTION,
+                    Bug bug = new BugImpl(1, VALID_STORY_TITLE, LONGER_STORY_DESCRIPTION,
                             BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
                 });
     }
 
     @Test
-    public void getStepsToReproduce_Should_ReturnACopyOfTheOriginalList() {
+    public void getStatus_Should_ReturnValidStatus() {
         /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
 
-        /*Act, Assert*/
-        Assertions.assertEquals(0, bug.getStepsToReproduce().size());
+        /*Act, Assess*/
+        Assertions.assertEquals(StoryStatusType.IN_PROGRESS.toString(), story.getStatus().toString());
     }
 
     @Test
-    public void print_Should_PrintCorrectMessage() {
+    public void getPriority_Should_ReturnValidPriority() {
         /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
 
-        /*Act, Assert*/
-        Assertions.assertEquals(VALID_BUG_PRINT, bug.print());
+        /*Act, Assess*/
+        Assertions.assertEquals(StoryPriorityType.HIGH.toString(), story.getPriority().toString());
     }
 
     @Test
-    public void addStepsToReproduce_Should_AddListOfStepsToTheBug_When_ValidStepsPassed() {
+    public void getSize_Should_ReturnValidSize() {
         /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-        List<String> stepsToReproduce = new ArrayList<>();
-        stepsToReproduce.add(STEP_1);
-        stepsToReproduce.add(STEP_2);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
 
-        /*Act*/
-        bug.addStepsToReproduce(stepsToReproduce);
-
-        /*Assert*/
-        Assertions.assertEquals(2, bug.getStepsToReproduce().size());
-        Assertions.assertEquals(STEP_1, bug.getStepsToReproduce().get(0));
-        Assertions.assertEquals(STEP_2, bug.getStepsToReproduce().get(1));
-
-    }
-
-
-    @Test
-    public void changeBugStatus_Should_ChangeStatus() {
-        /*Arrange*/
-        Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
-        bug.changeBugStatus();
-
-        /*Assert*/
-        Assertions.assertEquals(BugStatusType.DONE.toString(), bug.getStatus().toString());
+        /*Act, Assess*/
+        Assertions.assertEquals(StorySizeType.LARGE.toString(), story.getSize().toString());
     }
 
     @Test
-    public void changeBugPriority_Should_ChangePriority() {
+    public void getAssignee_Should_ReturnValidAssignee() {
         /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
 
-        /*Act*/
-        bug.changeBugPriority(BugPriorityType.MEDIUM);
-
-        /*Assert*/
-        Assertions.assertEquals(BugPriorityType.MEDIUM.toString(), bug.getPriority().toString());
+        /*Act, Assess*/
+        Assertions.assertEquals(VALID_MEMBER_NAME, story.getAssignee().getName());
     }
 
     @Test
-    public void changeBugSeverity_Should_ChangeSeverity() {
-        /*Arrange*/
-        Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
-        bug.changeBugSeverity(BugSeverityType.MINOR);
-
-        /*Assert*/
-        Assertions.assertEquals(BugSeverityType.MINOR.toString(), bug.getSeverity().toString());
-    }
-
-    @Test
-    public void changeAssignee_Should_ChangeAssignee_When_ValidAssigneePassed() {
-        /*Arrange*/
+    public void changeAssignee_Should_ChangeAssignee_When_ValidNewAssigneePassed(){
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Member member2 = new MemberImpl(VALID_MEMBER2_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
 
         /*Act*/
-        bug.changeAssignee(member2);
+        story.changeAssignee(member2);
+        /*Assess*/
+        Assertions.assertEquals(VALID_MEMBER2_NAME, story.getAssignee().getName());
+    }
 
-        /*Assert*/
-        Assertions.assertEquals(VALID_MEMBER2_NAME, bug.getAssignee().getName());
+    @Test
+    public void changeSize_Should_ChangeSize_When_ValidNewSizePassed(){
+        Member member = new MemberImpl(VALID_MEMBER_NAME);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
+
+        /*Act*/
+        story.changeSize(StorySizeType.MEDIUM);
+        /*Assess*/
+        Assertions.assertEquals(StorySizeType.MEDIUM.toString(), story.getSize().toString());
+    }
+
+    @Test
+    public void changeStatus_Should_ChangeStatus_When_ValidNewStatusPassed(){
+        Member member = new MemberImpl(VALID_MEMBER_NAME);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
+
+        /*Act*/
+        story.changeStatus(StoryStatusType.DONE);
+        /*Assess*/
+        Assertions.assertEquals(StoryStatusType.DONE.toString(), story.getStatus().toString());
+    }
+
+    @Test
+    public void changePriority_Should_ChangePriority_When_ValidNewPriorityPassed(){
+        Member member = new MemberImpl(VALID_MEMBER_NAME);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
+
+        /*Act*/
+        story.changePriority(StoryPriorityType.LOW);
+        /*Assess*/
+        Assertions.assertEquals(StoryPriorityType.LOW.toString(), story.getPriority().toString());
+    }
+
+    @Test
+    public void print_Should_CreateValidPrint(){
+        Member member = new MemberImpl(VALID_MEMBER_NAME);
+        Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
+                StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
+
+        Assertions.assertEquals(VALID_STORY_PRINT, story.print());
     }
 
 }
