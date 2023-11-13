@@ -60,7 +60,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case ASSIGN_BUG:
                 return new AssignBugCommand(teamManagementRepository);
             case ASSIGN_STORY:
-                return new AssignStoryCommand()teamManagementRepository);
+                return new AssignStoryCommand(teamManagementRepository);
             case UNASSIGN_BUG:
                 return new UnassignBugCommand(teamManagementRepository);
             case UNASSIGN_STORY:
