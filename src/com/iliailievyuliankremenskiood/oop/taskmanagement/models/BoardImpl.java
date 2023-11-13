@@ -34,8 +34,8 @@ public class BoardImpl implements Board {
         tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>(
                 Arrays.asList(String.format(
-                        LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                         BOARD_CREATE_MESSAGE,
+                        LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                         name))
         );
     }

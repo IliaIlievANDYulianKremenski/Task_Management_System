@@ -1,16 +1,19 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement.models;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Comment;
+import com.iliailievyuliankremenskiood.oop.taskmanagement.utils.ValidationHelpers;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
 
 public class CommentImpl implements Comment {
 
     /*<-------Constant(s)------->*/
+    public static final int AUTHOR_MIN_LEN = 3;
+    public static final int AUTHOR_MAX_LEN = 20;
+    public static final String AUTHOR_ERR_LEN = "Author name must be between %d and %d characters long.";
+    public static final int MESSAGE_MIN_LEN = 1;
+    public static final int MESSAGE_MAX_LEN = 200;
+    public static final String MESSAGE_ERR_LEN = "Comment must be between %d and %d characters long.";
 
-    //TODO
-    /*Talk with Yuli if it is a good idea if we choose to use some limitations
-    when setting author and message just like other classes. Limitations about name length
-    and message length.
-     */
 
     /*<-------Field(s)------->*/
 
@@ -35,18 +38,27 @@ public class CommentImpl implements Comment {
     /*<-------Setter(s)------->*/
 
     private void setAuthor(String author) {
+        ValidationHelpers.validateStringLength(
+                author,
+                AUTHOR_MIN_LEN,
+                AUTHOR_MAX_LEN,
+                String.format(AUTHOR_ERR_LEN,AUTHOR_MIN_LEN,AUTHOR_MAX_LEN));
         this.author = author;
     }
 
     private void setMessage(String message) {
+        ValidationHelpers.validateStringLength(
+                message,
+                MESSAGE_MIN_LEN,
+                MESSAGE_MAX_LEN,
+                String.format(MESSAGE_ERR_LEN,MESSAGE_MIN_LEN,MESSAGE_MAX_LEN));
         this.message = message;
     }
 
     /*<-------Behavioural Method(s)------->*/
     @Override
     public String print() {
-        return String.format("""
-                --------------    
+        return String.format("""   
                     Author: %s
                     Comment: %s                  
                 --------------""",

@@ -15,5 +15,20 @@ public class CommentImplTests {
     public void constructor_Should_createComment_When_ValidArgumentsPassed() {
 
     }
+    @Test
+    public void Constructor_Should_ThrowError_When_ShorterNamePassed() {
 
+    }
+    @Test
+    public void Constructor_Should_ThrowError_When_LongerNamePassed() {
+
+    }
+    @Test
+    public void Constructor_Should_ThrowError_When_ShorterMessagePassed() {
+
+    }
+    @Test
+    public void Constructor_Should_ThrowError_When_LongerMessagePassed() {
+
+    }
 }
