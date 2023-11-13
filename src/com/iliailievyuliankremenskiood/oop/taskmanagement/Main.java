@@ -1,25 +1,17 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagement;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.BugImpl;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.FeedbackImpl;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.MemberImpl;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.StoryImpl;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Bug;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Feedback;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.feedbackrelatedtypes.FeedbackStatusType;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.storyrelatedtypes.StoryPriorityType;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.storyrelatedtypes.StorySizeType;
-import com.iliailievyuliankremenskiood.oop.taskmanagement.models.enums.storyrelatedtypes.StoryStatusType;
 
 public class Main {
     public static void main(String[] args) {
 
-        /*Needed this test for the FeedbackImpl.print().*/
-/*        Feedback feedback = new FeedbackImpl(1,
+        /*Needed this test for the FeedbackImpl.print().
+        Feedback feedback = new FeedbackImpl(1,
                 "Something, something darkSid.",
                 "Description should be something that is long.", 1, FeedbackStatusType.NEW);
          System.out.println(feedback.print());
@@ -39,6 +31,11 @@ public class Main {
         Story story = new StoryImpl(1, "Some random title.", "Some random description that is.",
                 StoryPriorityType.HIGH, StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
         System.out.println(story.print());*/
+
+
+        //Ilia tests
+//        Board board = new BoardImpl("String");
+//        System.out.println(board.getActivityHistory().get(0));
     }
 
 }
