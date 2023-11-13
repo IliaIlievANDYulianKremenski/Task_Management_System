@@ -10,13 +10,13 @@ import java.util.List;
 
 public abstract class TaskImpl implements Task {
     /*<-------Constant(s)------->*/
-    private static final int MIN_TITLE_LENGTH = 10;
-    private static final int MAX_TITLE_LENGTH = 100;
+    public static final int MIN_TITLE_LENGTH = 10;
+    public static final int MAX_TITLE_LENGTH = 100;
     private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
                     title's length should be between %d and %d characters!""",
             MIN_TITLE_LENGTH, MAX_TITLE_LENGTH);
-    private static final int MIN_DESCRIPTION_LENGHT = 10;
-    private static final int MAX_DESCRIPTION_LENGHT = 500;
+    public static final int MIN_DESCRIPTION_LENGHT = 10;
+    public static final int MAX_DESCRIPTION_LENGHT = 500;
     private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
                     description's length should be between %d and %d characters!""",
             MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
@@ -130,7 +130,7 @@ public abstract class TaskImpl implements Task {
         return eventSb.toString();
     }
 
-    public void logEvent(String attributeForWhichWeAreLogging,
+    protected void logEvent(String attributeForWhichWeAreLogging,
                             String attributeOldContent,
                             String attributeNewContent) {
         StringBuilder eventSb = new StringBuilder();
