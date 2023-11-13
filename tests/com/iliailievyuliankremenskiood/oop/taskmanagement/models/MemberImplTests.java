@@ -118,7 +118,7 @@ public class MemberImplTests {
     /*<-------Helper Method(s)------->*/
 
     private static Member createValidMember() {
-        return new MemberImpl("Assignee");
+        return new MemberImpl(MemberImplTests.VALID_NAME);
     }
     private static Task createValidTask(Member assignee) {
         return new BugImpl(1,"This is a valid Title","This is a valid Description", BugPriorityType.HIGH, BugSeverityType.CRITICAL, assignee);

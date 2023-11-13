@@ -54,12 +54,10 @@ public class TeamImpl implements Team {
     }
 
     /*<-------Getter(s)------->*/
-
     @Override
     public String getName() {
         return this.name;
     }
-
     @Override
     public List<Member> getMembers() {
         return new ArrayList<>(members);
@@ -69,8 +67,10 @@ public class TeamImpl implements Team {
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
-
-
+    @Override
+    public List<String> getActivityHistory() {
+        return new ArrayList<>(activityHistory);
+    }
     /*<-------Setter(s)------->*/
 
     //TODO

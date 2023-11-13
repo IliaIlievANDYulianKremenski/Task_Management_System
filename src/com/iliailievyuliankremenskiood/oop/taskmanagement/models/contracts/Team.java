@@ -6,6 +6,7 @@ public interface Team {
     String getName();
     List<Member> getMembers();
     List<Board> getBoards();
+    List<String> getActivityHistory();
     void addMember(Member member);
     void removeMember(Member member);
     void createBoard(Board board);
