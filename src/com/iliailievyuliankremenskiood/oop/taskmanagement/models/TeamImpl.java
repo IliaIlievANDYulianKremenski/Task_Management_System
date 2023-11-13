@@ -15,8 +15,8 @@ public class TeamImpl implements Team {
 
     /*<-------Constant(s)------->*/
 
-    private static final int TEAM_NAME_MIN_LEN = 5;
-    private static final int TEAM_NAME_MAX_LEN = 15;
+    public static final int TEAM_NAME_MIN_LEN = 5;
+    public static final int TEAM_NAME_MAX_LEN = 15;
     private static final String TEAM_NAME_ERR_LEN = "Team name must be between %d and %d characters long!";
     private static final String TEAM_MEMBERS_HEADER = "--- %s Team Members ---";
     private static final String TEAM_BOARDS_HEADER = "--- %s Team Boards ---";

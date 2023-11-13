@@ -13,9 +13,9 @@ public class BoardImplTests {
     
     /*<-------Constant(s)------->*/
 
-    public static final String VALID_NAME = "Board";
-    public static final String SHORTER_NAME = "A";
-    public static final String LONGER_NAME = "AAAAAAAAAAAAAAAAAAAA";
+    public static final String VALID_NAME = "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN);
+    public static final String SHORTER_NAME = "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN - 1);
+    public static final String LONGER_NAME = "A".repeat(BoardImpl.BOARD_NAME_MAX_LEN + 1);
     
     /*<-------Field(s)------->*/
 
@@ -27,6 +27,8 @@ public class BoardImplTests {
         board = new BoardImpl(VALID_NAME);
     }
 
+    /*<-------Test(s)------->*/
+
     @Test
     public void constructor_Should_createBoard_When_ValidArgumentsPassed() {
         /*Act, Assert*/
@@ -34,14 +36,17 @@ public class BoardImplTests {
     }
     @Test
     public void constructor_Should_initializeTasks_When_ValidArgumentsPassed() {
+        /*Act, Assert*/
         Assertions.assertEquals(0,board.getTasks().size());
     }
     @Test
     public void constructor_Should_logActivityHistory_When_ValidArgumentsPassed() {
+        /*Act, Assert*/
         Assertions.assertEquals(1,board.getActivityHistory().size());
     }
     @Test
     public void Constructor_Should_ThrowError_When_ShorterNamePassed() {
+        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> new BoardImpl(SHORTER_NAME)
@@ -49,6 +54,7 @@ public class BoardImplTests {
     }
     @Test
     public void Constructor_Should_ThrowError_When_LongerNamePassed() {
+        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> new BoardImpl(LONGER_NAME)
@@ -56,10 +62,12 @@ public class BoardImplTests {
     }
     @Test
     public void getTasks_Should_ReturnCopyOfTheCollection() {
+        /*Act, Assert*/
         Assertions.assertFalse(board.getTasks() == board.getTasks());
     }
     @Test
     public void getActivityHistory_Should_ReturnCopyOfTheCollection() {
+        /*Act, Assert*/
         Assertions.assertFalse(board.getActivityHistory() == board.getActivityHistory());
     }
     @Test

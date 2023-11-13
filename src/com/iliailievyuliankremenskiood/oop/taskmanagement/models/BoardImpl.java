@@ -13,13 +13,13 @@ import java.util.List;
 public class BoardImpl implements Board {
 
     /*<-------Constant(s)------->*/
-    private static final int BOARD_NAME_MIN_LEN = 5;
-    private static final int BOARD_NAME_MAX_LEN = 10;
+    public static final int BOARD_NAME_MIN_LEN = 5;
+    public static final int BOARD_NAME_MAX_LEN = 10;
     private static final String BOARD_NAME_ERR_LEN = "Board name must be between %d and %d characters long!";
 
     private static final String BOARD_CREATE_MESSAGE = "[%s] Board %s has been crated.";
-    public static final String TASK_CREATED_MESSAGE = "[%s] %s %s has been created in the board %s.";
-    public static final String TASK_REMOVED_MESSAGE = "[%s] %s %s has been removed from the board %s.";
+    private static final String TASK_CREATED_MESSAGE = "[%s] %s %s has been created in the board %s.";
+    private static final String TASK_REMOVED_MESSAGE = "[%s] %s %s has been removed from the board %s.";
 
 
     /*<-------Field(s)------->*/

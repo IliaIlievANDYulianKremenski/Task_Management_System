@@ -15,8 +15,8 @@ public class MemberImpl implements Member {
 
     /*<-------Constant(s)------->*/
 
-    private static final int MEMBER_NAME_MIN_LEN = 5;
-    private static final int MEMBER_NAME_MAX_LEN = 15;
+    public static final int MEMBER_NAME_MIN_LEN = 5;
+    public static final int MEMBER_NAME_MAX_LEN = 15;
     private static final String MEMBER_NAME_ERR_LEN = "Member name must be between %d and %d characters long!";
     private static final String TASK_ASSIGN_MESSAGE = "[%s] The %s task has been assigned to %s.";
     private static final String TASK_UNASSIGNED_MESSAGE = "[%s] %s's task %s has been unassigned.";

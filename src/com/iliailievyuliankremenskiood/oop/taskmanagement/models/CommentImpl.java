@@ -9,10 +9,10 @@ public class CommentImpl implements Comment {
     /*<-------Constant(s)------->*/
     public static final int AUTHOR_MIN_LEN = 3;
     public static final int AUTHOR_MAX_LEN = 20;
-    public static final String AUTHOR_ERR_LEN = "Author name must be between %d and %d characters long.";
+    private static final String AUTHOR_ERR_LEN = "Author name must be between %d and %d characters long.";
     public static final int MESSAGE_MIN_LEN = 1;
     public static final int MESSAGE_MAX_LEN = 200;
-    public static final String MESSAGE_ERR_LEN = "Comment must be between %d and %d characters long.";
+    private static final String MESSAGE_ERR_LEN = "Comment must be between %d and %d characters long.";
 
 
     /*<-------Field(s)------->*/
