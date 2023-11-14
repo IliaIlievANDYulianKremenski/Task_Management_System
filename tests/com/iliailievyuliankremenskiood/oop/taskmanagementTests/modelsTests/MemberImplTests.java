@@ -3,6 +3,7 @@ package com.iliailievyuliankremenskiood.oop.taskmanagementTests.modelsTests;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.models.TaskImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
@@ -17,6 +18,9 @@ public class MemberImplTests {
     public static final String VALID_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
     public static final String SHORT_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN-1);
     public static final String LONG_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MAX_LEN+1);
+    public static final int ID = 1;
+    public static final String VALID_TITLE = "A".repeat(TaskImpl.MIN_TITLE_LENGTH);
+    public static final String VALID_DESCRIPTION = "A".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH);
 
 
     /*<-------Field(s)------->*/
@@ -123,6 +127,12 @@ public class MemberImplTests {
         return new MemberImpl(MemberImplTests.VALID_NAME);
     }
     private static Task createValidTask(Member assignee) {
-        return new BugImpl(1,"This is a valid Title","This is a valid Description", BugPriorityType.HIGH, BugSeverityType.CRITICAL, assignee);
+        return new BugImpl(
+                ID,
+                VALID_TITLE,
+                VALID_DESCRIPTION,
+                BugPriorityType.HIGH,
+                BugSeverityType.CRITICAL,
+                assignee);
     }
 }
