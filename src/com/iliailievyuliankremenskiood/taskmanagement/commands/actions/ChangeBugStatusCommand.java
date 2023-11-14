@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ChangeBugStatusCommand implements Command {
 
-    /** Command format: Change_Bug_Priority {bug ID} {new status} */
+    /** Command format: Change_Bug_Status {bug ID} {new status} */
 
     //TODO Ask Yuli how to implement this command. Will the user write status, or will just choose change and will be selected the alternative enum.
 
