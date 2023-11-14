@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Board extends Loggable {
     String getName();
-    List<Task> getTasks();
+    List<Task> getBoardTasks();
     List<String> getActivityHistory();
     void createTaskInBoard(Task task);
     void removeTaskFromBoard(Task task);

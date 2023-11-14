@@ -38,12 +38,12 @@ public class TeamImplTets {
     @Test
     public void constructor_Should_initializeMembers_When_ValidArgumentsPassed() {
         /*Act, Assert*/
-        Assertions.assertEquals(0,team.getMembers().size());
+        Assertions.assertEquals(0,team.getTeamMembers().size());
     }
     @Test
     public void constructor_Should_initializeBoards_When_ValidArgumentsPassed() {
         /*Act, Assert*/
-        Assertions.assertEquals(0,team.getBoards().size());
+        Assertions.assertEquals(0,team.getTeamBoards().size());
     }
     @Test
     public void constructor_Should_logActivityHistory_When_ValidArgumentsPassed() {
@@ -69,12 +69,12 @@ public class TeamImplTets {
     @Test
     public void getBoards_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertNotSame(team.getBoards(), team.getBoards());
+        Assertions.assertNotSame(team.getTeamBoards(), team.getTeamBoards());
     }
     @Test
     public void getMembers_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertNotSame(team.getMembers(), team.getMembers());
+        Assertions.assertNotSame(team.getTeamMembers(), team.getTeamMembers());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class TeamImplTets {
         /*Act*/
         team.addMember(member);
         /*Assert*/
-        Assertions.assertEquals(1,team.getMembers().size());
+        Assertions.assertEquals(1,team.getTeamMembers().size());
     }
     @Test
     public void addMember_Should_AddHistoryLog() {
@@ -108,7 +108,7 @@ public class TeamImplTets {
         team.addMember(member);
         team.removeMember(member);
         /*Assert*/
-        Assertions.assertEquals(0,team.getMembers().size());
+        Assertions.assertEquals(0,team.getTeamMembers().size());
     }
     @Test
     public void removeMember_Should_AddHistoryLog() {
@@ -127,7 +127,7 @@ public class TeamImplTets {
         /*Act*/
         team.createBoard(board);
         /*Assert*/
-        Assertions.assertEquals(1,team.getBoards().size());
+        Assertions.assertEquals(1,team.getTeamBoards().size());
     }
     @Test
     public void createBoard_Should_AddHistoryLog() {
@@ -146,7 +146,7 @@ public class TeamImplTets {
         team.createBoard(board);
         team.removeBoard(board);
         /*Assert*/
-        Assertions.assertEquals(0,team.getBoards().size());
+        Assertions.assertEquals(0,team.getTeamBoards().size());
     }
 
     @Test

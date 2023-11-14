@@ -2,10 +2,10 @@ package com.iliailievyuliankremenskiood.taskmanagement.models.contracts;
 
 import java.util.List;
 
-public interface Team extends Loggable{
+public interface Team extends Loggable {
     String getName();
-    List<Member> getMembers();
-    List<Board> getBoards();
+    List<Member> getTeamMembers();
+    List<Board> getTeamBoards();
     List<String> getActivityHistory();
     void addMember(Member member);
     void removeMember(Member member);

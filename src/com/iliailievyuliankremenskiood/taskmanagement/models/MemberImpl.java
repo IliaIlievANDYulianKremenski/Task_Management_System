@@ -54,7 +54,7 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public List<Task> getTasks() {
+    public List<Task> getMemberTasks() {
         return new ArrayList<>(tasks);
     }
     @Override
@@ -111,8 +111,8 @@ public class MemberImpl implements Member {
             taskInfo.append(System.lineSeparator());
             taskInfo.append(SEPARATOR).append(System.lineSeparator());
             sortTasks();
-            for (int i = 0; i < getTasks().size(); i++) {
-                taskInfo.append(getTasks().get(i).getTitle());
+            for (int i = 0; i < getMemberTasks().size(); i++) {
+                taskInfo.append(getMemberTasks().get(i).getTitle());
                 taskInfo.append(System.lineSeparator());
             }
             taskInfo.append(SEPARATOR).append(System.lineSeparator());
@@ -147,4 +147,5 @@ public class MemberImpl implements Member {
     private void sortTasks() {
         tasks.sort(Comparator.comparing(Task::getTitle));
     }
+
 }

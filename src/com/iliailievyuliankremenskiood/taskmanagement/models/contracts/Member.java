@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Member extends Loggable{
     String getName();
-    List<Task> getTasks();
+    List<Task> getMemberTasks();
     List<String> getActivityHistory();
     void assignTask(Task task);
     void unassignTask(Task task);

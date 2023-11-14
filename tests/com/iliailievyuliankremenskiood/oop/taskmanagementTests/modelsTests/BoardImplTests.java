@@ -44,7 +44,7 @@ public class BoardImplTests {
     @Test
     public void constructor_Should_initializeTasks_When_ValidArgumentsPassed() {
         /*Act, Assert*/
-        Assertions.assertEquals(0,board.getTasks().size());
+        Assertions.assertEquals(0,board.getBoardTasks().size());
     }
     @Test
     public void constructor_Should_logActivityHistory_When_ValidArgumentsPassed() {
@@ -70,7 +70,7 @@ public class BoardImplTests {
     @Test
     public void getTasks_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertNotSame(board.getTasks(), board.getTasks());
+        Assertions.assertNotSame(board.getBoardTasks(), board.getBoardTasks());
     }
     @Test
     public void getActivityHistory_Should_ReturnCopyOfTheCollection() {
@@ -85,7 +85,7 @@ public class BoardImplTests {
         /*Act*/
         board.createTaskInBoard(task);
         /*Assert*/
-        Assertions.assertEquals(1,board.getTasks().size());
+        Assertions.assertEquals(1,board.getBoardTasks().size());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class BoardImplTests {
         board.createTaskInBoard(task);
         board.removeTaskFromBoard(task);
         /*Assert*/
-        Assertions.assertEquals(0,board.getTasks().size());
+        Assertions.assertEquals(0,board.getBoardTasks().size());
     }
     @Test
     public void removeTaskInBoard_Should_AddHistoryLog() {

@@ -30,6 +30,8 @@ public class ChangeBugStatusCommand implements Command {
         this.teamManagementRepository = teamManagementRepository;
     }
 
+    /*<-------Behavioural Method(s)------->*/
+
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);

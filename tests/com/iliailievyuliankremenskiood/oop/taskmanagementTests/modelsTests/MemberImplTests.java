@@ -43,7 +43,7 @@ public class MemberImplTests {
     @Test
     public void constructor_Should_initializeTasks_When_ValidArgumentsPassed() {
         /*Act, Assert*/
-        Assertions.assertEquals(0,member.getTasks().size());
+        Assertions.assertEquals(0,member.getMemberTasks().size());
     }
     @Test
     public void constructor_Should_logActivityHistory_When_ValidArgumentsPassed() {
@@ -69,7 +69,7 @@ public class MemberImplTests {
     @Test
     public void getTasks_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertNotSame(member.getTasks(), member.getTasks());
+        Assertions.assertNotSame(member.getMemberTasks(), member.getMemberTasks());
     }
     @Test
     public void getActivityHistory_Should_ReturnCopyOfTheCollection() {
@@ -84,7 +84,7 @@ public class MemberImplTests {
         /*Act*/
         member.assignTask(task);
         /*Assert*/
-        Assertions.assertEquals(1,member.getTasks().size());
+        Assertions.assertEquals(1,member.getMemberTasks().size());
     }
     @Test
     public void assignTask_Should_AddHistoryLog() {
@@ -106,7 +106,7 @@ public class MemberImplTests {
         member.assignTask(task);
         member.unassignTask(task);
         /*Assert*/
-        Assertions.assertEquals(0,member.getTasks().size());
+        Assertions.assertEquals(0,member.getMemberTasks().size());
     }
     @Test
     public void unassignTask_Should_AddHistoryLog() {

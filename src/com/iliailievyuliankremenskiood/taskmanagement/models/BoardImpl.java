@@ -47,7 +47,7 @@ public class BoardImpl implements Board {
         return this.name;
     }
     @Override
-    public List<Task> getTasks() {
+    public List<Task> getBoardTasks() {
         return new ArrayList<>(tasks);
     }
 

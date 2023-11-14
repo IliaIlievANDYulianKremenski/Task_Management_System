@@ -59,12 +59,12 @@ public class TeamImpl implements Team {
         return this.name;
     }
     @Override
-    public List<Member> getMembers() {
+    public List<Member> getTeamMembers() {
         return new ArrayList<>(members);
     }
 
     @Override
-    public List<Board> getBoards() {
+    public List<Board> getTeamBoards() {
         return new ArrayList<>(boards);
     }
     @Override
@@ -147,8 +147,8 @@ public class TeamImpl implements Team {
             showMembers.append(System.lineSeparator());
             showMembers.append(SEPARATOR).append(System.lineSeparator());
 
-            for (int i = 0; i < getMembers().size(); i++) {
-                showMembers.append(getMembers().get(i).getName());
+            for (int i = 0; i < getTeamMembers().size(); i++) {
+                showMembers.append(getTeamMembers().get(i).getName());
                 showMembers.append(System.lineSeparator());
             }
             showMembers.append(SEPARATOR).append(System.lineSeparator());
@@ -173,8 +173,8 @@ public class TeamImpl implements Team {
             showBoards.append(System.lineSeparator());
             showBoards.append(SEPARATOR).append(System.lineSeparator());
 
-            for (int i = 0; i < getBoards().size(); i++) {
-                showBoards.append(getBoards().get(i).getName());
+            for (int i = 0; i < getTeamBoards().size(); i++) {
+                showBoards.append(getTeamBoards().get(i).getName());
                 showBoards.append(System.lineSeparator());
             }
             showBoards.append(SEPARATOR).append(System.lineSeparator());

@@ -27,6 +27,7 @@ public class ChangeBugSeverityCommand implements Command {
     public ChangeBugSeverityCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
+    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public String execute(List<String> parameters) {
