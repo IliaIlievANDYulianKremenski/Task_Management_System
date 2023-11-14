@@ -9,12 +9,12 @@ public class FeedbackImplTests {
 
     /*<-------Constant(s)------->*/
     private static final String VALID_FEEDBACK_TITLE = "a".repeat(TaskImpl.MIN_TITLE_LENGTH + 1);
-    private static final String VALID_FEEDBACK_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGHT + 1);
+    private static final String VALID_FEEDBACK_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH + 1);
     private static final String SHORTER_FEEDBACK_TITLE = "a".repeat(TaskImpl.MIN_TITLE_LENGTH - 1);
     private static final String LONGER_FEEDBACK_TITLE = "a".repeat(TaskImpl.MAX_TITLE_LENGTH + 1);
 
-    private static final String SHORTER_FEEDBACK_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGHT - 1);
-    private static final String LONGER_FEEDBACK_DESCRIPTION = "a".repeat(TaskImpl.MAX_DESCRIPTION_LENGHT + 1);
+    private static final String SHORTER_FEEDBACK_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH - 1);
+    private static final String LONGER_FEEDBACK_DESCRIPTION = "a".repeat(TaskImpl.MAX_DESCRIPTION_LENGTH + 1);
     private static final int VALID_FEEDBACK_RATING = 10;
     private static final FeedbackStatusType VALID_FEEDBACK_STATUS = FeedbackStatusType.NEW;
     private static final int VALID_TASK_ID = 1;

@@ -17,13 +17,13 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
 
     /*<-------Field(s)------->*/
     private final CommandFactory commandFactory;
-    private final TeamManagementRepository agencyRepository;
+    private final TeamManagementRepository teamManagementRepository;
 
 
     /*<-------Constructor(s)------->*/
     public TeamManagementSystemEngineImpl() {
         this.commandFactory = new CommandFactoryImpl();
-        this.agencyRepository = new TeamManagementRepositoryImpl();
+        this.teamManagementRepository = new TeamManagementRepositoryImpl();
     }
 
 
@@ -46,7 +46,7 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
                 if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
                     System.out.println(ex.getMessage());
                 } else {
-                    System.out.println(ex.toString());
+                    System.out.println(ex);
                 }
             }
         }
@@ -54,7 +54,7 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
 
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
-        Command command = commandFactory.createCommandFromCommandName(commandName, agencyRepository);
+        Command command = commandFactory.createCommandFromCommandName(commandName, teamManagementRepository);
         List<String> parameters = extractCommandParameters(inputLine);
         String executionResult = command.execute(parameters);
         System.out.println(executionResult);

@@ -17,13 +17,13 @@ public class BugImplTests {
 
     /*<-------Constant(s)------->*/
     private static final String VALID_BUG_TITLE = "a".repeat(TaskImpl.MIN_TITLE_LENGTH + 1);
-    private static final String VALID_BUG_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGHT + 1);
-    private static final String VALID_MEMBER_NAME = "Юлиан Кременски";
-    private static final String VALID_MEMBER2_NAME = "Илия Илиев";
+    private static final String VALID_BUG_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH + 1);
+    private static final String VALID_MEMBER_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
+    private static final String VALID_MEMBER2_NAME = "B".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
     private static final String SHORTER_BUG_TITLE = "a".repeat(TaskImpl.MIN_TITLE_LENGTH - 1);
     private static final String LONGER_BUG_TITLE = "a".repeat(TaskImpl.MAX_TITLE_LENGTH + 1);
-    private static final String SHORTER_BUG_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGHT - 1);
-    private static final String LONGER_BUG_DESCRIPTION = "a".repeat(TaskImpl.MAX_DESCRIPTION_LENGHT + 1);
+    private static final String SHORTER_BUG_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH - 1);
+    private static final String LONGER_BUG_DESCRIPTION = "a".repeat(TaskImpl.MAX_DESCRIPTION_LENGTH + 1);
     private static final String VALID_BUG_PRINT = String.format("""
                     --------------
                     Bug:

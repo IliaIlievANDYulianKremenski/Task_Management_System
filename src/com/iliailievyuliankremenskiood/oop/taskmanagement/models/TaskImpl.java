@@ -15,11 +15,11 @@ public abstract class TaskImpl implements Task {
     private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
                     title's length should be between %d and %d characters!""",
             MIN_TITLE_LENGTH, MAX_TITLE_LENGTH);
-    public static final int MIN_DESCRIPTION_LENGHT = 10;
-    public static final int MAX_DESCRIPTION_LENGHT = 500;
+    public static final int MIN_DESCRIPTION_LENGTH = 10;
+    public static final int MAX_DESCRIPTION_LENGTH = 500;
     private static final String INVALID_DESCRIPTION_LENGTH_MESSAGE = String.format("""
                     description's length should be between %d and %d characters!""",
-            MIN_DESCRIPTION_LENGHT, MAX_DESCRIPTION_LENGHT);
+            MIN_DESCRIPTION_LENGTH, MAX_DESCRIPTION_LENGTH);
 
     /*<-------Field(s)------->*/
     private int id;
@@ -105,7 +105,7 @@ public abstract class TaskImpl implements Task {
     }
 
     protected boolean validateDescription(String description) {
-        if (description.length() < MIN_DESCRIPTION_LENGHT || description.length() > MAX_DESCRIPTION_LENGHT) {
+        if (description.length() < MIN_DESCRIPTION_LENGTH || description.length() > MAX_DESCRIPTION_LENGTH) {
             throw new IllegalArgumentException(String.format("%s' %s",
                     this.getClass().getName(), INVALID_DESCRIPTION_LENGTH_MESSAGE));
         }
