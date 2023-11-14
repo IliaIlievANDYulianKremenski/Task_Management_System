@@ -81,6 +81,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListAllFeedbacksCommand(teamManagementRepository);
             case LIST_TASKS_WITH_ASSIGNEE:
                 return new ListTasksWithAssigneeCommand(teamManagementRepository);
+            case SHOW_ALL_TEAM_MEMBERS:
+                return new ShowAllTeamMembersCommand(teamManagementRepository);
+            case MANUAL:
+                return new ManualCommand(teamManagementRepository);
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));
         }

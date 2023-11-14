@@ -33,6 +33,7 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
+                System.out.println("Type a command, or type 'manual' to see all commands available.");
                 String inputLine = scanner.nextLine();
                 if (inputLine.isBlank()) {
                     System.out.println(EMPTY_COMMAND_ERROR);
