@@ -30,8 +30,8 @@ public class Main {
 
 
         //Ilia tests
-        Board board = new BoardImpl("String");
-        System.out.println(board.getActivityHistory().get(0));
+//        Board board = new BoardImpl("String");
+//        System.out.println(board.getActivityHistory().get(0));
     }
 
 }

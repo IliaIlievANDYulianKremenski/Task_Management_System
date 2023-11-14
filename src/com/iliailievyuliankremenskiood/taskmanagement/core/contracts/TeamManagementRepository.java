@@ -14,6 +14,9 @@ public interface TeamManagementRepository {
     List<Member> getMember();
 
     List<Task> getTasks();
+    List<Bug> getBugs();
+    List<Story> getStories();
+    List<Feedback> getFeedbacks();
 
     List<Team> getTeams();
 
@@ -28,6 +31,9 @@ public interface TeamManagementRepository {
     Team findTeamByName(String teamName);
 
     Task findTaskById(int taskId);
+    Bug findBugById(int bugId);
+    Story findStoryById(int storyId);
+    Feedback findFeedbackById(int feedbackId);
 
     Member createMember(String memberName);
 
