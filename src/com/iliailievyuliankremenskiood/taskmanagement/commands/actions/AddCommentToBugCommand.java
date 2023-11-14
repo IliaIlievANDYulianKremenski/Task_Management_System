@@ -2,14 +2,8 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
-import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.CommentImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ParsingHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
@@ -32,6 +26,8 @@ public class AddCommentToBugCommand implements Command {
     public AddCommentToBugCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
+
+    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public String execute(List<String> parameters) {

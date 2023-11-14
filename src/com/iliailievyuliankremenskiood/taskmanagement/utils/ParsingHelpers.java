@@ -6,7 +6,7 @@ public class ParsingHelpers {
 
     private static final String INVALID_NUMBER_MESSAGE = "Invalid value for %s. Should be an integer number.";
 
-    public static <E extends Enum<E>> E tryParseEnum(String valueToParse, Class<E> type, String errorMessage) {
+    public static <E extends Enum<E>> E parseEnum(String valueToParse, Class<E> type, String errorMessage) {
         try {
             return Enum.valueOf(type, valueToParse.toUpperCase());
         } catch (IllegalArgumentException e) {
