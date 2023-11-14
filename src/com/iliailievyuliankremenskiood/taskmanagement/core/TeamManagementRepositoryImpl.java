@@ -211,7 +211,14 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
     @Override
     public Bug createBug(String title, String description, BugPriorityType bugPriority, BugSeverityType bugSeverity, Member assignee) {
-        Bug temporaryBug = new BugImpl(nextId++, title, description, bugPriority, bugSeverity, assignee);
+        Bug temporaryBug = new BugImpl(
+                nextId++,
+                title,
+                description,
+                bugPriority,
+                bugSeverity,
+                assignee
+        );
         tasks.add(temporaryBug);
         bugs.add(temporaryBug);
         return temporaryBug;
@@ -219,7 +226,13 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
     @Override
     public Feedback createFeedback(String title, String description, int feedbackRating, FeedbackStatusType feedbackStatus) {
-        Feedback temporaryFeedback = new FeedbackImpl(nextId++, title, description, feedbackRating, feedbackStatus);
+        Feedback temporaryFeedback = new FeedbackImpl(
+                nextId++,
+                title,
+                description,
+                feedbackRating,
+                feedbackStatus
+        );
         tasks.add(temporaryFeedback);
         feedbacks.add(temporaryFeedback);
         return temporaryFeedback;
@@ -227,7 +240,15 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
     @Override
     public Story createStory(String title, String description, StoryPriorityType storyPriority, StorySizeType storySize, StoryStatusType storyStatus, Member assignee) {
-        Story temporaryStory = new StoryImpl(nextId++, title, description, storyPriority, storySize, storyStatus, assignee);
+        Story temporaryStory = new StoryImpl(
+                nextId++,
+                title,
+                description,
+                storyPriority,
+                storySize,
+                storyStatus,
+                assignee
+        );
         tasks.add(temporaryStory);
         stories.add(temporaryStory);
         return temporaryStory;

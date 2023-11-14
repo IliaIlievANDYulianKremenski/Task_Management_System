@@ -33,7 +33,10 @@ public class AddCommentToFeedbackCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        int feedbackId = ParsingHelpers.parseInteger(parameters.get(0),"Feedback ID");
+        int feedbackId = ParsingHelpers.parseInteger(
+                parameters.get(0),
+                "Feedback ID"
+        );
         String author = parameters.get(1);
         String message = parameters.get(2);
 

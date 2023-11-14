@@ -32,7 +32,11 @@ public class ChangeBugPriorityCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
         int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
-        BugPriorityType bugPriorityType = ParsingHelpers.parseEnum(parameters.get(1), BugPriorityType.class, String.format(INVALID_BUG_PRIORITY_MESSAGE));
+        BugPriorityType bugPriorityType = ParsingHelpers.parseEnum(
+                parameters.get(1),
+                BugPriorityType.class,
+                String.format(INVALID_BUG_PRIORITY_MESSAGE)
+        );
 
         Bug bug = teamManagementRepository.findBugById(bugId);
 

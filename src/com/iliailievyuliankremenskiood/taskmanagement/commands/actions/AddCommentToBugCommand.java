@@ -33,7 +33,10 @@ public class AddCommentToBugCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
+        int bugId = ParsingHelpers.parseInteger(
+                parameters.get(0),
+                "Bug ID"
+        );
         String author = parameters.get(1);
         String message = parameters.get(2);
 

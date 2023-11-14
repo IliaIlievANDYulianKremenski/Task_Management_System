@@ -35,7 +35,11 @@ public class ChangeBugStatusCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
         int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
-        BugStatusType bugStatusType = ParsingHelpers.parseEnum(parameters.get(1), BugStatusType.class, String.format(INVALID_BUG_STATUS_MESSAGE));
+        BugStatusType bugStatusType = ParsingHelpers.parseEnum(
+                parameters.get(1),
+                BugStatusType.class,
+                String.format(INVALID_BUG_STATUS_MESSAGE)
+        );
 
         Bug bug = teamManagementRepository.findBugById(bugId);
 

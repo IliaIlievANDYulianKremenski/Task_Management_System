@@ -42,7 +42,8 @@ public class CommentImpl implements Comment {
                 author,
                 AUTHOR_MIN_LEN,
                 AUTHOR_MAX_LEN,
-                String.format(AUTHOR_ERR_LEN,AUTHOR_MIN_LEN,AUTHOR_MAX_LEN));
+                String.format(AUTHOR_ERR_LEN,AUTHOR_MIN_LEN,AUTHOR_MAX_LEN)
+        );
         this.author = author;
     }
 
@@ -51,7 +52,8 @@ public class CommentImpl implements Comment {
                 message,
                 MESSAGE_MIN_LEN,
                 MESSAGE_MAX_LEN,
-                String.format(MESSAGE_ERR_LEN,MESSAGE_MIN_LEN,MESSAGE_MAX_LEN));
+                String.format(MESSAGE_ERR_LEN,MESSAGE_MIN_LEN,MESSAGE_MAX_LEN)
+        );
         this.message = message;
     }
 

@@ -33,7 +33,10 @@ public class AssignBugCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
+        int bugId = ParsingHelpers.parseInteger(
+                parameters.get(0),
+                "Bug ID"
+        );
         String memberName = parameters.get(1);
 
         Bug bug = teamManagementRepository.findBugById(bugId);

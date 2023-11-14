@@ -33,7 +33,11 @@ public class ChangeBugSeverityCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
         int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
-        BugSeverityType bugSeverityType = ParsingHelpers.parseEnum(parameters.get(1), BugSeverityType.class, String.format(INVALID_BUG_SEVERITY_MESSAGE));
+        BugSeverityType bugSeverityType = ParsingHelpers.parseEnum(
+                parameters.get(1),
+                BugSeverityType.class,
+                String.format(INVALID_BUG_SEVERITY_MESSAGE)
+        );
 
         Bug bug = teamManagementRepository.findBugById(bugId);
 
