@@ -35,15 +35,15 @@ public class AssignBugCommand implements Command {
         int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
         String memberName = parameters.get(1);
 
-        Task task = teamManagementRepository.findTaskById(bugId);
-        Bug bug = null;
-        if (task instanceof Bug) {
-            bug = (Bug) task;
-        }
-        Member member = teamManagementRepository.findMemberByName(parameters.get(1));
+        Bug bug = teamManagementRepository.findBugById(bugId);
+        Member member = teamManagementRepository.findMemberByName(memberName);
 
         bug.changeAssignee(member);
 
-        return bug.getAssignee().getName();
+        return userOutput(bug);
+    }
+
+    private static String userOutput(Bug bug) {
+        return bug.getActivityHistory().get(bug.getActivityHistory().size() - 1);
     }
 }

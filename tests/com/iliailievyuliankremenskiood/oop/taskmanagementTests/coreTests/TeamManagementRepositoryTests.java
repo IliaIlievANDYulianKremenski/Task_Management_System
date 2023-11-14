@@ -24,7 +24,7 @@ public class TeamManagementRepositoryTests {
     public static final String VALID_MEMBER_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
     public static final String VALID_BOARD_NAME = "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN);
     public static final String VALID_TEAM_NAME = "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN);
-    public static final int VALID_BUG_ID = 1;
+    public static final int VALID_TASK_ID = 1;
     public static final String VALID_BUG_TITLE = "A".repeat(BugImpl.MIN_TITLE_LENGTH);
     public static final String VALID_BUG_DESCRIPTION = "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH);
     public static final String VALID_COMMENT_AUTHOR = "A".repeat(CommentImpl.AUTHOR_MIN_LEN);
@@ -75,6 +75,27 @@ public class TeamManagementRepositoryTests {
         /*Act, Assert*/
         Assertions.assertNotSame(teamManagementRepository.getTasks(),
                 teamManagementRepository.getTasks());
+
+    }
+    @Test
+    public void getBugs_Should_ReturnCopyOfCollection() {
+        /*Act, Assert*/
+        Assertions.assertNotSame(teamManagementRepository.getBugs(),
+                teamManagementRepository.getBugs());
+
+    }
+    @Test
+    public void getStories_Should_ReturnCopyOfCollection() {
+        /*Act, Assert*/
+        Assertions.assertNotSame(teamManagementRepository.getStories(),
+                teamManagementRepository.getStories());
+
+    }
+    @Test
+    public void getFeedbacks_Should_ReturnCopyOfCollection() {
+        /*Act, Assert*/
+        Assertions.assertNotSame(teamManagementRepository.getFeedbacks(),
+                teamManagementRepository.getFeedbacks());
 
     }
 
@@ -162,31 +183,92 @@ public class TeamManagementRepositoryTests {
     public void findTaskById_Should_ThrowException_When_TaskDoesNotExist() {
         /*Act, Assert*/
         Assertions.assertThrows(ElementNotFoundException.class,
-                () -> teamManagementRepository.findTaskById(VALID_BUG_ID));
+                () -> teamManagementRepository.findTaskById(VALID_TASK_ID));
 
     }
-
-    //TODO Discuss with Yuli that when we find Task, we can't get all methods of the concrete task.
     @Test
     public void findTaskById_Should_ReturnVehicle_When_TaskExists() {
         /*Arrange*/
         Task bug = createValidBug();
         /*Act*/
-        Task bug2 = teamManagementRepository.findTaskById(VALID_BUG_ID);
+        Task bug2 = teamManagementRepository.findTaskById(VALID_TASK_ID);
         /*Act, Assert*/
         assertAll(
                 () -> assertSame(bug, bug2),
                 () -> assertEquals(bug.getId(), bug2.getId()),
                 () -> assertEquals(bug.getTitle(), bug2.getTitle()),
                 () -> assertEquals(bug.getDescription(), bug2.getDescription())
-//                ,
-//                () -> assertEquals(bug.getPriority(), bug2.getPriority()),
-//                () -> assertEquals(bug.getAssignee(), bug2.getAssignee())
         );
     }
+    @Test
+    public void findBugById_Should_ThrowException_When_BugDoesNotExist() {
+        /*Act, Assert*/
+        Assertions.assertThrows(ElementNotFoundException.class,
+                () -> teamManagementRepository.findBugById(VALID_TASK_ID));
 
+    }
+    @Test
+    public void findBugById_Should_ReturnVehicle_When_BugExists() {
+        /*Arrange*/
+        Bug bug = createValidBug();
+        /*Act*/
+        Bug bug2 = teamManagementRepository.findBugById(VALID_TASK_ID);
+        /*Act, Assert*/
+        assertAll(
+                () -> assertSame(bug, bug2),
+                () -> assertEquals(bug.getId(), bug2.getId()),
+                () -> assertEquals(bug.getTitle(), bug2.getTitle()),
+                () -> assertEquals(bug.getDescription(), bug2.getDescription()),
+                () -> assertEquals(bug.getPriority(), bug2.getPriority()),
+                () -> assertEquals(bug.getAssignee(), bug2.getAssignee())
+        );
+    }
+    @Test
+    public void findStoryById_Should_ThrowException_When_StoryDoesNotExist() {
+        /*Act, Assert*/
+        Assertions.assertThrows(ElementNotFoundException.class,
+                () -> teamManagementRepository.findStoryById(VALID_TASK_ID));
 
+    }
+    @Test
+    public void findStoryById_Should_ReturnVehicle_When_StoryExists() {
+        /*Arrange*/
+        Story story = createValidStory();
+        /*Act*/
+        Story story2 = teamManagementRepository.findStoryById(VALID_TASK_ID);
+        /*Act, Assert*/
+        assertAll(
+                () -> assertEquals(story.getId(), story2.getId()),
+                () -> assertEquals(story.getTitle(), story2.getTitle()),
+                () -> assertEquals(story.getDescription(), story2.getDescription()),
+                () -> assertEquals(story.getPriority(), story2.getPriority()),
+                () -> assertEquals(story.getSize(), story2.getSize()),
+                () -> assertEquals(story.getStatus(), story2.getStatus()),
+                () -> assertEquals(story.getAssignee(), story2.getAssignee())
+        );
+    }
+    @Test
+    public void findFeedbackById_Should_ThrowException_When_FeedbackDoesNotExist() {
+        /*Act, Assert*/
+        Assertions.assertThrows(ElementNotFoundException.class,
+                () -> teamManagementRepository.findFeedbackById(VALID_TASK_ID));
 
+    }
+    @Test
+    public void findFeedbackById_Should_ReturnVehicle_When_FeedbackExists() {
+        /*Arrange*/
+        Feedback feedback = createValidFeedback();
+        /*Act*/
+        Feedback feedback2 = teamManagementRepository.findFeedbackById(VALID_TASK_ID);
+        /*Act, Assert*/
+        assertAll(
+                () -> assertEquals(feedback.getId(), feedback2.getId()),
+                () -> assertEquals(feedback.getTitle(), feedback2.getTitle()),
+                () -> assertEquals(feedback.getDescription(), feedback2.getDescription()),
+                () -> assertEquals(feedback.getRating(), feedback2.getRating()),
+                () -> assertEquals(feedback.getStatus(), feedback2.getStatus())
+        );
+    }
     @Test
     public void createMember_Should_AddMemberToList() {
         /*Arrange*/
