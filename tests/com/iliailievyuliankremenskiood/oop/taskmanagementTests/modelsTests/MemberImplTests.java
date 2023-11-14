@@ -69,12 +69,12 @@ public class MemberImplTests {
     @Test
     public void getTasks_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(member.getTasks() == member.getTasks());
+        Assertions.assertNotSame(member.getTasks(), member.getTasks());
     }
     @Test
     public void getActivityHistory_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(member.getActivityHistory() == member.getActivityHistory());
+        Assertions.assertNotSame(member.getActivityHistory(), member.getActivityHistory());
     }
     @Test
     public void assignTask_Should_AddTaskToTheCollection() {

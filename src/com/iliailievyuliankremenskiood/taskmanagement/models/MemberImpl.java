@@ -64,10 +64,6 @@ public class MemberImpl implements Member {
 
     /*<-------Setter(s)------->*/
 
-    //TODO
-    /* Name must be unique in the whole system. Have to think how to implement it.
-    * Probably this will be done in the repository.*/
-
     private void setName(String name) {
         ValidationHelpers.validateStringLength(
                 name,
@@ -113,13 +109,13 @@ public class MemberImpl implements Member {
                     getName())
             );
             taskInfo.append(System.lineSeparator());
-            taskInfo.append(SEPARATOR).append(System.lineSeparator());;
+            taskInfo.append(SEPARATOR).append(System.lineSeparator());
             sortTasks();
             for (int i = 0; i < getTasks().size(); i++) {
                 taskInfo.append(getTasks().get(i).getTitle());
                 taskInfo.append(System.lineSeparator());
             }
-            taskInfo.append(SEPARATOR).append(System.lineSeparator());;
+            taskInfo.append(SEPARATOR).append(System.lineSeparator());
         }
         System.out.println(taskInfo.toString().trim());
     }

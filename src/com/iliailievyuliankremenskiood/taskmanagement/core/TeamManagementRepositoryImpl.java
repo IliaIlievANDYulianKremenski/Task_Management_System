@@ -2,6 +2,7 @@ package com.iliailievyuliankremenskiood.taskmanagement.core;
 
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
+import com.iliailievyuliankremenskiood.taskmanagement.exceptions.NameAlreadyExistException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.*;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.*;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
@@ -29,12 +30,12 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
             "There is no team with the following name: %s.";
     public static final String NO_BOARD_ERROR_MESSAGE = "There is no Board with the following name: %s.";
     public static final String NO_MEMBER_ERROR_MESSAGE = "There is no team member with the following name: %s.";
+    public static final String MEMBER_EXISTS_MESSAGE = "Member with a name %s already exists.";
+    public static final String TEAM_EXISTS_MESSAGE = "Team with a name %s already exists.";
+    public static final String BOARD_EXISTS_MESSAGE = "Team with a name %s already exists.";
 
 
     /*<-------Field(s)------->*/
-
-    //TODO We have to introduce lists for Bugs, Stories and Feedbacks
-    // When we have list of Task, we loose some of the specific functionality.
 
     private int nextId;
     private final List<Member> members = new ArrayList<>();
@@ -56,7 +57,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     /*<-------Getter(s)------->*/
 
     @Override
-    public List<Member> getMember() {
+    public List<Member> getMembers() {
         return new ArrayList<>(members);
     }
 
@@ -99,7 +100,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     /*<-------Behavioural Method(s)------->*/
     @Override
     public Member findMemberByName(String memberName) {
-        for (Member member : getMember()) {
+        for (Member member : getMembers()) {
             if (member.getName().equals(memberName)) {
                 return member;
             }
@@ -174,24 +175,31 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
     @Override
     public Member createMember(String memberName) {
+        checkIfMemberNameExists(memberName);
         Member temporaryMember = new MemberImpl(memberName);
         members.add(temporaryMember);
         return temporaryMember;
     }
 
+
+
     @Override
     public Team createTeam(String teamName) {
+        checkIfTeamNameExists(teamName);
         Team temporaryTeam = new TeamImpl(teamName);
         teams.add(temporaryTeam);
         return temporaryTeam;
     }
 
+
     @Override
     public Board creteBoard(String boardName) {
+        checkIfBoardNameExists(boardName);
         Board temporaryBoard = new BoardImpl(boardName);
         boards.add(temporaryBoard);
         return temporaryBoard;
     }
+
 
     @Override
     public Comment createComment(String commentAuthor, String commentMessage) {
@@ -224,4 +232,27 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         return temporaryStory;
     }
 
+    /*<-------Helper Method(s)------->*/
+
+    private void checkIfMemberNameExists(String memberName) {
+        for (Member member : getMembers()) {
+            if (member.getName().equals(memberName)) {
+                throw new NameAlreadyExistException(String.format(MEMBER_EXISTS_MESSAGE, memberName));
+            }
+        }
+    }
+    private void checkIfBoardNameExists(String boardName) {
+        for (Board board : getBoards()) {
+            if (board.getName().equals(boardName)) {
+                throw new NameAlreadyExistException(String.format(BOARD_EXISTS_MESSAGE, boardName));
+            }
+        }
+    }
+    private void checkIfTeamNameExists(String teamName) {
+        for (Team team : getTeams()) {
+            if (team.getName().equals(teamName)) {
+                throw new NameAlreadyExistException(String.format(TEAM_EXISTS_MESSAGE, teamName));
+            }
+        }
+    }
 }

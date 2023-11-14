@@ -6,7 +6,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 import org.junit.jupiter.api.Assertions;

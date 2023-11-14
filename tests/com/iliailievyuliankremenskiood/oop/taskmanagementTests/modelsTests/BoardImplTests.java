@@ -70,12 +70,12 @@ public class BoardImplTests {
     @Test
     public void getTasks_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(board.getTasks() == board.getTasks());
+        Assertions.assertNotSame(board.getTasks(), board.getTasks());
     }
     @Test
     public void getActivityHistory_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(board.getActivityHistory() == board.getActivityHistory());
+        Assertions.assertNotSame(board.getActivityHistory(), board.getActivityHistory());
     }
     @Test
     public void createTaskInBoard_Should_AddTaskToTheCollection() {

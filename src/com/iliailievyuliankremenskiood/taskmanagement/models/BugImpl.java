@@ -83,8 +83,6 @@ public class BugImpl extends TaskImpl implements Bug {
         this.severityType = severityType;
     }
 
-    ;
-
     private void setBugStatusType(BugStatusType bugStatusType) {
         this.statusType = bugStatusType;
     }

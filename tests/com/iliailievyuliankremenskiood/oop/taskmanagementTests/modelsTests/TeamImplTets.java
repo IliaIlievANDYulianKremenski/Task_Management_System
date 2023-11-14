@@ -69,18 +69,18 @@ public class TeamImplTets {
     @Test
     public void getBoards_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(team.getBoards() == team.getBoards());
+        Assertions.assertNotSame(team.getBoards(), team.getBoards());
     }
     @Test
     public void getMembers_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(team.getMembers() == team.getMembers());
+        Assertions.assertNotSame(team.getMembers(), team.getMembers());
     }
 
     @Test
     public void getActivityHistory_Should_ReturnCopyOfTheCollection() {
         /*Act, Assert*/
-        Assertions.assertFalse(team.getActivityHistory() == team.getActivityHistory());
+        Assertions.assertNotSame(team.getActivityHistory(), team.getActivityHistory());
     }
     @Test
     public void addMember_Should_AddMemberToTheCollection() {

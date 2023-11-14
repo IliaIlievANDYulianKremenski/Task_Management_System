@@ -3,6 +3,7 @@ package com.iliailievyuliankremenskiood.oop.taskmanagementTests.coreTests;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
+import com.iliailievyuliankremenskiood.taskmanagement.exceptions.NameAlreadyExistException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.*;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.*;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
@@ -54,7 +55,7 @@ public class TeamManagementRepositoryTests {
     @Test
     public void constructor_Should_InitializeAllCollections() {
         /*Act, Assert*/
-        Assertions.assertEquals(0,teamManagementRepository.getMember().size());
+        Assertions.assertEquals(0,teamManagementRepository.getMembers().size());
         Assertions.assertEquals(0,teamManagementRepository.getTasks().size());
         Assertions.assertEquals(0,teamManagementRepository.getTeams().size());
         Assertions.assertEquals(0,teamManagementRepository.getBoards().size());
@@ -65,8 +66,8 @@ public class TeamManagementRepositoryTests {
     @Test
     public void getMember_Should_ReturnCopyOfCollection() {
         /*Act, Assert*/
-        Assertions.assertNotSame(teamManagementRepository.getMember(),
-                teamManagementRepository.getMember());
+        Assertions.assertNotSame(teamManagementRepository.getMembers(),
+                teamManagementRepository.getMembers());
 
     }
 
@@ -274,9 +275,20 @@ public class TeamManagementRepositoryTests {
         /*Arrange*/
         Member member = createValidMember();
         /*Act, Assert*/
-        Assertions.assertEquals(1,teamManagementRepository.getMember().size());
+        Assertions.assertEquals(1,teamManagementRepository.getMembers().size());
 
     }
+    @Test
+    public void createMember_Should_ThrowException_When_MemberNameExists() {
+        /*Arrange*/
+        Member member = createValidMember();
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                NameAlreadyExistException.class,
+                () -> createValidMember()
+                );
+    }
+
     @Test
     public void createTeam_Should_AddTeamToList() {
         /*Arrange*/
@@ -286,12 +298,32 @@ public class TeamManagementRepositoryTests {
 
     }
     @Test
+    public void createTeam_Should_ThrowException_When_TeamNameExists() {
+        /*Arrange*/
+        Team team = createValidTeam();
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                NameAlreadyExistException.class,
+                () -> createValidTeam()
+        );
+    }
+    @Test
     public void createBoard_Should_AddBoardToList() {
         /*Arrange*/
         Board board = createValidBoard();
         /*Act, Assert*/
         Assertions.assertEquals(1,teamManagementRepository.getBoards().size());
 
+    }
+    @Test
+    public void createBoard_Should_ThrowException_When_BoardNameExists() {
+        /*Arrange*/
+        Board board = createValidBoard();
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                NameAlreadyExistException.class,
+                () -> createValidBoard()
+        );
     }
     @Test
     public void createComment_Should_AddCommentToList() {

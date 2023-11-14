@@ -71,11 +71,8 @@ public class TeamImpl implements Team {
     public List<String> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
-    /*<-------Setter(s)------->*/
 
-    //TODO
-    /* Name must be unique in the whole system. Have to think how to implement it.
-     * Probably this will be done in the repository.*/
+    /*<-------Setter(s)------->*/
 
     private void setName(String name) {
         ValidationHelpers.validateStringLength(
@@ -148,13 +145,13 @@ public class TeamImpl implements Team {
                     getName())
             );
             showMembers.append(System.lineSeparator());
-            showMembers.append(SEPARATOR).append(System.lineSeparator());;
+            showMembers.append(SEPARATOR).append(System.lineSeparator());
 
             for (int i = 0; i < getMembers().size(); i++) {
                 showMembers.append(getMembers().get(i).getName());
                 showMembers.append(System.lineSeparator());
             }
-            showMembers.append(SEPARATOR).append(System.lineSeparator());;
+            showMembers.append(SEPARATOR).append(System.lineSeparator());
         }
         System.out.println(showMembers.toString().trim());
     }
@@ -174,13 +171,13 @@ public class TeamImpl implements Team {
                     getName())
             );
             showBoards.append(System.lineSeparator());
-            showBoards.append(SEPARATOR).append(System.lineSeparator());;
+            showBoards.append(SEPARATOR).append(System.lineSeparator());
 
             for (int i = 0; i < getBoards().size(); i++) {
                 showBoards.append(getBoards().get(i).getName());
                 showBoards.append(System.lineSeparator());
             }
-            showBoards.append(SEPARATOR).append(System.lineSeparator());;
+            showBoards.append(SEPARATOR).append(System.lineSeparator());
         }
         System.out.println(showBoards.toString().trim());
     }
