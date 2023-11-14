@@ -98,6 +98,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
 
     /*<-------Behavioural Method(s)------->*/
+
     @Override
     public Member findMemberByName(String memberName) {
         for (Member member : getMembers()) {

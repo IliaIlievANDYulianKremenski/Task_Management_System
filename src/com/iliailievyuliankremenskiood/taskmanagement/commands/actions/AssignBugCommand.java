@@ -11,16 +11,23 @@ import java.util.List;
 
 public class AssignBugCommand implements Command {
 
-    /*Assign_Bug 50 pesho*/
+    /** Command format: Assign_Bug {bug ID} {assignee} */
+
+    /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
+    /*<-------Field(s)------->*/
 
     private final TeamManagementRepository teamManagementRepository;
+
+    /*<-------Constructor(s)------->*/
 
     public AssignBugCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
+
+    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public String execute(List<String> parameters) {
@@ -36,6 +43,8 @@ public class AssignBugCommand implements Command {
 
         return userOutput(bug);
     }
+
+    /*<-------Helper Method(s)------->*/
 
     private static String userOutput(Bug bug) {
         return bug.getActivityHistory().get(bug.getActivityHistory().size() - 1);

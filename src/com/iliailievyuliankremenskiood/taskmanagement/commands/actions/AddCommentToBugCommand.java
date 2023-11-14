@@ -10,12 +10,24 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ParsingHelpers;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
 public class AddCommentToBugCommand implements Command {
 
+    /** Command format: Add_Comment_to_Bug {bug ID} {author} {comment} */
+
+    /*<-------Constant(s)------->*/
+
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+
+    /*<-------Field(s)------->*/
+
     private final TeamManagementRepository teamManagementRepository;
+
+    /*<-------Constructor(s)------->*/
 
     public AddCommentToBugCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
@@ -23,11 +35,22 @@ public class AddCommentToBugCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        Member member = new MemberImpl("NAMEEE");
-        Bug bug = new BugImpl(1,"TItleee","Description", BugPriorityType.HIGH, BugSeverityType.CRITICAL,member);
-        Comment comment = new CommentImpl("Author","Message");
+        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+
+        int bugId = ParsingHelpers.parseInteger(parameters.get(0),"Bug ID");
+        String author = parameters.get(1);
+        String message = parameters.get(2);
+
+        Bug bug = teamManagementRepository.findBugById(bugId);
+        Comment comment = teamManagementRepository.createComment(author, message);
         bug.addCommentToTask(comment);
 
-        return null;
+        return userOutput(bug);
+    }
+
+    /*<-------Helper Method(s)------->*/
+
+    private static String userOutput(Bug bug) {
+        return bug.getActivityHistory().get(bug.getActivityHistory().size() - 1);
     }
 }
