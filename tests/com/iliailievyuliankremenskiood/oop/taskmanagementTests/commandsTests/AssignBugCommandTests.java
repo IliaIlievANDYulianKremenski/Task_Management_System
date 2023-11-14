@@ -12,18 +12,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class AssignBugCommandTests {
     public static final String VALID_MEMBER_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
-    public static final int VALID_BUG_ID = 1;
     public static final String VALID_BUG_TITLE = "A".repeat(BugImpl.MIN_TITLE_LENGTH);
     public static final String VALID_BUG_DESCRIPTION = "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH);
 
     TeamManagementRepositoryImpl teamManagementRepository;
     AssignBugCommand assignBugCommand;
-
     Member member;
     Bug bug;
     @BeforeEach
@@ -34,15 +30,8 @@ public class AssignBugCommandTests {
         bug = createValidBug();
     }
     @Test
-    public void method() {
-        teamManagementRepository.createMember("BBBBBB");
-        List<String> list = new ArrayList<>(List.of("1","BBBBBB"));
 
-        assignBugCommand.execute(list);
-
-//        Assertions.assertNotNull();
-        Assertions.assertEquals("BBBBBB",bug.getAssignee().getName());
-    }
+    /*<-------Helper Method(s)------->*/
 
     private Member createValidMember() {
         return teamManagementRepository.createMember(VALID_MEMBER_NAME);

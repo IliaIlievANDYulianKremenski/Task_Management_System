@@ -11,6 +11,8 @@ public interface Team extends Loggable {
     void removeMember(Member member);
     void createBoard(Board board);
     void removeBoard(Board board);
+    String getActivityInfo();
     void showAllMembers();
     void showAllBoards();
+
 }

@@ -28,6 +28,7 @@ public class TeamImpl implements Team {
     private static final String REMOVE_MEMBER_MESSAGE = "[%s] %s has left team %s.";
     private static final String CREATE_BOARD_MESSAGE = "[%s] %s team has created board %s.";
     private static final String REMOVE_BOARD_MESSAGE = "[%s] %s team has removed board %s.";
+    private static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
 
 
     /*<-------Field(s)------->*/
@@ -180,6 +181,22 @@ public class TeamImpl implements Team {
             showBoards.append(SEPARATOR).append(System.lineSeparator());
         }
         System.out.println(showBoards.toString().trim());
+    }
+    public String getActivityInfo() {
+        StringBuilder activityInfo = new StringBuilder();
+        activityInfo.append(String.format(
+                ACTIVITY_HISTORY_HEADER,
+                getName())
+        );
+        activityInfo.append(System.lineSeparator());
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
+
+        for (int i = 0; i < getActivityHistory().size(); i++) {
+            activityInfo.append(getActivityHistory().get(i));
+            activityInfo.append(System.lineSeparator());
+        }
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
+        return activityInfo.toString().trim();
     }
 
     /*<-------Helper Method(s)------->*/

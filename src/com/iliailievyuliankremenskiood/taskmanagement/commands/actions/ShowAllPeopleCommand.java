@@ -9,6 +9,9 @@ import java.util.List;
 
 public class ShowAllPeopleCommand implements Command {
 
+     /* TODO Discuss with Yuli do we need to validate 0 parameters, or it is the command that will be important and
+    it will does not matter any text after it. */
+
     /** Command format: Show_All_People */
 
     /*<-------Constant(s)------->*/

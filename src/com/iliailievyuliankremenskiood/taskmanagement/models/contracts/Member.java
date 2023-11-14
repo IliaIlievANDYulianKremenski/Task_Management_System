@@ -9,7 +9,7 @@ public interface Member extends Loggable{
     void assignTask(Task task);
     void unassignTask(Task task);
     void viewTasksInfo();
-    void viewActivityInfo();
+    String getActivityInfo();
 
 
 }

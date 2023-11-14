@@ -8,5 +8,6 @@ public interface Board extends Loggable {
     List<String> getActivityHistory();
     void createTaskInBoard(Task task);
     void removeTaskFromBoard(Task task);
+    String getActivityInfo();
 
 }

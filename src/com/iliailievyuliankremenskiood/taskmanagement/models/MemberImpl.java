@@ -120,7 +120,7 @@ public class MemberImpl implements Member {
         System.out.println(taskInfo.toString().trim());
     }
 
-    public void viewActivityInfo() {
+    public String getActivityInfo() {
         StringBuilder activityInfo = new StringBuilder();
         activityInfo.append(String.format(
                 ACTIVITY_HISTORY_HEADER,
@@ -134,7 +134,7 @@ public class MemberImpl implements Member {
             activityInfo.append(System.lineSeparator());
         }
         activityInfo.append(SEPARATOR).append(System.lineSeparator());
-        System.out.println(activityInfo.toString().trim());
+        return activityInfo.toString().trim();
     }
 
 

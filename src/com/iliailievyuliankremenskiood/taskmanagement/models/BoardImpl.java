@@ -16,11 +16,11 @@ public class BoardImpl implements Board {
     public static final int BOARD_NAME_MIN_LEN = 5;
     public static final int BOARD_NAME_MAX_LEN = 10;
     private static final String BOARD_NAME_ERR_LEN = "Board name must be between %d and %d characters long!";
-
     private static final String BOARD_CREATE_MESSAGE = "[%s] Board %s has been crated.";
     private static final String TASK_CREATED_MESSAGE = "[%s] %s %s has been created in the board %s.";
     private static final String TASK_REMOVED_MESSAGE = "[%s] %s %s has been removed from the board %s.";
-
+    private static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
+    private static final String SEPARATOR = "--------------";
 
     /*<-------Field(s)------->*/
     private String name;
@@ -90,6 +90,22 @@ public class BoardImpl implements Board {
                 task.getTitle(),
                 getName())
         );
+    }
+    public String getActivityInfo() {
+        StringBuilder activityInfo = new StringBuilder();
+        activityInfo.append(String.format(
+                ACTIVITY_HISTORY_HEADER,
+                getName())
+        );
+        activityInfo.append(System.lineSeparator());
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
+
+        for (int i = 0; i < getActivityHistory().size(); i++) {
+            activityInfo.append(getActivityHistory().get(i));
+            activityInfo.append(System.lineSeparator());
+        }
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
+        return activityInfo.toString().trim();
     }
 
     /*<-------Helper Method(s)------->*/
