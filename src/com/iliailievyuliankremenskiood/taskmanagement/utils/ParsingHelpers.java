@@ -20,4 +20,5 @@ public class ParsingHelpers {
             throw new InvalidUserInputException(String.format(INVALID_NUMBER_MESSAGE, parameterName));
         }
     }
+
 }

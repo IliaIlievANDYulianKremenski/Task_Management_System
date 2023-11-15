@@ -1,7 +1,13 @@
 package com.iliailievyuliankremenskiood.taskmanagement;
 
+import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.BoardImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Board;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,6 +38,6 @@ public class Main {
         //Ilia tests
 //        Board board = new BoardImpl("String");
 //        System.out.println(board.getActivityHistory().get(0));
-    }
 
+    }
 }
