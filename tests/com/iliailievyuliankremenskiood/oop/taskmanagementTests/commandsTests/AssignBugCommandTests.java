@@ -27,8 +27,8 @@ public class AssignBugCommandTests {
 
     /*<-------Field(s)------->*/
 
-    TeamManagementRepositoryImpl teamManagementRepository;
-    AssignBugCommand assignBugCommand;
+    private TeamManagementRepositoryImpl teamManagementRepository;
+    private AssignBugCommand assignBugCommand;
 
     /*Arrange*/
     @BeforeEach
@@ -55,7 +55,7 @@ public class AssignBugCommandTests {
         /*Arrange*/
         List<String> list = List.of(
                 "Bug ID",
-                "Assignee"
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
@@ -69,7 +69,7 @@ public class AssignBugCommandTests {
         /*Arrange*/
         List<String> list = List.of(
                 "1",
-                "Assignee"
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
@@ -84,7 +84,7 @@ public class AssignBugCommandTests {
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1",
-                "Assignee"
+                "B".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
@@ -98,16 +98,16 @@ public class AssignBugCommandTests {
     public void execute_Should_AddCommentToBug_When_PassedValidInput() {
         /*Arrange*/
         Bug bug = createValidBug();
-        teamManagementRepository.createMember("Assignee");
+        teamManagementRepository.createMember("B".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
         List<String> list = List.of(
                 "1",
-                "Assignee"
+                "B".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act*/
         assignBugCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
-                "Assignee",
+                "B".repeat(MemberImpl.MEMBER_NAME_MIN_LEN),
                 bug.getAssignee().getName()
         );
 

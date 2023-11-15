@@ -1,7 +1,7 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ChangeBugSeverityCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.CreateNewBugCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
@@ -10,30 +10,29 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ChangeBugSeverityCommandTests {
+public class CreateNewBugCommandTests {
 
     /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            ChangeBugSeverityCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            CreateNewBugCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
 
     /*<-------Field(s)------->*/
 
     private TeamManagementRepository teamManagementRepository;
-    private ChangeBugSeverityCommand changeBugSeverityCommand;
+    private CreateNewBugCommand createNewBugCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setChangeBugSeverityCommand() {
+    public void setCreateNewBugCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        changeBugSeverityCommand = new ChangeBugSeverityCommand(teamManagementRepository);
+        createNewBugCommand = new CreateNewBugCommand(teamManagementRepository);
+
     }
 
     /*<-------Test(s)------->*/
@@ -46,79 +45,80 @@ public class ChangeBugSeverityCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> changeBugSeverityCommand.execute(list)
+                () -> createNewBugCommand.execute(list)
         );
 
     }
     @Test
-    public void execute_Should_ThrowException_When_BugIdNotNumber() {
+    public void execute_Should_ThrowException_When_PriorityTypeNotValid() {
         /*Arrange*/
         List<String> list = List.of(
-                "Bug ID",
-                "CRITICAL"
+                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
+                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
+                "Not Valid",
+                "CRITICAL",
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
-                InvalidUserInputException.class,
-                () -> changeBugSeverityCommand.execute(list)
+                IllegalArgumentException.class,
+                () -> createNewBugCommand.execute(list)
         );
     }
     @Test
     public void execute_Should_ThrowException_When_SeverityTypeNotValid() {
         /*Arrange*/
         List<String> list = List.of(
-                "1",
-                "Not Valid"
+                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
+                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
+                "HIGH",
+                "Not Valid",
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> changeBugSeverityCommand.execute(list)
+                () -> createNewBugCommand.execute(list)
         );
     }
     @Test
-    public void execute_Should_ThrowException_When_BugDoNotExist() {
+    public void execute_Should_ThrowException_When_MemberDoNotExist() {
         /*Arrange*/
         List<String> list = List.of(
-                "1",
-                "MEDIUM"
+                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
+                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
+                "HIGH",
+                "CRITICAL",
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> changeBugSeverityCommand.execute(list)
+                ElementNotFoundException.class,
+                () -> createNewBugCommand.execute(list)
         );
+
     }
     @Test
-    public void execute_Should_ChangeBugSeverity_When_PassedValidInput() {
-        /*Arrange*/
-        Bug bug = createValidBug();
+    public void execute_Should_CreateNewBug_When_PassedValidInput() {
         List<String> list = List.of(
-                "1",
-                "MINOR"
+                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
+                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
+                "HIGH",
+                "CRITICAL",
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act*/
-        changeBugSeverityCommand.execute(list);
+        Member member = createValidMember();
+        createNewBugCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
-                "MINOR",
-                bug.getSeverity().toString()
+                1,teamManagementRepository.getBugs().size()
         );
 
     }
 
     /*<-------Helper Method(s)------->*/
 
-    private Bug createValidBug() {
-        Member member = createValidMember();
-        return teamManagementRepository.createBug(
-                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
-                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
-                BugPriorityType.HIGH,
-                BugSeverityType.CRITICAL,
-                member
-        );
-    }
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

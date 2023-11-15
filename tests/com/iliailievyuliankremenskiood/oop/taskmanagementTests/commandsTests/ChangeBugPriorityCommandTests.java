@@ -26,7 +26,7 @@ public class ChangeBugPriorityCommandTests {
 
     /*<-------Field(s)------->*/
 
-    TeamManagementRepository teamManagementRepository;
+    private TeamManagementRepository teamManagementRepository;
     private ChangeBugPriorityCommand changeBugPriorityCommand;
 
     /*Arrange*/
@@ -101,7 +101,7 @@ public class ChangeBugPriorityCommandTests {
         /*Act, Assert*/
         Assertions.assertEquals(
                 "MEDIUM",
-                teamManagementRepository.getBugs().get(0).getPriority().toString()
+                bug.getPriority().toString()
         );
 
     }

@@ -37,8 +37,6 @@ public class CreateNewBoardInTeamCommand implements Command {
         Board board = teamManagementRepository.creteBoard(boardName, teamName);
         Team team = teamManagementRepository.findTeamByName(teamName);
 
-        team.createBoard(board);
-
         return userOutput(team);
     }
 

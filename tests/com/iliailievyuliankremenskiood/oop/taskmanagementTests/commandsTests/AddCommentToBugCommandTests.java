@@ -6,6 +6,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagem
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.models.CommentImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
@@ -26,7 +27,7 @@ public class AddCommentToBugCommandTests {
 
     /*<-------Field(s)------->*/
 
-    TeamManagementRepository teamManagementRepository;
+    private TeamManagementRepository teamManagementRepository;
     private AddCommentToBugCommand addCommentToBugCommand;
 
     /*Arrange*/
@@ -56,8 +57,8 @@ public class AddCommentToBugCommandTests {
         /*Arrange*/
         List<String> list = List.of(
                 "Bug ID",
-                "Author",
-                "Comment"
+                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
+                "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
@@ -71,8 +72,8 @@ public class AddCommentToBugCommandTests {
         /*Arrange*/
         List<String> list = List.of(
                 "1",
-                "Author",
-                "Comment"
+                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
+                "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
@@ -87,15 +88,15 @@ public class AddCommentToBugCommandTests {
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1",
-                "Author",
-                "Comment"
+                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
+                "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
         /*Act*/
         addCommentToBugCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
             1,
-            teamManagementRepository.getBugs().get(0).getComments().size()
+            bug.getComments().size()
         );
         Assertions.assertEquals(
                 1,

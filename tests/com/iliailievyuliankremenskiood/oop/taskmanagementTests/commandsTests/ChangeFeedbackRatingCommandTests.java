@@ -1,37 +1,36 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
+import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddCommentToFeedbackCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ChangeFeedbackRatingCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
-import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
-import com.iliailievyuliankremenskiood.taskmanagement.models.CommentImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.FeedbackImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.feedbackrelatedtypes.FeedbackStatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
 
 import java.util.List;
 
-public class AddCommentToFeedbackCommandTests {
+public class ChangeFeedbackRatingCommandTests {
 
     /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            AddCommentToFeedbackCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            ChangeFeedbackRatingCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
 
     /*<-------Field(s)------->*/
 
     private TeamManagementRepository teamManagementRepository;
-    private AddCommentToFeedbackCommand addCommentToFeedbackCommand;
+    private ChangeFeedbackRatingCommand changeFeedbackRatingCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setAddCommentToFeedbackCommand() {
+    public void setChangeFeedbackRatingCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        addCommentToFeedbackCommand = new AddCommentToFeedbackCommand(teamManagementRepository);
+        changeFeedbackRatingCommand = new ChangeFeedbackRatingCommand(teamManagementRepository);
     }
 
     /*<-------Test(s)------->*/
@@ -43,58 +42,53 @@ public class AddCommentToFeedbackCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> addCommentToFeedbackCommand.execute(list)
+                () -> changeFeedbackRatingCommand.execute(list)
         );
 
     }
+
     @Test
     public void execute_Should_ThrowException_When_FeedbackIdNotNumber() {
         /*Arrange*/
         List<String> list = List.of(
                 "Feedback ID",
-                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
-                "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
+                "Rating"
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
-                () -> addCommentToFeedbackCommand.execute(list)
+                () -> changeFeedbackRatingCommand.execute(list)
         );
     }
     @Test
-    public void execute_Should_ThrowException_When_FeedbackDoNotExist() {
+    public void execute_Should_ThrowException_When_FeedbackRatingNotNumber() {
         /*Arrange*/
         List<String> list = List.of(
                 "1",
-                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
-                "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
+                "Rating"
         );
         /*Act, Assert*/
         Assertions.assertThrows(
-                ElementNotFoundException.class,
-                () -> addCommentToFeedbackCommand.execute(list)
+                InvalidUserInputException.class,
+                () -> changeFeedbackRatingCommand.execute(list)
         );
     }
     @Test
-    public void execute_Should_AddCommentToBug_When_PassedValidInput() {
+    public void execute_Should_ChangeFeedbackRating_When_PassedValidInput() {
         /*Arrange*/
         Feedback feedback = createValidFeedback();
         List<String> list = List.of(
                 "1",
-                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
-                "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
+                "5"
         );
         /*Act*/
-        addCommentToFeedbackCommand.execute(list);
+        changeFeedbackRatingCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
-                1,
-                feedback.getComments().size()
+                5,
+                feedback.getRating()
         );
-        Assertions.assertEquals(
-                1,
-                teamManagementRepository.getComments().size()
-        );
+
     }
 
     /*<-------Helper Method(s)------->*/

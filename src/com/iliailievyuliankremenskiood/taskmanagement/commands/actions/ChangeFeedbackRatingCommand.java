@@ -34,7 +34,7 @@ public class ChangeFeedbackRatingCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
         int feedbackId = ParsingHelpers.parseInteger(parameters.get(0),"Feedback ID");
-        int feedbackRating = ParsingHelpers.parseInteger(parameters.get(0),"Feedback Rating");
+        int feedbackRating = ParsingHelpers.parseInteger(parameters.get(1),"Feedback Rating");
 
         Feedback feedback = teamManagementRepository.findFeedbackById(feedbackId);
         feedback.changeRating(feedbackRating);
