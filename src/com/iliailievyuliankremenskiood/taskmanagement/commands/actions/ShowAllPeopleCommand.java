@@ -12,9 +12,9 @@ public class ShowAllPeopleCommand implements Command {
     /** Command format: Show_All_People */
 
     /*<-------Constant(s)------->*/
-    public static final String NO_PEOPLE_ERROR = "There are currently no registered members.";
-    public static final String MEMBERS_HEADER = "All registered members: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String NO_PEOPLE_ERROR = "There are currently no registered members.";
+    private static final String MEMBERS_HEADER = "All registered members: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;

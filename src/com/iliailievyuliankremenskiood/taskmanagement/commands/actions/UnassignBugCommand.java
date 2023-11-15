@@ -15,7 +15,7 @@ public class UnassignBugCommand implements Command {
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String BUG_UNASSIGN_MESSAGE = "Bug with ID #%d is now not assigned.";
+    private static final String BUG_UNASSIGN_MESSAGE = "Bug with ID #%d is now not assigned.";
 
     /*<-------Field(s)------->*/
 

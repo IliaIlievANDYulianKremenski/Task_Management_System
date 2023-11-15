@@ -16,9 +16,9 @@ public class ListAllBugsCommand implements Command {
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    public static final String NO_BUGS_ERROR = "There are currently no Bugs.";
-    public static final String BUGS_HEADER = "Bugs: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String NO_BUGS_ERROR = "There are currently no Bugs.";
+    private static final String BUGS_HEADER = "Bugs: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
 
     /*<-------Field(s)------->*/

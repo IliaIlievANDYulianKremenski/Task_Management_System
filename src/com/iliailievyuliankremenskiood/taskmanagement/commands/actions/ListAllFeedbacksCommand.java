@@ -16,9 +16,9 @@ public class ListAllFeedbacksCommand implements Command {
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
-    public static final String FEEDBACK_HEADER = "Feedbacks: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
+    private static final String FEEDBACK_HEADER = "Feedbacks: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
 
 

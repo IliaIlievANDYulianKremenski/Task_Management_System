@@ -15,9 +15,9 @@ public class ShowAllTeamBoardsCommand implements Command {
 
     /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String NO_BOARDS_ERROR = "There are no boards to display.";
-    public static final String BOARDS_HEADER = "%s's boards: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String NO_BOARDS_ERROR = "There are no boards to display.";
+    private static final String BOARDS_HEADER = "%s's boards: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
 
     /*<-------Field(s)------->*/

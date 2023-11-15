@@ -13,6 +13,7 @@ public class ParsingHelpers {
             throw new IllegalArgumentException(String.format(errorMessage, valueToParse));
         }
     }
+
     public static int parseInteger(String valueToParse, String parameterName) {
         try {
             return Integer.parseInt(valueToParse);
@@ -20,5 +21,4 @@ public class ParsingHelpers {
             throw new InvalidUserInputException(String.format(INVALID_NUMBER_MESSAGE, parameterName));
         }
     }
-
 }

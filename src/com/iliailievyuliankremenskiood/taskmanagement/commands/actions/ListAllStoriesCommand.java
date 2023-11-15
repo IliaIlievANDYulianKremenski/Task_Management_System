@@ -16,9 +16,9 @@ public class ListAllStoriesCommand implements Command {
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    public static final String NO_STORIES_ERROR = "There are currently no Stories.";
-    public static final String STORIES_HEADER = "Stories: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String NO_STORIES_ERROR = "There are currently no Stories.";
+    private static final String STORIES_HEADER = "Stories: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/
 

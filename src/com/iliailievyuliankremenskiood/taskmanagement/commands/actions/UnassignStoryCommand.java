@@ -15,7 +15,7 @@ public class UnassignStoryCommand implements Command {
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String STORY_UNASSIGN_MESSAGE = "Story with ID #%d is now not assigned.";
+    private static final String STORY_UNASSIGN_MESSAGE = "Story with ID #%d is now not assigned.";
 
     /*<-------Field(s)------->*/
 

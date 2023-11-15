@@ -13,6 +13,7 @@ public class ChangeBugStatusCommand implements Command {
     /** Command format: Change_Bug_Status {bug ID}*/
 
     /*<-------Constant(s)------->*/
+
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
     /*<-------Field(s)------->*/

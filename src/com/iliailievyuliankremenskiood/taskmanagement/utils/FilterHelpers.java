@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FilterHelpers {
 
-    /* TODO Yuli, which is better, filter methods to be void or to have return value? */
+    /* TODO Ask Yuli, which is better, filter methods to be void or to have return value? */
 
     public static void filterBugsByStatus(String statusFilter, List<Bug> bugList, List<Bug> filteredBugList) {
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {

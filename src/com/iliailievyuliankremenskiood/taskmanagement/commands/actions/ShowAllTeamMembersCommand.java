@@ -15,10 +15,10 @@ public class ShowAllTeamMembersCommand implements Command {
 
     /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String NO_TEAM_MEMBERS_ERROR = "There are no team members in this team.";
+    private static final String NO_TEAM_MEMBERS_ERROR = "There are no team members in this team.";
 
-    public static final String MEMBERS_HEADER = "%s's team members: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String MEMBERS_HEADER = "%s's team members: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;

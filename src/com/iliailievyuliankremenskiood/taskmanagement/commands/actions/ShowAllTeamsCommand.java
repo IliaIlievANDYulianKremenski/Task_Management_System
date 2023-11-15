@@ -12,9 +12,9 @@ public class ShowAllTeamsCommand implements Command {
      */
 
     /*<-------Constant(s)------->*/
-    public static final String NO_TEAMS_ERROR_MESSAGE = "There are no teams registered in the system.";
-    public static final String TEAMS_HEADER = "Teams: ";
-    public static final String SEPARATOR = "-".repeat(14);
+    private static final String NO_TEAMS_ERROR_MESSAGE = "There are no teams registered in the system.";
+    private static final String TEAMS_HEADER = "Teams: ";
+    private static final String SEPARATOR = "-".repeat(14);
 
 
     /*<-------Field(s)------->*/
