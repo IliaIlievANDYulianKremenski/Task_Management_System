@@ -3,6 +3,7 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -43,9 +44,9 @@ public class ListAllBugsCommand implements Command {
         List<Bug> bugList = teamManagementRepository.getBugs();
         List<Bug> filteredBugList = new ArrayList<>();
 
-        filterBugsByStatus(statusFilter, bugList, filteredBugList);
+        FilterHelpers.filterBugsByStatus(statusFilter, bugList, filteredBugList);
         bugList.retainAll(filteredBugList);
-        filterBugsByAssignee(statusFilter, bugList, assigneeFilter, filteredBugList);
+        FilterHelpers.filterTasksByAssignee(assigneeFilter, bugList, filteredBugList);
 
         if (filteredBugList.isEmpty()) {
             throw new IllegalArgumentException(NO_BUGS_ERROR);
@@ -61,28 +62,9 @@ public class ListAllBugsCommand implements Command {
         return output.toString().trim();
     }
 
-    /*<-------Helper Method(s)------->*/
 
     /* TODO Do we want our filter to be case sensitive or to be able to find no matter upper or lower case. The other option is to parse the enum filter
     *   and search all bugs by their specific enum and that way we can implement to return an exception message to the user that the enum is incorrect and
     * "Should be ACTIVE or DONE.   */
 
-    private static void filterBugsByStatus(String statusFilter, List<Bug> bugList, List<Bug> filteredBugList) {
-        if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
-            for (Bug bug : bugList) {
-                if(bug.getStatus().toString().contains(statusFilter.toUpperCase())) {
-                    filteredBugList.add(bug);
-                }
-            }
-        }
-    }
-    private static void filterBugsByAssignee(String statusFilter, List<Bug> bugList, String assigneeFilter, List<Bug> filteredBugList) {
-        if (!statusFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {
-            for (Bug bug : bugList) {
-                if(bug.getAssignee().toString().toUpperCase().contains(assigneeFilter.toUpperCase())) {
-                    filteredBugList.add(bug);
-                }
-            }
-        }
-    }
 }

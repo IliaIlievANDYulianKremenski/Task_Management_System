@@ -2,15 +2,21 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllFeedbacksCommand implements Command {
 
-    /** Command format: List_All_Feedbacks {filter status / ALL_STATUSES}*/
+    /** Command format: List_All_Feedbacks {filter status / ALL_STATUSES} */
 
     /*<-------Constant(s)------->*/
+
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
     public static final String FEEDBACK_HEADER = "Feedbacks: ";
     public static final String SEPARATOR = "-".repeat(14);
@@ -31,17 +37,16 @@ public class ListAllFeedbacksCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+
+        String statusFilter = parameters.get(0);
+        List<Bug> bugList = teamManagementRepository.getBugs();
+        List<Bug> filteredBugList = new ArrayList<>();
+        FilterHelpers.filterBugsByStatus(statusFilter, bugList, filteredBugList);
+
         if (teamManagementRepository.getFeedbacks().isEmpty()) {
             throw new IllegalArgumentException(NO_FEEDBACKS_ERROR);
         }
-
-        /*✏️ TODO ✏️- for Iliya to implement this part of the function.*/
-        /*switch (parameters.size()){
-            case 0 *//*All Feedbacks*//*:
-                break;
-            case 1 *//*Status*//*:
-                break;
-        }*/
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
@@ -52,4 +57,6 @@ public class ListAllFeedbacksCommand implements Command {
         }
         return output.toString().trim();
     }
+
+    /* TODO Like AllBugsCommand we can print with a header point what filters are choosen */
 }
