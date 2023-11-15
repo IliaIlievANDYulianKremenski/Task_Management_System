@@ -50,19 +50,19 @@ public class CreateNewStoryCommand implements Command {
         StoryPriorityType storyPriorityType = ParsingHelpers.parseEnum(
                 parameters.get(2),
                 StoryPriorityType.class,
-                String.format(INVALID_STORY_PRIORITY_MESSAGE)
+                INVALID_STORY_PRIORITY_MESSAGE
         );
 
         StorySizeType storySizeType = ParsingHelpers.parseEnum(
                 parameters.get(3),
                 StorySizeType.class,
-                String.format(INVALID_STORY_SIZE_MESSAGE)
+                INVALID_STORY_SIZE_MESSAGE
         );
 
         StoryStatusType storyStatusType = ParsingHelpers.parseEnum(
                 parameters.get(4),
                 StoryStatusType.class,
-                String.format(INVALID_STORY_STATUS_MESSAGE)
+                INVALID_STORY_STATUS_MESSAGE
         );
 
         String assigneeName = parameters.get(5);

@@ -37,7 +37,7 @@ public class ChangeBugSeverityCommand implements Command {
         BugSeverityType bugSeverityType = ParsingHelpers.parseEnum(
                 parameters.get(1),
                 BugSeverityType.class,
-                String.format(INVALID_BUG_SEVERITY_MESSAGE)
+                INVALID_BUG_SEVERITY_MESSAGE
         );
 
         Bug bug = teamManagementRepository.findBugById(bugId);

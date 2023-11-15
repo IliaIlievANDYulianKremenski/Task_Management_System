@@ -43,12 +43,12 @@ public class CreateNewBugCommand implements Command {
         BugPriorityType bugPriorityType = ParsingHelpers.parseEnum(
                 parameters.get(2),
                 BugPriorityType.class,
-                String.format(INVALID_BUG_PRIORITY_MESSAGE)
+                INVALID_BUG_PRIORITY_MESSAGE
         );
         BugSeverityType bugSeverityType = ParsingHelpers.parseEnum(
                 parameters.get(3),
                 BugSeverityType.class,
-                String.format(INVALID_BUG_SEVERITY_MESSAGE)
+                INVALID_BUG_SEVERITY_MESSAGE
         );
         String assigneeName = parameters.get(4);
 

@@ -1,16 +1,13 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddCommentToBugCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddCommentToFeedbackCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
-import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
+import com.iliailievyuliankremenskiood.taskmanagement.models.FeedbackImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.feedbackrelatedtypes.FeedbackStatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,26 +15,25 @@ import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestU
 
 import java.util.List;
 
-public class AddCommentToBugCommandTests {
+public class AddCommentToFeedbackCommandTests {
 
     /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            AddCommentToBugCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            AddCommentToFeedbackCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
 
     /*<-------Field(s)------->*/
 
     TeamManagementRepository teamManagementRepository;
-    private AddCommentToBugCommand addCommentToBugCommand;
+    private AddCommentToFeedbackCommand addCommentToFeedbackCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setAddCommentToBugCommand() {
+    public void setAddCommentToFeedbackCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        addCommentToBugCommand = new AddCommentToBugCommand(teamManagementRepository);
+        addCommentToFeedbackCommand = new AddCommentToFeedbackCommand(teamManagementRepository);
     }
 
     /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
         /*Arrange*/
@@ -46,28 +42,26 @@ public class AddCommentToBugCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> addCommentToBugCommand.execute(list)
+                () -> addCommentToFeedbackCommand.execute(list)
         );
 
     }
-
     @Test
-    public void execute_Should_ThrowException_When_BugIdNotNumber() {
+    public void execute_Should_ThrowException_When_FeedbackIdNotNumber() {
         /*Arrange*/
         List<String> list = List.of(
-                "Bug ID",
+                "Feedback ID",
                 "Author",
                 "Comment"
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
-                () -> addCommentToBugCommand.execute(list)
+                () -> addCommentToFeedbackCommand.execute(list)
         );
     }
-
     @Test
-    public void execute_Should_ThrowException_When_BugDoNotExist() {
+    public void execute_Should_ThrowException_When_FeedbackDoNotExist() {
         /*Arrange*/
         List<String> list = List.of(
                 "1",
@@ -77,25 +71,24 @@ public class AddCommentToBugCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
-                () -> addCommentToBugCommand.execute(list)
+                () -> addCommentToFeedbackCommand.execute(list)
         );
     }
-
     @Test
     public void execute_Should_AddCommentToBug_When_PassedValidInput() {
         /*Arrange*/
-        Bug bug = createValidBug();
+        Feedback feedback = createValidFeedback();
         List<String> list = List.of(
                 "1",
                 "Author",
                 "Comment"
         );
         /*Act*/
-        addCommentToBugCommand.execute(list);
+        addCommentToFeedbackCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
-            1,
-            teamManagementRepository.getBugs().get(0).getComments().size()
+                1,
+                teamManagementRepository.getFeedbacks().get(0).getComments().size()
         );
         Assertions.assertEquals(
                 1,
@@ -105,19 +98,12 @@ public class AddCommentToBugCommandTests {
 
     /*<-------Helper Method(s)------->*/
 
-    private Bug createValidBug() {
-        Member member = createValidMember();
-        return teamManagementRepository.createBug(
-                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
-                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
-                BugPriorityType.HIGH,
-                BugSeverityType.CRITICAL,
-                member
+    private Feedback createValidFeedback() {
+        return teamManagementRepository.createFeedback(
+                "A".repeat(FeedbackImpl.MIN_TITLE_LENGTH),
+                "A".repeat(FeedbackImpl.MIN_DESCRIPTION_LENGTH),
+                1,
+                FeedbackStatusType.NEW
         );
     }
-    private Member createValidMember() {
-        return teamManagementRepository.createMember(
-                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
-    }
-
 }

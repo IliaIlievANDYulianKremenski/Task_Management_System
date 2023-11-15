@@ -1,9 +1,9 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddCommentToBugCommand;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AssignBugCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ChangeBugPriorityCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
@@ -18,23 +18,22 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-
-public class AssignBugCommandTests {
+public class ChangeBugPriorityCommandTests {
 
     /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            AssignBugCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            ChangeBugPriorityCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
 
     /*<-------Field(s)------->*/
 
-    TeamManagementRepositoryImpl teamManagementRepository;
-    AssignBugCommand assignBugCommand;
+    TeamManagementRepository teamManagementRepository;
+    private ChangeBugPriorityCommand changeBugPriorityCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setAssignBugCommand() {
+    public void setChangeBugPriorityCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        assignBugCommand = new AssignBugCommand(teamManagementRepository);
+        changeBugPriorityCommand = new ChangeBugPriorityCommand(teamManagementRepository);
     }
 
     /*<-------Test(s)------->*/
@@ -46,7 +45,7 @@ public class AssignBugCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> assignBugCommand.execute(list)
+                () -> changeBugPriorityCommand.execute(list)
         );
 
     }
@@ -55,60 +54,54 @@ public class AssignBugCommandTests {
         /*Arrange*/
         List<String> list = List.of(
                 "Bug ID",
-                "Assignee"
+                "MEDIUM"
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
-                () -> assignBugCommand.execute(list)
+                () -> changeBugPriorityCommand.execute(list)
         );
-
+    }
+    @Test
+    public void execute_Should_ThrowException_When_PriorityTypeNotValid() {
+        /*Arrange*/
+        List<String> list = List.of(
+                "1",
+                "Not Valid"
+        );
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> changeBugPriorityCommand.execute(list)
+        );
     }
     @Test
     public void execute_Should_ThrowException_When_BugDoNotExist() {
         /*Arrange*/
         List<String> list = List.of(
                 "1",
-                "Assignee"
+                "MEDIUM"
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
-                () -> assignBugCommand.execute(list)
+                () -> changeBugPriorityCommand.execute(list)
         );
-
     }
     @Test
-    public void execute_Should_ThrowException_When_MemberDoNotExist() {
+    public void execute_Should_ChangeBugPriority_When_PassedValidInput() {
         /*Arrange*/
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1",
-                "Assignee"
-        );
-        /*Act, Assert*/
-        Assertions.assertThrows(
-                ElementNotFoundException.class,
-                () -> assignBugCommand.execute(list)
-        );
-
-    }
-
-    @Test
-    public void execute_Should_AddCommentToBug_When_PassedValidInput() {
-        /*Arrange*/
-        Bug bug = createValidBug();
-        teamManagementRepository.createMember("Assignee");
-        List<String> list = List.of(
-                "1",
-                "Assignee"
+                "MEDIUM"
         );
         /*Act*/
-        assignBugCommand.execute(list);
+        changeBugPriorityCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
-                "Assignee",
-                bug.getAssignee().getName()
+                "MEDIUM",
+                teamManagementRepository.getBugs().get(0).getPriority().toString()
         );
 
     }

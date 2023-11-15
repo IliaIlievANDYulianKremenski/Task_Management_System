@@ -38,7 +38,7 @@ public class ChangeBugPriorityCommand implements Command {
         BugPriorityType bugPriorityType = ParsingHelpers.parseEnum(
                 parameters.get(1),
                 BugPriorityType.class,
-                String.format(INVALID_BUG_PRIORITY_MESSAGE)
+                INVALID_BUG_PRIORITY_MESSAGE
         );
 
         Bug bug = teamManagementRepository.findBugById(bugId);
