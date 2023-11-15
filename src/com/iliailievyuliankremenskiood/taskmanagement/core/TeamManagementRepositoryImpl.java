@@ -192,7 +192,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         return temporaryTeam;
     }
 
-
+    /*TODO requested by Iliya - boards must be unique only in the team, not in the entire repository.*/
     @Override
     public Board creteBoard(String boardName) {
         checkIfBoardNameExists(boardName);

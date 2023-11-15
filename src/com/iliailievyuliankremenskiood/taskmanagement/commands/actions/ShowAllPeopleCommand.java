@@ -9,13 +9,12 @@ import java.util.List;
 
 public class ShowAllPeopleCommand implements Command {
 
-     /* TODO Discuss with Yuli do we need to validate 0 parameters, or it is the command that will be important and
-    it will does not matter any text after it. */
-
     /** Command format: Show_All_People */
 
     /*<-------Constant(s)------->*/
-    public static final String NO_PEOPLE_ERROR = "There are currently no People.";
+    public static final String NO_PEOPLE_ERROR = "There are currently no registered members.";
+    public static final String MEMBERS_HEADER = "All registered members: ";
+    public static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
@@ -35,9 +34,14 @@ public class ShowAllPeopleCommand implements Command {
         }
 
         StringBuilder output = new StringBuilder();
+        output.append(SEPARATOR).append(System.lineSeparator());
+        output.append(MEMBERS_HEADER).append(System.lineSeparator());
+        output.append(SEPARATOR).append(System.lineSeparator());
         for (Member member : teamManagementRepository.getMembers()) {
             output.append(member.getName()).append(System.lineSeparator());
         }
+        output.append(SEPARATOR)
+                .append(System.lineSeparator());
         return output.toString().trim();
     }
 }

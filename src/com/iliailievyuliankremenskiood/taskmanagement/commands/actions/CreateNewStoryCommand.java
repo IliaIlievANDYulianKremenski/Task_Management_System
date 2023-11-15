@@ -15,7 +15,7 @@ import java.util.List;
 public class CreateNewStoryCommand implements Command {
     /**
      * Command format: Create_New_Story {title} {description} {priority} {size} {status} {assignee}
-     * */
+     */
 
     /*<-------Constant(s)------->*/
     private static final String INVALID_STORY_PRIORITY_MESSAGE =
@@ -25,8 +25,6 @@ public class CreateNewStoryCommand implements Command {
     private static final String INVALID_STORY_STATUS_MESSAGE =
             "Invalid value for Story Status: %s. Should be NOT_DONE, IN_PROGRESS or DONE.";
 
-    private static final String INVALID_STORY_ASSIGNEE_MESSAGE =
-            "Invalid value for Story Assignee.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
 
 
@@ -43,7 +41,7 @@ public class CreateNewStoryCommand implements Command {
     /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         String storyTitle = parameters.get(0);
         String storyDescription = parameters.get(1);
@@ -70,8 +68,13 @@ public class CreateNewStoryCommand implements Command {
         String assigneeName = parameters.get(5);
         Member assignee = teamManagementRepository.findMemberByName(assigneeName);
 
-        Story temporarStory = teamManagementRepository.createStory(storyTitle, storyDescription, storyPriorityType,
-                storySizeType,storyStatusType, assignee);
+        Story temporarStory = teamManagementRepository.createStory(
+                storyTitle,
+                storyDescription,
+                storyPriorityType,
+                storySizeType,
+                storyStatusType,
+                assignee);
 
         return userOutput(temporarStory);
     }

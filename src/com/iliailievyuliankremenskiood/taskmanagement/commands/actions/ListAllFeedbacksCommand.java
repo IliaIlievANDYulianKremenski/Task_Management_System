@@ -8,13 +8,13 @@ import java.util.List;
 
 public class ListAllFeedbacksCommand implements Command {
 
-    /* TODO Discuss with Yuli do we need to validate 0 parameters, or it is the command that will be important and
-    it will does not matter any text after it. */
-
-    /** Command format: List_All_Feedbacks */
+    /** Command format: List_All_Feedbacks {filter status / ALL_STATUSES}*/
 
     /*<-------Constant(s)------->*/
     public static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
+    public static final String FEEDBACK_HEADER = "Feedbacks: ";
+    public static final String SEPARATOR = "-".repeat(14);
+
 
 
     /*<-------Field(s)------->*/
@@ -35,13 +35,21 @@ public class ListAllFeedbacksCommand implements Command {
             throw new IllegalArgumentException(NO_FEEDBACKS_ERROR);
         }
 
+        /*✏️ TODO ✏️- for Iliya to implement this part of the function.*/
+        /*switch (parameters.size()){
+            case 0 *//*All Feedbacks*//*:
+                break;
+            case 1 *//*Status*//*:
+                break;
+        }*/
+
         StringBuilder output = new StringBuilder();
+        output.append(SEPARATOR).append(System.lineSeparator());
+        output.append(FEEDBACK_HEADER).append(System.lineSeparator());
+        output.append(SEPARATOR).append(System.lineSeparator());
         for (Feedback feedback : teamManagementRepository.getFeedbacks()) {
             output.append(feedback.print()).append(System.lineSeparator());
         }
         return output.toString().trim();
     }
-
-    /*TODO Ask Yuli if I'm using his print() method correctly. My suggestion for his implementation is to remove the "Feedback" part and to have only 1 "Feedback" header
-    implemented here. */
 }

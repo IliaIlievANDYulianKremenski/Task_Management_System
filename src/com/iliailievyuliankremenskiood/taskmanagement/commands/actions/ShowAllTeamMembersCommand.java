@@ -17,6 +17,8 @@ public class ShowAllTeamMembersCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String NO_TEAM_MEMBERS_ERROR = "There are no team members in this team.";
 
+    public static final String MEMBERS_HEADER = "%s's team members: ";
+    public static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
@@ -41,10 +43,17 @@ public class ShowAllTeamMembersCommand implements Command {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("Team members: ").append(System.lineSeparator());
+        result.append(String.format(MEMBERS_HEADER, teamName))
+                .append(System.lineSeparator())
+                .append(SEPARATOR)
+                .append(System.lineSeparator());
+
         for (Member member : temporaryTeam.getTeamMembers()) {
-            result.append(member.getName()).append(System.lineSeparator());
+            result.append(member.getName())
+                    .append(System.lineSeparator());
         }
+        result.append(SEPARATOR).append(System.lineSeparator());
+
         return result.toString().trim();
     }
 }

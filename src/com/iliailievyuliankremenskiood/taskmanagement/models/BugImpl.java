@@ -109,8 +109,6 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override /*TaskImpl*/
     public String print() {
         return String.format("""
-                        --------------
-                        Bug:
                             %s
                             Priority: %s
                             Severity: %s

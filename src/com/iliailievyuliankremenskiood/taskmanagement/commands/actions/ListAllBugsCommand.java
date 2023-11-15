@@ -8,15 +8,12 @@ import java.util.List;
 
 public class ListAllBugsCommand implements Command {
 
-    /* TODO Discuss with Yuli do we need to validate 0 parameters, or it is the command that will be important and
-    it will does not matter any text after it. */
-
-    /*TODO Discuss with Iliya the sort and filter methods that are going to be needed here.*/
-
-    /** Command format: List_All_Bugs */
+    /** Command format: List_All_Bugs {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}*/
 
     /*<-------Constant(s)------->*/
     public static final String NO_BUGS_ERROR = "There are currently no Bugs.";
+    public static final String BUGS_HEADER = "Bugs: ";
+    public static final String SEPARATOR = "-".repeat(14);
 
 
     /*<-------Field(s)------->*/
@@ -37,13 +34,23 @@ public class ListAllBugsCommand implements Command {
             throw new IllegalArgumentException(NO_BUGS_ERROR);
         }
 
+        /*✏️ TODO ✏️- for Iliya to implement this part of the function.*/
+        /*switch (parameters.size()){
+            case 0 *//*All Bugs*//*:
+                break;
+            case 1 *//*Status*//*:
+                break;
+            case 2 *//*Status + Assignee*//*:
+                break;
+        }*/
+
         StringBuilder output = new StringBuilder();
+        output.append(SEPARATOR).append(System.lineSeparator());
+        output.append(BUGS_HEADER).append(System.lineSeparator());
+        output.append(SEPARATOR).append(System.lineSeparator());
         for (Bug bug : teamManagementRepository.getBugs()) {
             output.append(bug.print()).append(System.lineSeparator());
         }
         return output.toString().trim();
     }
-
-    /*TODO Ask Yuli if I'm using his print() method correctly. My suggestion for his implementation is to remove the "Bug" part and to have only 1 "Bug" header
-    implemented here. */
 }

@@ -39,7 +39,9 @@ public class ChangeStorySizeCommand implements Command {
                 parameters.get(0),
                 "Story ID"
         );
-        StorySizeType newSize = ParsingHelpers.parseEnum(parameters.get(1),
+
+        StorySizeType newSize = ParsingHelpers.parseEnum(
+                parameters.get(1),
                 StorySizeType.class,
                 INVALID_STORY_SIZE_MESSAGE);
 

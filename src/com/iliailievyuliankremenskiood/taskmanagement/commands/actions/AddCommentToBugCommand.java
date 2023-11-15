@@ -11,6 +11,9 @@ import java.util.List;
 
 public class AddCommentToBugCommand implements Command {
 
+    /*✏️ TODO ✏️- do the trainers want us to make the author a member, or is it OK to leave it this, so that
+    *  even anonymous ppl can leave comments?*/
+
     /** Command format: Add_Comment_to_Bug {bug ID} {author} {comment} */
 
     /*<-------Constant(s)------->*/

@@ -31,8 +31,8 @@ public class CreateNewBoardInTeamCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String boardName = parameters.get(1);
-        String teamName = parameters.get(2);
+        String boardName = parameters.get(0);
+        String teamName = parameters.get(1);
 
         Board board = teamManagementRepository.creteBoard(boardName);
         Team team = teamManagementRepository.findTeamByName(teamName);

@@ -39,7 +39,9 @@ public class ChangeStoryStatusCommand implements Command {
                 parameters.get(0),
                 "Story ID"
         );
-        StoryStatusType newStatus = ParsingHelpers.parseEnum(parameters.get(1),
+
+        StoryStatusType newStatus = ParsingHelpers.parseEnum(
+                parameters.get(1),
                 StoryStatusType.class,
                 INVALID_STORY_STATUS_MESSAGE);
 

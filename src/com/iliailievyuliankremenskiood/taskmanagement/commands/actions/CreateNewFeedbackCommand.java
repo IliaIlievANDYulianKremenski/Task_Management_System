@@ -13,11 +13,9 @@ public class CreateNewFeedbackCommand implements Command {
 
     /** Command format: Create_New_Feedback {title} {description} {rating} {status} */
 
-    /*TODO Maybe the feedback status should always start as NEW. Talk with Yuli to see
-        what is his opinion. */
-
     /*<-------Constant(s)------->*/
-    private static final String INVALID_FEEDBACK_STATUS_MESSAGE = "Invalid value for Feedback Status: %s. Should be NEW, UNSCHEDULED, SCHEDULED or DONE.";
+    private static final String INVALID_FEEDBACK_STATUS_MESSAGE =
+            "Invalid value for Feedback Status: %s. Should be NEW, UNSCHEDULED, SCHEDULED or DONE.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
 
     /*<-------Field(s)------->*/

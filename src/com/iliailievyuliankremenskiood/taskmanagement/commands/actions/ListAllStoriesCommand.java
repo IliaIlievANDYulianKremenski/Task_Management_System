@@ -8,13 +8,13 @@ import java.util.List;
 
 public class ListAllStoriesCommand implements Command {
 
-     /* TODO Discuss with Yuli do we need to validate 0 parameters, or it is the command that will be important and
-    it will does not matter any text after it. */
-
-    /** Command format: List_All_Stories */
+    /** Command format: List_All_Stories {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}*/
 
     /*<-------Constant(s)------->*/
     public static final String NO_STORIES_ERROR = "There are currently no Stories.";
+
+    public static final String STORIES_HEADER = "Stories: ";
+    public static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/
 
@@ -34,7 +34,20 @@ public class ListAllStoriesCommand implements Command {
             throw new IllegalArgumentException(NO_STORIES_ERROR);
         }
 
+        /*✏️ TODO ✏️- for Iliya to implement this part of the function.*/
+        /*switch (parameters.size()){
+            case 0 *//*All Feedbacks*//*:
+                break;
+            case 1 *//*Status*//*:
+                break;
+            case 2 *//*Status + Assignee*//*:
+                break;
+        }*/
+
         StringBuilder output = new StringBuilder();
+        output.append(SEPARATOR).append(System.lineSeparator());
+        output.append(STORIES_HEADER).append(System.lineSeparator());
+        output.append(SEPARATOR).append(System.lineSeparator());
         for (Story story : teamManagementRepository.getStories()) {
             output.append(story.print()).append(System.lineSeparator());
         }

@@ -13,6 +13,8 @@ public class ShowAllTeamsCommand implements Command {
 
     /*<-------Constant(s)------->*/
     public static final String NO_TEAMS_ERROR_MESSAGE = "There are no teams registered in the system.";
+    public static final String TEAMS_HEADER = "Teams: ";
+    public static final String SEPARATOR = "-".repeat(14);
 
 
     /*<-------Field(s)------->*/
@@ -33,10 +35,16 @@ public class ShowAllTeamsCommand implements Command {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("Teams: ").append(System.lineSeparator());
+        result.append(TEAMS_HEADER)
+                .append(System.lineSeparator())
+                .append(SEPARATOR)
+                .append(System.lineSeparator());
+
         for (Team team : teamManagementRepository.getTeams()) {
             result.append(team.getName()).append(System.lineSeparator());
         }
+        result.append(SEPARATOR).append(System.lineSeparator());
+
         return result.toString().trim();
     }
 }

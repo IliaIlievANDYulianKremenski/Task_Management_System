@@ -39,7 +39,9 @@ public class ChangeFeedbackStatusCommand implements Command {
                 parameters.get(0),
                 "Feedback ID"
         );
-        FeedbackStatusType newStatus = ParsingHelpers.parseEnum(parameters.get(1),
+        
+        FeedbackStatusType newStatus = ParsingHelpers.parseEnum(
+                parameters.get(1),
                 FeedbackStatusType.class,
                 INVALID_FEEDBACK_STATUS_MESSAGE);
 

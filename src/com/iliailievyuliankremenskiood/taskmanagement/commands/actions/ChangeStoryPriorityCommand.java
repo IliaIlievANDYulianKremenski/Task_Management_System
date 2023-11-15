@@ -39,7 +39,9 @@ public class ChangeStoryPriorityCommand implements Command {
                 parameters.get(0),
                 "Story ID"
         );
-        StoryPriorityType newType = ParsingHelpers.parseEnum(parameters.get(1),
+
+        StoryPriorityType newType = ParsingHelpers.parseEnum(
+                parameters.get(1),
                 StoryPriorityType.class,
                 INVALID_STORY_PRIORITY_MESSAGE);
 

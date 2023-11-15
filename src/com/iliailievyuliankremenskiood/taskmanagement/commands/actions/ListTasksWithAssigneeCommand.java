@@ -6,14 +6,19 @@ import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagem
 import java.util.List;
 
 public class ListTasksWithAssigneeCommand implements Command {
-    /*TODO - it is technically impossible to create a task without assigning it to somebody.
-    *  This means that both List_All_Tasks and this command will be doing the same thing.
-    *  Should we keep this one?*/
+    /**
+     * Command format: List_All_Tasks_With_Assignee {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}
+     * */
+
     private final TeamManagementRepository teamManagementRepository;
 
     public ListTasksWithAssigneeCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
+
+    /*✏️ TODO ✏️- for Yuli to implement this part of the function.
+    *    Check command format for more info.*/
+
 
     @Override
     public String execute(List<String> parameters) {

@@ -147,5 +147,8 @@ public abstract class TaskImpl implements Task {
     /*TODO - make a test for this method.*/
     public void addCommentToTask(Comment commentToBeAddedToTheTask){
         this.comments.add(commentToBeAddedToTheTask);
+        logEvent("Comment",
+                "",
+                commentToBeAddedToTheTask.getMessage());
     }
 }

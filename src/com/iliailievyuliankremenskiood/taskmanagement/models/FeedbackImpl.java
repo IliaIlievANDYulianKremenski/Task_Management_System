@@ -33,6 +33,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
 
+    /* ✏️ TODO ✏️ - ask the trainers if the rating can be negative? What is the purpose of the rating?*/
     /*<-------Setter(s)------->*/
     private void setRating(int rating) {
         this.rating = rating;
@@ -47,8 +48,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     @Override
     public String print() {
         return String.format("""
-                        --------------
-                        Feedback:
                             %s
                             Rating: %d
                             Status: %s

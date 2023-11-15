@@ -11,15 +11,13 @@ import java.util.List;
 public class ShowAllTeamBoardsCommand implements Command {
     /**
      * Command format: Show_All_Team_Boards {team name}
-     * */
-
-    /*TODO - this command is supposed to list only the names of all boards which belong to a specific team
-    *  or the name of every board and the tasks which have been assigned to them?*/
+     */
 
     /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String NO_BOARDS_ERROR = "There are no Boards to display.";
-
+    public static final String NO_BOARDS_ERROR = "There are no boards to display.";
+    public static final String BOARDS_HEADER = "%s's boards: ";
+    public static final String SEPARATOR = "-".repeat(14);
 
 
     /*<-------Field(s)------->*/
@@ -45,10 +43,17 @@ public class ShowAllTeamBoardsCommand implements Command {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("Boards: ").append(System.lineSeparator());
+        result.append(String.format(BOARDS_HEADER, teamName))
+                .append(System.lineSeparator())
+                .append(SEPARATOR)
+                .append(System.lineSeparator());
+
         for (Board board : temporaryTeam.getTeamBoards()) {
-            result.append(board.getName()).append(System.lineSeparator());
+            result.append(board.getName())
+                    .append(System.lineSeparator())
+                    .append(SEPARATOR);
         }
+
         return result.toString().trim();
     }
 }

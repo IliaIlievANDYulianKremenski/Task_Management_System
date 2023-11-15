@@ -16,8 +16,10 @@ public class CreateNewBugCommand implements Command {
     /** Command format: Create_New_Bug {title} {description} {priority} {severity} {assignee} */
 
     /*<-------Constant(s)------->*/
-    private static final String INVALID_BUG_PRIORITY_MESSAGE = "Invalid value for Bug Priority: %s. Should be HIGH, MEDIUM or LOW.";
-    private static final String INVALID_BUG_SEVERITY_MESSAGE = "Invalid value for Bug Severity: %s. Should be CRITICAL, MAJOR or MINOR.";
+    private static final String INVALID_BUG_PRIORITY_MESSAGE =
+            "Invalid value for Bug Priority: %s. Should be HIGH, MEDIUM or LOW.";
+    private static final String INVALID_BUG_SEVERITY_MESSAGE =
+            "Invalid value for Bug Severity: %s. Should be CRITICAL, MAJOR or MINOR.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
 
     /*<-------Field(s)------->*/
@@ -50,7 +52,7 @@ public class CreateNewBugCommand implements Command {
         );
         String assigneeName = parameters.get(4);
 
-        Member assignee = teamManagementRepository.createMember(assigneeName);
+        Member assignee = teamManagementRepository.findMemberByName(assigneeName);
         Bug bug = teamManagementRepository.createBug(
                 title,
                 description,

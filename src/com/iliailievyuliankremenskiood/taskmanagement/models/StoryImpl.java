@@ -82,8 +82,6 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override /*TaskImpl - Printable*/
     public String print() {
         return String.format("""
-                        --------------
-                        Story:
                             %s
                             Priority: %s
                             Size: %s

@@ -14,7 +14,8 @@ public class ChangeBugSeverityCommand implements Command {
     /** Command format: Change_Bug_Severity {bug ID} {new severity} */
 
     /*<-------Constant(s)------->*/
-    private static final String INVALID_BUG_SEVERITY_MESSAGE = "Invalid value for Bug Severity: %s. Should be CRITICAL, MAJOR or MINOR.";
+    private static final String INVALID_BUG_SEVERITY_MESSAGE =
+            "Invalid value for Bug Severity: %s. Should be CRITICAL, MAJOR or MINOR.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
     /*<-------Field(s)------->*/
