@@ -16,7 +16,6 @@ public class CommentImpl implements Comment {
 
     /*<-------Field(s)------->*/
 
-    //TODO To change author from String to a Member type.
     private String author;
     private String message;
 

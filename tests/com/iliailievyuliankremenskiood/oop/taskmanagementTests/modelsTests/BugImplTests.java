@@ -43,7 +43,6 @@ public class BugImplTests {
     public static final String STEP_1 = "Step 1.";
     public static final String STEP_2 = "Step 2.";
 
-    /*TODO - A valid implementation of the "Member" class is needed for the tests. @Ilia Iliev will implement it 👍*/
     /*<-------Test(s)------->*/
     @Test
     public void Constructor_Should_CreateNewBug_When_ValidArgumentsPassed() {

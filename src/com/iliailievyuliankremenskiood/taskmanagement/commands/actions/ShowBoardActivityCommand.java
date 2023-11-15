@@ -9,11 +9,12 @@ import java.util.List;
 
 public class ShowBoardActivityCommand implements Command {
 
-    /* TODO What we have to show here: all activities in a board of a team, just any board or absolutely all boards. */
+    /* ✏️ TODO ✏️ To ask trainers: What we have to show here: all activities in a board of a team, just any board or absolutely all boards. */
 
     /** Command format: Show_Board_Activity {board name} */
 
     /*<-------Constant(s)------->*/
+
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
     /*<-------Field(s)------->*/

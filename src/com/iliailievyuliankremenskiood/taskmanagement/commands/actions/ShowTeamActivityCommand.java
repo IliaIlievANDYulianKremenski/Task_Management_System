@@ -8,8 +8,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowTeamActivityCommand implements Command {
-    /*TODO - this method should show the activity log of a team OR go through every member of the team and
-    *  list their activity log?*/
+
 
     /**
      * Command format: Show_Team_Activity {team name}

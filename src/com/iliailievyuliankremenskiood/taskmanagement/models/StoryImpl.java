@@ -11,18 +11,13 @@ public class StoryImpl extends TaskImpl implements Story {
 
 
     /*<-------Field(s)------->*/
-    /*TODO:
-     *  - should we be able to change the priority?*/
+
     private StoryPriorityType priorityType;
 
     private StorySizeType sizeType;
 
-    /*TODO:
-     *  - should we be able to change the status? It seems as something natural.*/
     private StoryStatusType statusType;
 
-    /*TODO:
-     *  - should we be able to change the assignee?*/
     private Member assignee;
 
 

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ShowPersonActivityCommand implements Command {
 
-    /* TODO What we have to show here: all activities of a person of a team or just any person. */
 
     /** Command format: Show_Person_Activity {person name} */
 

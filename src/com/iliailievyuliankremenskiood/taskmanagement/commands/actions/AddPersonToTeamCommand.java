@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddPersonToTeamCommand implements Command {
     /**
-     * Command format: Add_Person_to_Team {person's name} {team's name}
+     * Command format: Add_Person_to_Team {person name} {team name}
      */
     /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;

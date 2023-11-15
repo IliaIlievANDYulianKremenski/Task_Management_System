@@ -9,16 +9,13 @@ import java.util.List;
 
 public class UnassignBugCommand implements Command {
 
-    /*TODO Yuli do you like this message for unassignment and we should think how to print bugs or stories that are
-    not assigned. I mean if they have no assignee, they will print null. We have to avoid that and think how to print "no assignee" for example.
-     */
 
     /** Command format: Unassign_Bug {bug ID} */
 
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String BUG_UNASSIGN_MESSAGE = "Bug with ID #%d is now unassigned.";
+    public static final String BUG_UNASSIGN_MESSAGE = "Bug with ID #%d is now not assigned.";
 
     /*<-------Field(s)------->*/
 
@@ -41,7 +38,6 @@ public class UnassignBugCommand implements Command {
 
         Bug bug = teamManagementRepository.findBugById(bugId);
 
-        /* TODO */
         bug.changeAssignee(null);
 
         return userOutput(bug);
