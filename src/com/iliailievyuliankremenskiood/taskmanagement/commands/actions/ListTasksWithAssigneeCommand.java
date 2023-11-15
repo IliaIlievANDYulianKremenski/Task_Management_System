@@ -6,6 +6,9 @@ import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagem
 import java.util.List;
 
 public class ListTasksWithAssigneeCommand implements Command {
+    /*TODO - it is technically impossible to create a task without assigning it to somebody.
+    *  This means that both List_All_Tasks and this command will be doing the same thing.
+    *  Should we keep this one?*/
     private final TeamManagementRepository teamManagementRepository;
 
     public ListTasksWithAssigneeCommand(TeamManagementRepository teamManagementRepository) {

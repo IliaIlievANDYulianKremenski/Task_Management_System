@@ -11,6 +11,8 @@ public class ListAllBugsCommand implements Command {
     /* TODO Discuss with Yuli do we need to validate 0 parameters, or it is the command that will be important and
     it will does not matter any text after it. */
 
+    /*TODO Discuss with Iliya the sort and filter methods that are going to be needed here.*/
+
     /** Command format: List_All_Bugs */
 
     /*<-------Constant(s)------->*/

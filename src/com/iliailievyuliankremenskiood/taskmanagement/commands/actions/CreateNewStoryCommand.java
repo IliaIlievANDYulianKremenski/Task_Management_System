@@ -2,18 +2,83 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StoryPriorityType;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StorySizeType;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StoryStatusType;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ParsingHelpers;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
 public class CreateNewStoryCommand implements Command {
+    /**
+     * Command format: Create_New_Story {title} {description} {priority} {size} {status} {assignee}
+     * */
+
+    /*<-------Constant(s)------->*/
+    private static final String INVALID_STORY_PRIORITY_MESSAGE =
+            "Invalid value for Story Priority: %s. Should be HIGH, MEDIUM or LOW.";
+    private static final String INVALID_STORY_SIZE_MESSAGE =
+            "Invalid value for Story Size: %s. Should be LARGE, MEDIUM or SMALL.";
+    private static final String INVALID_STORY_STATUS_MESSAGE =
+            "Invalid value for Story Status: %s. Should be NOT_DONE, IN_PROGRESS or DONE.";
+
+    private static final String INVALID_STORY_ASSIGNEE_MESSAGE =
+            "Invalid value for Story Assignee.";
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
+
+
+    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
+
+    /*<-------Constructor(s)------->*/
     public CreateNewStoryCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
+
+    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
-        return null;
+        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+
+        String storyTitle = parameters.get(0);
+        String storyDescription = parameters.get(1);
+
+
+        StoryPriorityType storyPriorityType = ParsingHelpers.parseEnum(
+                parameters.get(2),
+                StoryPriorityType.class,
+                String.format(INVALID_STORY_PRIORITY_MESSAGE)
+        );
+
+        StorySizeType storySizeType = ParsingHelpers.parseEnum(
+                parameters.get(3),
+                StorySizeType.class,
+                String.format(INVALID_STORY_SIZE_MESSAGE)
+        );
+
+        StoryStatusType storyStatusType = ParsingHelpers.parseEnum(
+                parameters.get(4),
+                StoryStatusType.class,
+                String.format(INVALID_STORY_STATUS_MESSAGE)
+        );
+
+        String assigneeName = parameters.get(5);
+        Member assignee = teamManagementRepository.findMemberByName(assigneeName);
+
+        Story temporarStory = teamManagementRepository.createStory(storyTitle, storyDescription, storyPriorityType,
+                storySizeType,storyStatusType, assignee);
+
+        return userOutput(temporarStory);
+    }
+
+    private static String userOutput(Story storyWhoseActivityLogWeNeed) {
+        return storyWhoseActivityLogWeNeed
+                .getActivityHistory()
+                .get(storyWhoseActivityLogWeNeed.getActivityHistory().size() - 1);
     }
 }
