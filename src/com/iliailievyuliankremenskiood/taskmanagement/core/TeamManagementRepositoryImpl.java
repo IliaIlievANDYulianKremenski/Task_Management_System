@@ -192,12 +192,12 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         return temporaryTeam;
     }
 
-    /*TODO requested by Iliya - boards must be unique only in the team, not in the entire repository.*/
     @Override
-    public Board creteBoard(String boardName) {
-        checkIfBoardNameExists(boardName);
+    public Board creteBoard(String boardName, String teamName) {
+        checkIfBoardNameExists(boardName, teamName);
         Board temporaryBoard = new BoardImpl(boardName);
         boards.add(temporaryBoard);
+        findTeamByName(teamName).createBoard(temporaryBoard);
         return temporaryBoard;
     }
 
@@ -263,8 +263,9 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
             }
         }
     }
-    private void checkIfBoardNameExists(String boardName) {
-        for (Board board : getBoards()) {
+    private void checkIfBoardNameExists(String boardName, String teamName) {
+        Team team = findTeamByName(teamName);
+        for (Board board : team.getTeamBoards()) {
             if (board.getName().equals(boardName)) {
                 throw new NameAlreadyExistException(String.format(BOARD_EXISTS_MESSAGE, boardName));
             }

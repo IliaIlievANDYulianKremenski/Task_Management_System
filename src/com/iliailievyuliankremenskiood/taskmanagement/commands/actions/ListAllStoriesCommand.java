@@ -3,16 +3,20 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllStoriesCommand implements Command {
 
-    /** Command format: List_All_Stories {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}*/
+    /** Command format: List_All_Stories {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES} */
 
     /*<-------Constant(s)------->*/
-    public static final String NO_STORIES_ERROR = "There are currently no Stories.";
 
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    public static final String NO_STORIES_ERROR = "There are currently no Stories.";
     public static final String STORIES_HEADER = "Stories: ";
     public static final String SEPARATOR = "-".repeat(14);
 
@@ -30,25 +34,26 @@ public class ListAllStoriesCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        if (teamManagementRepository.getStories().isEmpty()) {
+        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+
+        String statusFilter = parameters.get(0);
+        String assigneeFilter = parameters.get(1);
+        List<Story> storyList = teamManagementRepository.getStories();
+        List<Story> filteredStoryList = new ArrayList<>();
+
+        FilterHelpers.filterStoriesByStatus(statusFilter, storyList, filteredStoryList);
+        storyList.retainAll(filteredStoryList);
+        FilterHelpers.filterTasksByAssignee(assigneeFilter, storyList, filteredStoryList);
+
+        if (filteredStoryList.isEmpty()) {
             throw new IllegalArgumentException(NO_STORIES_ERROR);
         }
-
-        /*✏️ TODO ✏️- for Iliya to implement this part of the function.*/
-        /*switch (parameters.size()){
-            case 0 *//*All Feedbacks*//*:
-                break;
-            case 1 *//*Status*//*:
-                break;
-            case 2 *//*Status + Assignee*//*:
-                break;
-        }*/
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
         output.append(STORIES_HEADER).append(System.lineSeparator());
         output.append(SEPARATOR).append(System.lineSeparator());
-        for (Story story : teamManagementRepository.getStories()) {
+        for (Story story : filteredStoryList) {
             output.append(story.print()).append(System.lineSeparator());
         }
         return output.toString().trim();

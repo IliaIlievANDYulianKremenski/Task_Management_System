@@ -151,8 +151,9 @@ public class TeamManagementRepositoryTests {
     }
 
     @Test
-    public void findBoardByName_Should_ReturnBoard_When_MemberExists() {
+    public void findBoardByName_Should_ReturnBoard_When_BoardExists() {
         /*Arrange*/
+        Team team = createValidTeam();
         Board board = createValidBoard();
         /*Act*/
         Board board2 = teamManagementRepository.findBoardByName(VALID_BOARD_NAME);
@@ -310,14 +311,17 @@ public class TeamManagementRepositoryTests {
     @Test
     public void createBoard_Should_AddBoardToList() {
         /*Arrange*/
+        Team team = createValidTeam();
         Board board = createValidBoard();
         /*Act, Assert*/
         Assertions.assertEquals(1,teamManagementRepository.getBoards().size());
+        Assertions.assertEquals(1, team.getTeamBoards().size());
 
     }
     @Test
     public void createBoard_Should_ThrowException_When_BoardNameExists() {
         /*Arrange*/
+        Team team = createValidTeam();
         Board board = createValidBoard();
         /*Act, Assert*/
         Assertions.assertThrows(
@@ -366,7 +370,7 @@ public class TeamManagementRepositoryTests {
         return teamManagementRepository.createMember(VALID_MEMBER_NAME);
     }
     private Board createValidBoard() {
-        return teamManagementRepository.creteBoard(VALID_BOARD_NAME);
+        return teamManagementRepository.creteBoard(VALID_BOARD_NAME, VALID_TEAM_NAME);
     }
     private Team createValidTeam() {
         return teamManagementRepository.createTeam(VALID_TEAM_NAME);

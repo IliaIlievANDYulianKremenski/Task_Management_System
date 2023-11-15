@@ -34,7 +34,7 @@ public class CreateNewBoardInTeamCommand implements Command {
         String boardName = parameters.get(0);
         String teamName = parameters.get(1);
 
-        Board board = teamManagementRepository.creteBoard(boardName);
+        Board board = teamManagementRepository.creteBoard(boardName, teamName);
         Team team = teamManagementRepository.findTeamByName(teamName);
 
         team.createBoard(board);

@@ -2,7 +2,6 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
@@ -40,11 +39,11 @@ public class ListAllFeedbacksCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
         String statusFilter = parameters.get(0);
-        List<Bug> bugList = teamManagementRepository.getBugs();
-        List<Bug> filteredBugList = new ArrayList<>();
-        FilterHelpers.filterBugsByStatus(statusFilter, bugList, filteredBugList);
+        List<Feedback> feedbacksList = teamManagementRepository.getFeedbacks();
+        List<Feedback> filteredBugList = new ArrayList<>();
+        FilterHelpers.filterFeedbacksByStatus(statusFilter, feedbacksList, filteredBugList);
 
-        if (teamManagementRepository.getFeedbacks().isEmpty()) {
+        if (filteredBugList.isEmpty()) {
             throw new IllegalArgumentException(NO_FEEDBACKS_ERROR);
         }
 
@@ -52,7 +51,7 @@ public class ListAllFeedbacksCommand implements Command {
         output.append(SEPARATOR).append(System.lineSeparator());
         output.append(FEEDBACK_HEADER).append(System.lineSeparator());
         output.append(SEPARATOR).append(System.lineSeparator());
-        for (Feedback feedback : teamManagementRepository.getFeedbacks()) {
+        for (Feedback feedback : filteredBugList) {
             output.append(feedback.print()).append(System.lineSeparator());
         }
         return output.toString().trim();

@@ -45,7 +45,7 @@ public interface TeamManagementRepository {
 
     Team createTeam(String teamName);
 
-    Board creteBoard(String boardName);
+    Board creteBoard(String boardName, String teamName);
 
     Comment createComment(String commentAuthor, String commentMessage);
 
