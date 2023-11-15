@@ -42,11 +42,14 @@ public class ListAllBugsCommand implements Command {
         String statusFilter = parameters.get(0);
         String assigneeFilter = parameters.get(1);
         List<Bug> bugList = teamManagementRepository.getBugs();
-        List<Bug> filteredBugList = new ArrayList<>();
 
-        FilterHelpers.filterBugsByStatus(statusFilter, bugList, filteredBugList);
-        bugList.retainAll(filteredBugList);
-        FilterHelpers.filterTasksByAssignee(assigneeFilter, bugList, filteredBugList);
+        List<Bug> filteredBugList = FilterHelpers.filterBugsByStatus(
+                statusFilter,
+                bugList);
+        filteredBugList = FilterHelpers.filterBugsByAssignee(
+                assigneeFilter,
+                new ArrayList<>(filteredBugList)
+                );
 
         if (filteredBugList.isEmpty()) {
             throw new IllegalArgumentException(NO_BUGS_ERROR);

@@ -39,11 +39,13 @@ public class ListAllStoriesCommand implements Command {
         String statusFilter = parameters.get(0);
         String assigneeFilter = parameters.get(1);
         List<Story> storyList = teamManagementRepository.getStories();
-        List<Story> filteredStoryList = new ArrayList<>();
 
-        FilterHelpers.filterStoriesByStatus(statusFilter, storyList, filteredStoryList);
-        storyList.retainAll(filteredStoryList);
-        FilterHelpers.filterTasksByAssignee(assigneeFilter, storyList, filteredStoryList);
+        List<Story> filteredStoryList = FilterHelpers.filterStoriesByStatus(
+                statusFilter,
+                storyList);
+        filteredStoryList = FilterHelpers.filterTasksByAssignee(
+                assigneeFilter,
+                new ArrayList<>(filteredStoryList));
 
         if (filteredStoryList.isEmpty()) {
             throw new IllegalArgumentException(NO_STORIES_ERROR);

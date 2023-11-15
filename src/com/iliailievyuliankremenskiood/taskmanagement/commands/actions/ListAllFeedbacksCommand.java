@@ -40,8 +40,11 @@ public class ListAllFeedbacksCommand implements Command {
 
         String statusFilter = parameters.get(0);
         List<Feedback> feedbacksList = teamManagementRepository.getFeedbacks();
-        List<Feedback> filteredBugList = new ArrayList<>();
-        FilterHelpers.filterFeedbacksByStatus(statusFilter, feedbacksList, filteredBugList);
+
+        List<Feedback> filteredBugList = FilterHelpers.filterFeedbacksByStatus(
+                statusFilter,
+                feedbacksList
+        );
 
         if (filteredBugList.isEmpty()) {
             throw new IllegalArgumentException(NO_FEEDBACKS_ERROR);
