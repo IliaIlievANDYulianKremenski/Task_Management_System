@@ -40,7 +40,7 @@ public class ManualCommandPrintHelper {
                 "\tList_All_Feedbacks " + ANSI_GREEN + "{filter status / ALL_STATUSES}\n" + ANSI_RESET +
                 "\tList_All_Stories " + ANSI_GREEN + "{filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}\n" + ANSI_RESET +
                 "\tList_All_Tasks " + ANSI_GREEN + "{filter title / ALL_TITLES}\n" + ANSI_RESET +
-                "\tList_All_Tasks_With_Assignee " + ANSI_GREEN + "{filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}\n" + ANSI_RESET +
+                "\tList_Tasks_With_Assignee " + ANSI_GREEN + "{filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}\n" + ANSI_RESET +
                 "\tManual\n" + ANSI_RESET +
                 "\tShow_All_People\n" + ANSI_RESET +
                 "\tShow_All_Team_Boards " + ANSI_GREEN + "{team name}\n" + ANSI_RESET +

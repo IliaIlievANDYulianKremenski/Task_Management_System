@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ListTasksWithAssigneeCommand implements Command {
     /**
-     * Command format: List_All_Tasks_With_Assignee {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}
+     * Command format: List_Tasks_With_Assignee {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}
      */
 
     /*<-------Constant(s)------->*/

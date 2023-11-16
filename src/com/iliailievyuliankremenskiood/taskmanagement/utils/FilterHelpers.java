@@ -46,7 +46,7 @@ public class FilterHelpers {
                 }
             }
         } else {
-            filteredFeedbackList = new ArrayList<>(filteredFeedbackList);
+            filteredFeedbackList = new ArrayList<>(feedbacksList);
         }
         return filteredFeedbackList;
     }

@@ -343,6 +343,8 @@ public class TeamManagementRepositoryTests {
         Bug bug = createValidBug();
         /*Act, Assert*/
         Assertions.assertEquals(1,teamManagementRepository.getTasks().size());
+        Assertions.assertEquals(1,teamManagementRepository.getBugs().size());
+
 
     }
     @Test
@@ -351,6 +353,8 @@ public class TeamManagementRepositoryTests {
         Feedback feedback = createValidFeedback();
         /*Act, Assert*/
         Assertions.assertEquals(1,teamManagementRepository.getTasks().size());
+        Assertions.assertEquals(1,teamManagementRepository.getFeedbacks().size());
+
     }
 
     @Test
@@ -359,6 +363,7 @@ public class TeamManagementRepositoryTests {
         Story story = createValidStory();
         /*Act, Assert*/
         Assertions.assertEquals(1,teamManagementRepository.getTasks().size());
+        Assertions.assertEquals(1,teamManagementRepository.getStories().size());
 
     }
 
