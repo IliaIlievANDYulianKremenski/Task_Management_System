@@ -23,13 +23,11 @@ public interface TeamManagementRepository {
 
     List<Team> getTeams();
 
-    List<Board> getBoards();
-
     List<Comment> getComments();
 
     Member findMemberByName(String memberName);
 
-    Board findBoardByName(String boardName);
+    Board findBoardByName(String boardName, String teamName);
 
     Team findTeamByName(String teamName);
 

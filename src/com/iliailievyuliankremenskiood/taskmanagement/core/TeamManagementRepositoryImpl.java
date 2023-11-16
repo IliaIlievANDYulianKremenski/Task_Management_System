@@ -44,7 +44,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
-    private final List<Board> boards = new ArrayList<>();
     private final List<Comment> comments = new ArrayList<>();
 
 
@@ -87,11 +86,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     }
 
     @Override
-    public List<Board> getBoards() {
-        return new ArrayList<>(boards);
-    }
-
-    @Override
     public List<Comment> getComments() {
         return new ArrayList<>(comments);
     }
@@ -111,8 +105,9 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     }
 
     @Override
-    public Board findBoardByName(String boardName) {
-        for (Board board : getBoards()) {
+    public Board findBoardByName(String boardName, String teamName) {
+        Team team = findTeamByName(teamName);
+        for (Board board : team.getTeamBoards()) {
             if (board.getName().equals(boardName)) {
                 return board;
             }
@@ -196,7 +191,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     public Board creteBoard(String boardName, String teamName) {
         checkIfBoardNameExists(boardName, teamName);
         Board temporaryBoard = new BoardImpl(boardName);
-        boards.add(temporaryBoard);
         findTeamByName(teamName).createBoard(temporaryBoard);
         return temporaryBoard;
     }

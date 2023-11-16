@@ -58,9 +58,12 @@ public class TeamManagementRepositoryTests {
         /*Act, Assert*/
         Assertions.assertEquals(0,teamManagementRepository.getMembers().size());
         Assertions.assertEquals(0,teamManagementRepository.getTasks().size());
+        Assertions.assertEquals(0,teamManagementRepository.getBugs().size());
+        Assertions.assertEquals(0,teamManagementRepository.getFeedbacks().size());
+        Assertions.assertEquals(0,teamManagementRepository.getStories().size());
         Assertions.assertEquals(0,teamManagementRepository.getTeams().size());
-        Assertions.assertEquals(0,teamManagementRepository.getBoards().size());
         Assertions.assertEquals(0,teamManagementRepository.getComments().size());
+
 
     }
 
@@ -110,14 +113,6 @@ public class TeamManagementRepositoryTests {
     }
 
     @Test
-    public void getBoards_Should_ReturnCopyOfCollection() {
-        /*Act, Assert*/
-        Assertions.assertNotSame(teamManagementRepository.getBoards(),
-                teamManagementRepository.getBoards());
-
-    }
-
-    @Test
     /*Act, Assert*/
     public void getComments_Should_ReturnCopyOfCollection() {
         Assertions.assertNotSame(teamManagementRepository.getComments(),
@@ -147,7 +142,7 @@ public class TeamManagementRepositoryTests {
     public void findBoardByName_Should_ThrowException_When_BoardDoesNotExist() {
         /*Act, Assert*/
         Assertions.assertThrows(ElementNotFoundException.class,
-                () -> teamManagementRepository.findBoardByName(VALID_BOARD_NAME));
+                () -> teamManagementRepository.findBoardByName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
     }
 
@@ -157,7 +152,7 @@ public class TeamManagementRepositoryTests {
         Team team = createValidTeam();
         Board board = createValidBoard();
         /*Act*/
-        Board board2 = teamManagementRepository.findBoardByName(VALID_BOARD_NAME);
+        Board board2 = teamManagementRepository.findBoardByName(VALID_BOARD_NAME, VALID_TEAM_NAME);
         /*Asser*/
         Assertions.assertSame(board,board2);
 
@@ -315,7 +310,10 @@ public class TeamManagementRepositoryTests {
         Team team = createValidTeam();
         Board board = createValidBoard();
         /*Act, Assert*/
-        Assertions.assertEquals(1,teamManagementRepository.getBoards().size());
+        Assertions.assertEquals(
+                1,
+                teamManagementRepository.getTeams().get(0).getTeamBoards().size()
+        );
         Assertions.assertEquals(1, team.getTeamBoards().size());
 
     }

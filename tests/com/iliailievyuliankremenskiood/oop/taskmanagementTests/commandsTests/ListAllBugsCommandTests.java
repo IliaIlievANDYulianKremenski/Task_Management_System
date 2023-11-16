@@ -37,6 +37,7 @@ public class ListAllBugsCommandTests {
     }
 
     /*<-------Test(s)------->*/
+
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
         /*Arrange*/
@@ -56,7 +57,7 @@ public class ListAllBugsCommandTests {
                 "ALL_STATUSES",
                 "ALL_ASSIGNEES"
         );
-        /*Arrange,Act, Assert*/
+        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllBugsCommand.execute(list)
