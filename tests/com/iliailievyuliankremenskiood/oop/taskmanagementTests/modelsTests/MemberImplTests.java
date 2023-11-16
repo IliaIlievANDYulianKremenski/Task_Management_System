@@ -121,6 +121,32 @@ public class MemberImplTests {
 
     }
 
+    @Test
+    public void viewTasksInfo_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> member.viewTasksInfo()
+        );
+    }
+    @Test
+    public void viewTasksInfo_Should_NotThrowException_When_MethodCalledAndThereAreTasks() {
+        /*Arrange*/
+        Member member = createValidMember();
+        Task task = createValidTask(member);
+        member.assignTask(task);
+        /*Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> member.viewTasksInfo()
+        );
+    }
+    @Test
+    public void getActivityInfo_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> member.getActivityInfo()
+        );
+    }
+
     /*<-------Helper Method(s)------->*/
 
     private static Member createValidMember() {
@@ -135,4 +161,5 @@ public class MemberImplTests {
                 BugSeverityType.CRITICAL,
                 assignee);
     }
+
 }

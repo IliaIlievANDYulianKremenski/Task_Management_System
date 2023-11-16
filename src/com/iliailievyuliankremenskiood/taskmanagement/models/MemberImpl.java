@@ -95,8 +95,6 @@ public class MemberImpl implements Member {
         );
     }
 
-    //TODO Test the print method with DoesNotThrow.
-
     public void viewTasksInfo() {
         StringBuilder taskInfo = new StringBuilder();
         if (tasks.isEmpty()) {
@@ -121,8 +119,6 @@ public class MemberImpl implements Member {
         }
         System.out.println(taskInfo.toString().trim());
     }
-
-    //TODO Test the print method with DoesNotThrow.
 
     public String getActivityInfo() {
         StringBuilder activityInfo = new StringBuilder();

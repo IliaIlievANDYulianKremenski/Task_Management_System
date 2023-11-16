@@ -119,7 +119,16 @@ public class BoardImplTests {
         board.removeTaskFromBoard(task);
         /*Assert*/
         Assertions.assertEquals(3,board.getActivityHistory().size());
+
     }
+    @Test
+    public void getActivityInfo_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> board.getActivityInfo()
+        );
+    }
+
     
     
     /*<-------Helper Method(s)------->*/

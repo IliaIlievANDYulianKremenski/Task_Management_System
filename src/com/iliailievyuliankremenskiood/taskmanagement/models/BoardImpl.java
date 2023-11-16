@@ -92,7 +92,6 @@ public class BoardImpl implements Board {
         );
     }
 
-    //TODO Test the print method with DoesNotThrow.
     public String getActivityInfo() {
         StringBuilder activityInfo = new StringBuilder();
         activityInfo.append(String.format(

@@ -159,6 +159,48 @@ public class TeamImplTets {
         /*Assert*/
         Assertions.assertEquals(3,team.getActivityHistory().size());
     }
+    @Test
+    public void showAllMembers_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> team.showAllMembers()
+        );
+    }
+    @Test
+    public void showAllMembers_Should_NotThrowException_When_MethodCalledAndThereAreMembers() {
+        /*Arrange*/
+        Member member = createValidMember();
+        team.addMember(member);
+        /*Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> team.showAllMembers()
+        );
+    }
+    @Test
+    public void showAllBoards_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> team.showAllBoards()
+        );
+    }
+    @Test
+    public void showAllBoards_Should_NotThrowException_When_MethodCalledAndThereAreBoards() {
+       /*Arrange*/
+        Board board = createValidBoard();
+        team.createBoard(board);
+        /*Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> team.showAllBoards()
+        );
+    }
+    @Test
+    public void getActivityInfo_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> team.getActivityInfo()
+        );
+    }
+
     /*<-------Helper Method(s)------->*/
 
     private static Member createValidMember() {

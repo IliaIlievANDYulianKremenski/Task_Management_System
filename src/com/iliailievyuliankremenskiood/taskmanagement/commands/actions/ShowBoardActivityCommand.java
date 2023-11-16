@@ -10,8 +10,6 @@ import java.util.List;
 
 public class ShowBoardActivityCommand implements Command {
 
-    /* ✏️ TODO ✏️ To ask trainers: What we have to show here: all activities in a board of a team, just any board or absolutely all boards. */
-
     /** Command format: Show_Board_Activity {board name} {team name} */
 
     /*<-------Constant(s)------->*/

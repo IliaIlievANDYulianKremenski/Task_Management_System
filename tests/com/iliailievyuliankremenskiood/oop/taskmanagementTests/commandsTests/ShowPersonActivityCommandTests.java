@@ -1,37 +1,37 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ListAllFeedbacksCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ShowBoardActivityCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ShowPersonActivityCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.BoardImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.TeamImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Board;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Team;
+import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ShowBoardActivityCommandTests {
+public class ShowPersonActivityCommandTests {
 
     /*<-------Constant(s)------->*/
-
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ShowBoardActivityCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
 
     /*<-------Field(s)------->*/
 
     private TeamManagementRepository teamManagementRepository;
-    private ShowBoardActivityCommand showBoardActivityCommand;
+    private ShowPersonActivityCommand showPersonActivityCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setShowBoardActivityCommand() {
+    public void setShowPersonActivityCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        showBoardActivityCommand = new ShowBoardActivityCommand(teamManagementRepository);
+        showPersonActivityCommand = new ShowPersonActivityCommand(teamManagementRepository);
 
     }
 
@@ -45,21 +45,20 @@ public class ShowBoardActivityCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> showBoardActivityCommand.execute(list)
+                () -> showPersonActivityCommand.execute(list)
         );
 
     }
     @Test
-    public void should_ThrowException_When_THereAreNoBoardToShow() {
+    public void should_ThrowException_When_THereAreNoPersonToShow() {
         /*Arrange*/
         List<String> list = List.of(
-                "Board name",
-                "Team name"
+                "Person name"
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
-                () -> showBoardActivityCommand.execute(list)
+                () -> showPersonActivityCommand.execute(list)
         );
 
     }
@@ -67,31 +66,22 @@ public class ShowBoardActivityCommandTests {
     public void execute_Should_NotThrowException_When_PassedValidInput() {
         /*Arrange*/
         List<String> list = List.of(
-                "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
-                "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act*/
-        Team team = createValidTeam();
-        Board board = createValidBoard();
+        Member member = createValidMember();
         /*Act, Assert*/
         Assertions.assertDoesNotThrow(
-                () -> showBoardActivityCommand.execute(list)
+                () -> showPersonActivityCommand.execute(list)
         );
-
     }
 
     /*<-------Helper Method(s)------->*/
 
-    private Board createValidBoard() {
-        return teamManagementRepository.creteBoard(
-                "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
-                "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
-        );
-    }
-    private Team createValidTeam() {
-        return teamManagementRepository.createTeam(
-                "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
-        );
+    private Member createValidMember() {
+        return teamManagementRepository.createMember(
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
+                );
     }
 
 }

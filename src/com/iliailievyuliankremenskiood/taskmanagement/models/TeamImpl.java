@@ -131,8 +131,6 @@ public class TeamImpl implements Team {
         );
     }
 
-    //TODO Test the print method with DoesNotThrow.
-
     @Override
     public void showAllMembers() {
         StringBuilder showMembers = new StringBuilder();
@@ -159,12 +157,10 @@ public class TeamImpl implements Team {
         System.out.println(showMembers.toString().trim());
     }
 
-    //TODO Test the print method with DoesNotThrow.
-
     @Override
     public void showAllBoards() {
         StringBuilder showBoards = new StringBuilder();
-        if (members.isEmpty()) {
+        if (boards.isEmpty()) {
             showBoards.append(String.format(
                     TEAM_NO_BOARDS_MESSAGE,
                     getName())
@@ -186,7 +182,6 @@ public class TeamImpl implements Team {
         }
         System.out.println(showBoards.toString().trim());
     }
-    //TODO Test the print method with DoesNotThrow.
 
     public String getActivityInfo() {
         StringBuilder activityInfo = new StringBuilder();

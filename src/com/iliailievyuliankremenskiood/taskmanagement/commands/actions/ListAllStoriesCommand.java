@@ -61,7 +61,4 @@ public class ListAllStoriesCommand implements Command {
         }
         return output.toString().trim();
     }
-
-    /*TODO Ask Yuli if I'm using his print() method correctly. My suggestion for his implementation is to remove the "Story" part and to have only 1 "Story" header
-    implemented here. */
 }

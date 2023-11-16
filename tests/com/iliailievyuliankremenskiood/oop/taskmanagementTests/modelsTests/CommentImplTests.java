@@ -67,4 +67,11 @@ public class CommentImplTests {
                 () -> new CommentImpl(LONG_MESSAGE,VALID_MESSAGE)
         );
     }
+    @Test
+    public void print_Should_NotThrowException_When_MethodCalled() {
+        /*Arrange, Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> comment.print()
+        );
+    }
 }
