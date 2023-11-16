@@ -30,10 +30,10 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
     /*<-------Behavioural Method(s)------->*/
     @Override
     public void start() {
+        System.out.println("Hello! Type a command, type 'manual' to see all commands available or 'exit' to abort program.");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.println("Type a command, or type 'manual' to see all commands available.");
                 String inputLine = scanner.nextLine();
                 if (inputLine.isBlank()) {
                     System.out.println(EMPTY_COMMAND_ERROR);
@@ -51,6 +51,7 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
                 }
             }
         }
+        System.out.println("Program terminated. Good bye!");
     }
 
     private void processCommand(String inputLine) {

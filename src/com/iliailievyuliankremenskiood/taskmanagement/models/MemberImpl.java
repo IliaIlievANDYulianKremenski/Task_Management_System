@@ -20,7 +20,7 @@ public class MemberImpl implements Member {
     private static final String MEMBER_NAME_ERR_LEN = "Member name must be between %d and %d characters long!";
     private static final String TASK_ASSIGN_MESSAGE = "[%s] The %s task has been assigned to %s.";
     private static final String TASK_UNASSIGNED_MESSAGE = "[%s] %s's task %s has been unassigned.";
-    private static final String PERSON_CREATE_MESSAGE = "[%s] Person %s has been crated.";
+    private static final String PERSON_CREATE_MESSAGE = "[%s] Person '%s' has been crated.";
     private static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
     private static final String NO_TASKS_MESSAGE = "No tasks are assigned to %s.";
     private static final String TASK_INFO_HEADER = "--- %s Tasks ---";
