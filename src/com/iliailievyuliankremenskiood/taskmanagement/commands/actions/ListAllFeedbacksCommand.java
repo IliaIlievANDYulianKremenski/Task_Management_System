@@ -41,12 +41,12 @@ public class ListAllFeedbacksCommand implements Command {
         String statusFilter = parameters.get(0);
         List<Feedback> feedbacksList = teamManagementRepository.getFeedbacks();
 
-        List<Feedback> filteredBugList = FilterHelpers.filterFeedbacksByStatus(
+        feedbacksList = FilterHelpers.filterFeedbacksByStatus(
                 statusFilter,
                 feedbacksList
         );
 
-        if (filteredBugList.isEmpty()) {
+        if (feedbacksList.isEmpty()) {
             throw new IllegalArgumentException(NO_FEEDBACKS_ERROR);
         }
 
@@ -54,7 +54,7 @@ public class ListAllFeedbacksCommand implements Command {
         output.append(SEPARATOR).append(System.lineSeparator());
         output.append(FEEDBACK_HEADER).append(System.lineSeparator());
         output.append(SEPARATOR).append(System.lineSeparator());
-        for (Feedback feedback : filteredBugList) {
+        for (Feedback feedback : feedbacksList) {
             output.append(feedback.print()).append(System.lineSeparator());
         }
         return output.toString().trim();

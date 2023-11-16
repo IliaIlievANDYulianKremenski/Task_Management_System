@@ -1,38 +1,39 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ListAllBugsCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ListAllStoriesCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
-import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
+import com.iliailievyuliankremenskiood.taskmanagement.models.StoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
-import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StoryPriorityType;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StorySizeType;
+import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StoryStatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ListAllBugsCommandTests {
+public class ListAllStoriesCommandTests {
 
     /*<-------Constant(s)------->*/
 
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            ListAllBugsCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            ListAllStoriesCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
 
     /*<-------Field(s)------->*/
 
     private TeamManagementRepository teamManagementRepository;
-    private ListAllBugsCommand listAllBugsCommand;
+    private ListAllStoriesCommand listAllStoriesCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setCreateNewBugCommand() {
+    public void setListAllStoriesCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        listAllBugsCommand = new ListAllBugsCommand(teamManagementRepository);
+        listAllStoriesCommand = new ListAllStoriesCommand(teamManagementRepository);
 
     }
 
@@ -45,12 +46,12 @@ public class ListAllBugsCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> listAllBugsCommand.execute(list)
+                () -> listAllStoriesCommand.execute(list)
         );
 
     }
     @Test
-    public void should_ThrowException_When_THereAreNoBugsToList() {
+    public void should_ThrowException_When_THereAreNoStoriesToList() {
         /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES",
@@ -59,40 +60,40 @@ public class ListAllBugsCommandTests {
         /*Arrange,Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> listAllBugsCommand.execute(list)
+                () -> listAllStoriesCommand.execute(list)
         );
 
     }
 
     @Test
-    public void should_ThrowException_When_THereAreNoBugsToFilterByAssignee() {
+    public void should_ThrowException_When_THereAreNoStoriesToFilterByAssignee() {
         /*Arrange*/
         List<String> list = List.of(
                 "Status",
                 "ALL_ASSIGNEES"
         );
         /*Act*/
-        Bug bug = createValidBug();
+        Story story = createValidStory();
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> listAllBugsCommand.execute(list)
+                () -> listAllStoriesCommand.execute(list)
         );
 
     }
     @Test
-    public void should_ThrowException_When_THereAreNoBugsInFilteredList() {
+    public void should_ThrowException_When_THereAreNoStoriesInFilteredList() {
         /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES",
                 "Assignee"
         );
-         /*Act*/
-         Bug bug = createValidBug();
+        /*Act*/
+        Story story = createValidStory();
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> listAllBugsCommand.execute(list)
+                () -> listAllStoriesCommand.execute(list)
         );
 
     }
@@ -100,27 +101,28 @@ public class ListAllBugsCommandTests {
     public void execute_Should_NotThrowException_When_PassedValidInput() {
         /*Arrange*/
         List<String> list = List.of(
-                "ACT",
+                "In",
                 "A"
         );
         /*Act*/
-        Bug bug = createValidBug();
+        Story story = createValidStory();
         /*Act, Assert*/
         Assertions.assertDoesNotThrow(
-                () -> listAllBugsCommand.execute(list)
+                () -> listAllStoriesCommand.execute(list)
         );
 
     }
 
     /*<-------Helper Method(s)------->*/
 
-    private Bug createValidBug() {
+    private Story createValidStory() {
         Member member = createValidMember();
-        return teamManagementRepository.createBug(
-                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
-                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
-                BugPriorityType.HIGH,
-                BugSeverityType.CRITICAL,
+        return teamManagementRepository.createStory(
+                "A".repeat(StoryImpl.MIN_TITLE_LENGTH),
+                "A".repeat(StoryImpl.MIN_DESCRIPTION_LENGTH),
+                StoryPriorityType.HIGH,
+                StorySizeType.LARGE,
+                StoryStatusType.IN_PROGRESS,
                 member
         );
     }
@@ -128,4 +130,5 @@ public class ListAllBugsCommandTests {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
     }
+
 }

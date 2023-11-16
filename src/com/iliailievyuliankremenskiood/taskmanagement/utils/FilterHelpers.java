@@ -24,7 +24,7 @@ public class FilterHelpers {
         List<Bug> filteredBugList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
             for (Bug bug : bugList) {
-                if(bug.getStatus().toString().contains(statusFilter)) {
+                if(bug.getStatus().toString().contains(statusFilter.toUpperCase())) {
                     filteredBugList.add(bug);
                 }
             }
@@ -68,28 +68,6 @@ public class FilterHelpers {
         return filteredStoryList;
     }
 
-    /*TODO Ask Yuli to implement a getStatus() method in TaskImpl (Task) so we can use this generic method to filter
-    any list by its status, no matter what is the status  */
-    /* TODO We can try to use generic abstract method in Task to solve that the three task types have different
-    return types in their getStatus() methods */
-
-
-//    public static <E extends Task> List<E> filterTaskByStatus(String statusFilter, List<E> taskList) {
-//         if (taskList.isEmpty()) {
-//            throw new IllegalArgumentException(NO_TASKS_ERROR);
-//        }
-//          List<E> filteredList = new ArrayList<>();
-//        if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
-//            for (E e : taskList) {
-//                if(e.getStatus().toString().contains(statusFilter.toUpperCase())) {
-//                    filteredList.add(e);
-//                }
-//            }
-//        } else {
-//          filteredList = new ArrayList<>(taskList);
-//        return filteredList;
-//    }
-
     public static List<Bug> filterBugsByAssignee(String assigneeFilter, List<Bug> bugList) {
         if (bugList.isEmpty()) {
             throw new IllegalArgumentException(NO_BUGS_ERROR);
@@ -97,7 +75,7 @@ public class FilterHelpers {
         List<Bug> filteredBugList = new ArrayList<>();
         if (!assigneeFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {
             for (Bug bug : bugList) {
-                if(bug.getAssignee().toString().toUpperCase().contains(assigneeFilter.toUpperCase())) {
+                if(bug.getAssignee().getName().toUpperCase().contains(assigneeFilter.toUpperCase())) {
                     filteredBugList.add(bug);
                 }
             }
@@ -107,7 +85,6 @@ public class FilterHelpers {
         return filteredBugList;
     }
 
-    /* TODO Check if this filter works correctly. */
     public static <E extends Assignable> List<E> filterTasksByAssignee (String assigneeFilter, List<E> taskList) {
         if (taskList.isEmpty()) {
             throw new IllegalArgumentException(NO_TASKS_ERROR);
@@ -115,7 +92,7 @@ public class FilterHelpers {
         List<E> filteredList = new ArrayList<>();
         if (!assigneeFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {
             for (E e : taskList) {
-                if(e.getAssignee().toString().toUpperCase().contains(assigneeFilter.toUpperCase())) {
+                if(e.getAssignee().getName().toUpperCase().contains(assigneeFilter.toUpperCase())) {
                     filteredList.add(e);
                 }
             }

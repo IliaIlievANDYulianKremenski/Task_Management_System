@@ -40,14 +40,15 @@ public class ListAllStoriesCommand implements Command {
         String assigneeFilter = parameters.get(1);
         List<Story> storyList = teamManagementRepository.getStories();
 
-        List<Story> filteredStoryList = FilterHelpers.filterStoriesByStatus(
+        storyList = FilterHelpers.filterStoriesByStatus(
                 statusFilter,
                 storyList);
-        filteredStoryList = FilterHelpers.filterTasksByAssignee(
+        storyList = FilterHelpers.filterTasksByAssignee(
                 assigneeFilter,
-                new ArrayList<>(filteredStoryList));
+                storyList
+        );
 
-        if (filteredStoryList.isEmpty()) {
+        if (storyList.isEmpty()) {
             throw new IllegalArgumentException(NO_STORIES_ERROR);
         }
 
@@ -55,7 +56,7 @@ public class ListAllStoriesCommand implements Command {
         output.append(SEPARATOR).append(System.lineSeparator());
         output.append(STORIES_HEADER).append(System.lineSeparator());
         output.append(SEPARATOR).append(System.lineSeparator());
-        for (Story story : filteredStoryList) {
+        for (Story story : storyList) {
             output.append(story.print()).append(System.lineSeparator());
         }
         return output.toString().trim();

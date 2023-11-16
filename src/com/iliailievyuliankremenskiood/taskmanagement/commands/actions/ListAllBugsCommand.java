@@ -35,6 +35,7 @@ public class ListAllBugsCommand implements Command {
 
     /* TODO We can print the result as point the two filters as a header. For example ** Bugs with parameters: ALL_STATUSES ALL_ASSIGNEES: ** */
 
+    /* TODO When there are no tasks to list we will print just new line */
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
@@ -43,15 +44,16 @@ public class ListAllBugsCommand implements Command {
         String assigneeFilter = parameters.get(1);
         List<Bug> bugList = teamManagementRepository.getBugs();
 
-        List<Bug> filteredBugList = FilterHelpers.filterBugsByStatus(
+        bugList  = FilterHelpers.filterBugsByStatus(
                 statusFilter,
-                bugList);
-        filteredBugList = FilterHelpers.filterBugsByAssignee(
+                bugList
+        );
+        bugList = FilterHelpers.filterBugsByAssignee(
                 assigneeFilter,
-                new ArrayList<>(filteredBugList)
+                bugList
                 );
 
-        if (filteredBugList.isEmpty()) {
+        if (bugList.isEmpty()) {
             throw new IllegalArgumentException(NO_BUGS_ERROR);
         }
 
@@ -59,11 +61,12 @@ public class ListAllBugsCommand implements Command {
         output.append(SEPARATOR).append(System.lineSeparator());
         output.append(BUGS_HEADER).append(System.lineSeparator());
         output.append(SEPARATOR).append(System.lineSeparator());
-        for (Bug bug : filteredBugList) {
+        for (Bug bug : bugList) {
             output.append(bug.print()).append(System.lineSeparator());
         }
         return output.toString().trim();
     }
+
 
 
     /* TODO Do we want our filter to be case sensitive or to be able to find no matter upper or lower case. The other option is to parse the enum filter
