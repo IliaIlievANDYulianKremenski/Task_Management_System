@@ -20,10 +20,10 @@ public class MemberImpl implements Member {
     private static final String MEMBER_NAME_ERR_LEN = "Member name must be between %d and %d characters long!";
     private static final String TASK_ASSIGN_MESSAGE = "[%s] The %s task has been assigned to %s.";
     private static final String TASK_UNASSIGNED_MESSAGE = "[%s] %s's task %s has been unassigned.";
-    private static final String PERSON_CREATE_MESSAGE = "[%s] Person '%s' has been crated.";
-    private static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
+    private static final String PERSON_CREATE_MESSAGE = "[%s] Person '%s' has been created.";
+    private static final String ACTIVITY_HISTORY_HEADER = "%s activity history: ";
     private static final String NO_TASKS_MESSAGE = "No tasks are assigned to %s.";
-    private static final String TASK_INFO_HEADER = "--- %s Tasks ---";
+    private static final String TASK_INFO_HEADER = "%s tasks: ";
     private static final String SEPARATOR = "--------------";
 
 
@@ -95,7 +95,7 @@ public class MemberImpl implements Member {
         );
     }
 
-    public void viewTasksInfo() {
+    public String viewTasksInfo() {
         StringBuilder taskInfo = new StringBuilder();
         if (tasks.isEmpty()) {
             taskInfo.append(String.format(
@@ -104,6 +104,7 @@ public class MemberImpl implements Member {
             );
 
         } else {
+            taskInfo.append(SEPARATOR).append(System.lineSeparator());
             taskInfo.append(String.format(
                     TASK_INFO_HEADER,
                     getName())
@@ -117,11 +118,12 @@ public class MemberImpl implements Member {
             }
             taskInfo.append(SEPARATOR).append(System.lineSeparator());
         }
-        System.out.println(taskInfo.toString().trim());
+        return taskInfo.toString().trim();
     }
 
     public String getActivityInfo() {
         StringBuilder activityInfo = new StringBuilder();
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
         activityInfo.append(String.format(
                 ACTIVITY_HISTORY_HEADER,
                 getName())

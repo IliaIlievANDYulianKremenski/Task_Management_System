@@ -7,7 +7,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreatePersonCommand implements Command {
+public class CreateNewPersonCommand implements Command {
     /**
      * Command format: Create_New_Person {person name}
      * */
@@ -20,7 +20,7 @@ public class CreatePersonCommand implements Command {
 
 
     /*<-------Constructor(s)------->*/
-    public CreatePersonCommand(TeamManagementRepository teamManagementRepository) {
+    public CreateNewPersonCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 

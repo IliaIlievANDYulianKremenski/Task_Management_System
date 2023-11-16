@@ -12,7 +12,7 @@ public interface Team extends Loggable {
     void createBoard(Board board);
     void removeBoard(Board board);
     String getActivityInfo();
-    void showAllMembers();
-    void showAllBoards();
+    String showAllMembers();
+    String showAllBoards();
 
 }

@@ -15,7 +15,7 @@ public class ManualCommandPrintHelper {
 
 
     public static String print() {
-        return "Commands format:\n" +
+        return ANSI_BLUE + "Commands format:\n" + ANSI_RESET +
                 "\tAdd_Comment_to_Bug " + ANSI_GREEN + "{bug ID} {author} {comment}\n" + ANSI_RESET +
                 "\tAdd_Comment_to_Feedback " + ANSI_GREEN + "{feedback ID} {author} {comment}\n" + ANSI_RESET +
                 "\tAdd_Comment_to_Story " + ANSI_GREEN + "{story ID} {author} {comment}\n" + ANSI_RESET +

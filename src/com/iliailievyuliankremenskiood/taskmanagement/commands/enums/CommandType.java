@@ -2,7 +2,7 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.enums;
 
 public enum CommandType {
 
-    CREATE_PERSON,
+    CREATE_NEW_PERSON,
     SHOW_ALL_PEOPLE,
     SHOW_PERSON_ACTIVITY,
     CREATE_NEW_TEAM,

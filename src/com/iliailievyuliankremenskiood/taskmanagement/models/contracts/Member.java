@@ -8,7 +8,7 @@ public interface Member extends Loggable{
     List<String> getActivityHistory();
     void assignTask(Task task);
     void unassignTask(Task task);
-    void viewTasksInfo();
+    String viewTasksInfo();
     String getActivityInfo();
 
 

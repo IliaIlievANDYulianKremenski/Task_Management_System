@@ -16,8 +16,8 @@ public class CommandFactoryImpl implements CommandFactory {
         CommandType commandType = ParsingHelpers.parseEnum(commandName, CommandType.class, String.format(INVALID_COMMAND, commandName));
 
         switch (commandType) {
-            case CREATE_PERSON:
-                return new CreatePersonCommand(teamManagementRepository);
+            case CREATE_NEW_PERSON:
+                return new CreateNewPersonCommand(teamManagementRepository);
             case SHOW_ALL_PEOPLE:
                 return new ShowAllPeopleCommand(teamManagementRepository);
             case SHOW_PERSON_ACTIVITY:

@@ -18,17 +18,17 @@ public class TeamImpl implements Team {
     public static final int TEAM_NAME_MIN_LEN = 5;
     public static final int TEAM_NAME_MAX_LEN = 15;
     private static final String TEAM_NAME_ERR_LEN = "Team name must be between %d and %d characters long!";
-    private static final String TEAM_MEMBERS_HEADER = "--- %s Team Members ---";
-    private static final String TEAM_BOARDS_HEADER = "--- %s Team Boards ---";
+    private static final String TEAM_MEMBERS_HEADER = "Team %s Members: ";
+    private static final String TEAM_BOARDS_HEADER = "Team %s Boards: ";
     private static final String SEPARATOR = "--------------";
     private static final String TEAM_NO_MEMBERS_MESSAGE = "Team %s has no members yet.";
     private static final String TEAM_NO_BOARDS_MESSAGE = "Team %s has no boards yet.";
-    private static final String TEAM_CREATE_MESSAGE = "[%s] Team %s has been crated.";
+    private static final String TEAM_CREATE_MESSAGE = "[%s] Team %s has been created.";
     private static final String ADD_MEMBER_MESSAGE = "[%s] %s joined team %s.";
     private static final String REMOVE_MEMBER_MESSAGE = "[%s] %s has left team %s.";
-    private static final String CREATE_BOARD_MESSAGE = "[%s] %s team has created board %s.";
-    private static final String REMOVE_BOARD_MESSAGE = "[%s] %s team has removed board %s.";
-    private static final String ACTIVITY_HISTORY_HEADER = "--- %s Activity History ---";
+    private static final String CREATE_BOARD_MESSAGE = "[%s] Team %s has created board %s.";
+    private static final String REMOVE_BOARD_MESSAGE = "[%s] Team %s has removed board %s.";
+    private static final String ACTIVITY_HISTORY_HEADER = "%s activity history: ";
 
 
     /*<-------Field(s)------->*/
@@ -132,7 +132,7 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public void showAllMembers() {
+    public String showAllMembers() {
         StringBuilder showMembers = new StringBuilder();
         if (members.isEmpty()) {
             showMembers.append(String.format(
@@ -154,11 +154,11 @@ public class TeamImpl implements Team {
             }
             showMembers.append(SEPARATOR).append(System.lineSeparator());
         }
-        System.out.println(showMembers.toString().trim());
+        return showMembers.toString().trim();
     }
 
     @Override
-    public void showAllBoards() {
+    public String showAllBoards() {
         StringBuilder showBoards = new StringBuilder();
         if (boards.isEmpty()) {
             showBoards.append(String.format(
@@ -167,11 +167,12 @@ public class TeamImpl implements Team {
             );
 
         } else {
+            showBoards.append(SEPARATOR).append(System.lineSeparator());
             showBoards.append(String.format(
                     TEAM_BOARDS_HEADER,
                     getName())
             );
-            showBoards.append(System.lineSeparator());
+            showBoards.append("\n");
             showBoards.append(SEPARATOR).append(System.lineSeparator());
 
             for (int i = 0; i < getTeamBoards().size(); i++) {
@@ -180,11 +181,12 @@ public class TeamImpl implements Team {
             }
             showBoards.append(SEPARATOR).append(System.lineSeparator());
         }
-        System.out.println(showBoards.toString().trim());
+        return showBoards.toString().trim();
     }
 
     public String getActivityInfo() {
         StringBuilder activityInfo = new StringBuilder();
+        activityInfo.append(SEPARATOR).append(System.lineSeparator());
         activityInfo.append(String.format(
                 ACTIVITY_HISTORY_HEADER,
                 getName())
