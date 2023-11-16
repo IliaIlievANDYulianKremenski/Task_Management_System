@@ -7,7 +7,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFound
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.CommentImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.StoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.TaskImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
@@ -77,7 +76,7 @@ public class AddCommentToStoryCommandTests {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidSotryIDPassed(){
+    public void execute_Should_ThrowException_When_InvalidStoryIDPassed(){
         /*Arrange*/
         parameters.add("100");
         parameters.add(VALID_COMMENT_AUTHOR);
