@@ -1,6 +1,7 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AssignStoryCommand;
+
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ChangeStoryPriorityCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
@@ -18,50 +19,54 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignStoryCommandTests {
+public class ChangeStoryPriorityCommandTest {
     /*<-------Constant(s)------->*/
     private static final String VALID_MEMBER_NAME = "a".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
-    private static final String VALID_MEMBER_NAME2 = "b".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
-    private static final String VALID_MEMBER_NAME3 = "c".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
     private static final String VALID_STORY_TITLE = "a".repeat(StoryImpl.MIN_TITLE_LENGTH + 1);
     private static final String VALID_STORY_DESCRIPTION = "a".repeat(StoryImpl.MIN_DESCRIPTION_LENGTH + 1);
+    private static final StoryPriorityType VALID_STORY_PRIORITY = StoryPriorityType.HIGH;
+    private static final StoryPriorityType VALID_STORY_PRIORITY2 = StoryPriorityType.MEDIUM;
     private static final StorySizeType VALID_STORY_SIZE = StorySizeType.LARGE;
     private static final StoryStatusType VALID_STORY_STATUS = StoryStatusType.IN_PROGRESS;
-    private static final StoryPriorityType VALID_STORY_PRIORITY = StoryPriorityType.HIGH;
+    private static final String INVALID_STORY_PRIORITY = "SOMETHING_INVALID";
+
+
     /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
-    private AssignStoryCommand assignStoryCommand;
+    private ChangeStoryPriorityCommand changeStoryPriorityCommand;
     private List<String> parameters;
     private Story story;
     private Member member;
-    private Member member2;
+
 
     /*<-------Behavioural Method(s)------->*/
+
     @BeforeEach
     private void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        assignStoryCommand = new AssignStoryCommand(teamManagementRepository);
+        changeStoryPriorityCommand = new ChangeStoryPriorityCommand(teamManagementRepository);
         parameters = new ArrayList<>();
-        member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
-        member2 = teamManagementRepository.createMember(VALID_MEMBER_NAME2);
+        member = new MemberImpl(VALID_MEMBER_NAME);
         story = teamManagementRepository.createStory(
                 VALID_STORY_TITLE,
                 VALID_STORY_DESCRIPTION,
                 VALID_STORY_PRIORITY,
                 VALID_STORY_SIZE,
-                VALID_STORY_STATUS, member);
+                VALID_STORY_STATUS,
+                member
+        );
+
     }
 
     @Test
     public void execute_Should_ThrowException_When_ListWithInvalidNumberOfParamsPassed() {
         /*Arrange*/
-        parameters.add("1");
+        parameters.add("test");
 
         /*Act, Assert*/
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
-                    assignStoryCommand.execute(parameters);
+                    changeStoryPriorityCommand.execute(parameters);
                 });
     }
 
@@ -69,27 +74,25 @@ public class AssignStoryCommandTests {
     public void execute_Should_ThrowException_When_InvalidStoryIdPassed() {
         /*Arrange*/
         parameters.add("100");
-        parameters.add(VALID_MEMBER_NAME2);
+        parameters.add(VALID_STORY_PRIORITY.toString());
 
         /*Act, Assert*/
-        Assertions.assertThrows(
-                ElementNotFoundException.class,
+        Assertions.assertThrows(ElementNotFoundException.class,
                 () -> {
-                    assignStoryCommand.execute(parameters);
+                    changeStoryPriorityCommand.execute(parameters);
                 });
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidMemberNamePassed() {
+    public void execute_Should_ThrowException_When_InvalidPriorityPassed() {
         /*Arrange*/
         parameters.add("1");
-        parameters.add(VALID_MEMBER_NAME3);
+        parameters.add(INVALID_STORY_PRIORITY.toString());
 
         /*Act, Assert*/
-        Assertions.assertThrows(
-                ElementNotFoundException.class,
+        Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
-                    assignStoryCommand.execute(parameters);
+                    changeStoryPriorityCommand.execute(parameters);
                 });
     }
 
@@ -97,13 +100,15 @@ public class AssignStoryCommandTests {
     public void execute_Should_executeSuccessfully_When_validParamsPassed() {
         /*Arrange*/
         parameters.add("1");
-        parameters.add(VALID_MEMBER_NAME2);
+        parameters.add(VALID_STORY_PRIORITY2.toString());
 
         /*Act*/
-        String resultFromSuccessfullAssignment = assignStoryCommand.execute(parameters);
+        String resultFromSuccessfullStoryPriorityChange = changeStoryPriorityCommand.execute(parameters);
 
         /*Assert*/
         Assertions.assertEquals(
-                story.getActivityHistory().get(story.getActivityHistory().size() - 1), resultFromSuccessfullAssignment);
+                story.getActivityHistory().get(story.getActivityHistory().size() - 1),
+                resultFromSuccessfullStoryPriorityChange
+        );
     }
 }

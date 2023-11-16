@@ -1,15 +1,12 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddCommentToStoryCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddPersonToTeamCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.TeamImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
