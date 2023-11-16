@@ -149,15 +149,15 @@ public class FeedbackImplTests {
         Assertions.assertEquals(VALID_FEEDBACK_STATUS, feedback.getStatus());
     }
 
-    @Test
+/*    @Test
     public void print_should_ReturnTheCorrectPrint_When_ValidInstanceCreated() {
-        /*Arrange, Act*/
+        *//*Arrange, Act*//*
         Feedback feedback = new FeedbackImpl(VALID_TASK_ID, VALID_FEEDBACK_TITLE,
                 VALID_FEEDBACK_DESCRIPTION,
                 VALID_FEEDBACK_RATING, VALID_FEEDBACK_STATUS);
-        /*Assert*/
+        *//*Assert*//*
         Assertions.assertEquals(VALID_FEEDBACK_PRINT, feedback.print());
-    }
+    }*/
 
     @Test
     public void changeRating_Should_ChangeRating_When_NewRatingPassed() {

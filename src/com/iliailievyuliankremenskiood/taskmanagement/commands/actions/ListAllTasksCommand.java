@@ -3,6 +3,7 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class ListAllTasksCommand implements Command {
     public static final String NO_TASKS_ERROR = "There are no Tasks (Bugs, Stories or Feedbacks) to be listed.";
     public static final String TASKS_HEADER = "Tasks: ";
     public static final String SEPARATOR = "-".repeat(14);
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    public static final String ALL_TITLES_ARGUMENT = "ALL_TITLES";
 
     /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
@@ -28,25 +31,41 @@ public class ListAllTasksCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+
         if (teamManagementRepository.getTasks().isEmpty()) {
             throw new IllegalArgumentException(NO_TASKS_ERROR);
         }
 
-        /*✏️ TODO ✏️- for Yuli to implement this part of the function.*/
-        /*switch (parameters.size()){
-            case 0 *//*All Tasks*//*:
-                break;
-            case 1 *//*Filter by title and sort by title*//*:
-                break;
-        }*/
-
+        String taskTitle = parameters.get(0);
         StringBuilder result = new StringBuilder();
-        result.append(SEPARATOR).append(System.lineSeparator());
-        result.append(TASKS_HEADER).append(System.lineSeparator());
-        result.append(SEPARATOR).append(System.lineSeparator());
-        for (Task task : teamManagementRepository.getTasks()) {
-            result.append(task.print()).append(System.lineSeparator());
+
+        if(taskTitle.equals(ALL_TITLES_ARGUMENT)){
+            result.append(SEPARATOR).append(System.lineSeparator());
+            result.append(TASKS_HEADER).append(System.lineSeparator());
+            result.append(SEPARATOR).append(System.lineSeparator());
+            for (Task task : teamManagementRepository.getTasks()) {
+                result.append(task.print()).append(System.lineSeparator());
+            }
+            result.append(System.lineSeparator());
         }
-        return result.toString().trim();
+        else{
+            result.append(SEPARATOR).append(System.lineSeparator());
+            result.append(TASKS_HEADER).append(System.lineSeparator());
+            result.append(SEPARATOR).append(System.lineSeparator());
+            for (Task task : teamManagementRepository.getTasks()) {
+                if(task.getTitle().contains(taskTitle)){
+                    result.append(task.print()).append(System.lineSeparator());
+                }
+            }
+            result.append(System.lineSeparator());
+        }
+
+        if(result.toString().trim().isEmpty()){
+            throw new IllegalArgumentException(NO_TASKS_ERROR);
+        }
+        else{
+            return result.toString().trim();
+        }
     }
 }

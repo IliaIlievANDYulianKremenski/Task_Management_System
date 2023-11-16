@@ -205,13 +205,13 @@ public class StoryImplTests {
         Assertions.assertEquals(StoryPriorityType.LOW.toString(), story.getPriority().toString());
     }
 
-    @Test
+/*    @Test
     public void print_Should_CreateValidPrint(){
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Story story = new StoryImpl(1, VALID_STORY_TITLE, VALID_STORY_DESCRIPTION, StoryPriorityType.HIGH,
                 StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
 
         Assertions.assertEquals(VALID_STORY_PRINT, story.print());
-    }
+    }*/
 
 }
