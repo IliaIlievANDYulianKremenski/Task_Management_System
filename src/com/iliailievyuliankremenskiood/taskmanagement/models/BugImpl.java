@@ -156,6 +156,8 @@ public class BugImpl extends TaskImpl implements Bug {
         logEvent("Bug Severity", oldSeverity.toString(),bugSeverityType.toString());
     }
 
+
+    /*TODO Implement if statement in changeAssignee() method to check whether the parameter is null ot not.*/
     @Override /*Bug*/
     public void changeAssignee(Member assignee) {
         Member oldAssignee = this.getAssignee();
