@@ -32,8 +32,6 @@ public class ListTasksWithAssigneeCommand implements Command {
 
 
     /*<-------Behavioural Method(s)------->*/
-    /*✏️ TODO ✏️- for Yuli to implement this part of the function.
-     *    Check command format for more info.*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
