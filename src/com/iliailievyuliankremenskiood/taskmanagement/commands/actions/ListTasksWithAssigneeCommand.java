@@ -46,6 +46,8 @@ public class ListTasksWithAssigneeCommand implements Command {
         String taskAssignee = parameters.get(1);
         StringBuilder result = new StringBuilder();
 
+
+        /*✏️ TODO ✏️- from: Юли to: Юли да помисля как да направя кода без да има повече от един if()else if() check.*/
         /*User supplies ALL_STATUSES + ALL_ASSIGNEES as command arguments*/
         if (taskStatus.equalsIgnoreCase(ALL_STATUSES_ARGUMENT)
                 && taskAssignee.equalsIgnoreCase(ALL_ASSIGNEES_ARGUMENT)) {

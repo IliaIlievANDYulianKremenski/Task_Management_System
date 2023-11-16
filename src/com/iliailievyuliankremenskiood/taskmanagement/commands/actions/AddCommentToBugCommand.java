@@ -15,7 +15,7 @@ public class AddCommentToBugCommand implements Command {
     *  even anonymous ppl can leave comments?*/
 
     /** Command format: Add_Comment_to_Bug {bug ID} {author} {comment} */
-
+    
     /*<-------Constant(s)------->*/
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
