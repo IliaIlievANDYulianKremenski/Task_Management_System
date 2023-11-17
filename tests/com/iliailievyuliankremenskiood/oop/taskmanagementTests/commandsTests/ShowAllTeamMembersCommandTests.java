@@ -54,6 +54,17 @@ public class ShowAllTeamMembersCommandTests {
     }
 
     @Test
+    public void execute_Should_ThrowAnException_When_ThereIsNobodyInTheTeam(){
+        teamManagementRepository.createTeam(RANDOM_TEAM_NAME);
+        parameters.add(RANDOM_TEAM_NAME);
+        /*Act, Assert*/
+        Assertions.assertThrows(IllegalArgumentException.class,
+                ()->{
+                    showAllTeamMembersCommand.execute(parameters);
+                });
+    }
+
+    @Test
     public void execute_Should_NotThrowAnException_When_ValidTeamNameProvided(){
         /*Arrange*/
         teamManagementRepository.createTeam(RANDOM_TEAM_NAME);
