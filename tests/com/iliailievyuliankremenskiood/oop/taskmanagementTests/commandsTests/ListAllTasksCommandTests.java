@@ -59,6 +59,20 @@ public class ListAllTasksCommandTests {
     @Test
     public void execute_Should_NotThrowException_When_ThereAreTasksToBeListed(){
         /*Arrange*/
+        parameters.add(VALID_FEEDBACK_TITlE);
+        feedback = teamManagementRepository.createFeedback(
+                VALID_FEEDBACK_TITlE,
+                VALID_FEEDBACK_DESCRIPTION,
+                1,
+                VALID_FEEDBACK_STATUS);
+
+        /*Act, Assert*/
+        Assertions.assertDoesNotThrow(()->{listAllTasksCommand.execute(parameters);});
+    }
+
+    @Test
+    public void execute_Should_NotThrowException_When_ThereAreTasksToBeListedAndAllTitlesPassed(){
+        /*Arrange*/
         parameters.add("ALL_TITLES");
         feedback = teamManagementRepository.createFeedback(
                 VALID_FEEDBACK_TITlE,
