@@ -42,22 +42,7 @@ public class ShowAllTeamBoardsCommand implements Command {
             throw new IllegalArgumentException(NO_BOARDS_ERROR);
         }
 
-//        StringBuilder result = new StringBuilder();
-//        result.append(String.format(BOARDS_HEADER, teamName))
-//                .append(System.lineSeparator())
-//                .append(SEPARATOR)
-//                .append(System.lineSeparator());
-//
-//        for (Board board : temporaryTeam.getTeamBoards()) {
-//            result.append(board.getName())
-//                    .append(System.lineSeparator())
-//                    .append(SEPARATOR);
-//        }
-//
-//        return result.toString().trim();
         return temporaryTeam.showAllBoards();
 
-        /*TODO Yuli, please use the methods in the models classes for the commands. I've implemented
-        * all necessary print methods. */
     }
 }
