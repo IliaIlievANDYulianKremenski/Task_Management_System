@@ -67,7 +67,7 @@ public class ListAllFeedbacksCommandTests {
     public void should_ThrowException_When_THereAreNoFeedbacksAfterFilter() {
         /*Arrange*/
         List<String> list = List.of(
-                "ALL_STATUSES"
+                "Status"
         );
         Feedback feedback = createValidFeedback();
         /*Arrange,Act, Assert*/
