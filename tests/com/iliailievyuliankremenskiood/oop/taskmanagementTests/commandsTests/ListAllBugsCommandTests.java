@@ -73,7 +73,7 @@ public class ListAllBugsCommandTests {
                 "ALL_ASSIGNEES"
         );
         /*Act*/
-        Bug bug = createValidBug();
+        createValidBug();
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
@@ -89,7 +89,7 @@ public class ListAllBugsCommandTests {
                 "Assignee"
         );
          /*Act*/
-         Bug bug = createValidBug();
+        createValidBug();
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
@@ -105,7 +105,7 @@ public class ListAllBugsCommandTests {
                 "A"
         );
         /*Act*/
-        Bug bug = createValidBug();
+        createValidBug();
         /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> listAllBugsCommand.execute(list)

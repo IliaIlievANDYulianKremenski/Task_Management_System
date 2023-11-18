@@ -1,7 +1,6 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ChangeBugPriorityCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.UnassignBugCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;

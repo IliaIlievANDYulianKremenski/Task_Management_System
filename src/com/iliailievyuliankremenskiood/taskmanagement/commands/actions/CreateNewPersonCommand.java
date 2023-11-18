@@ -6,6 +6,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class CreateNewPersonCommand implements Command {
     /**
@@ -28,9 +29,13 @@ public class CreateNewPersonCommand implements Command {
     /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+//        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String personName = parameters.get(0);
+        /*TODO Yuli, apologise that I've used your command class to check how we can change the input approach. */
+
+        System.out.print("Person name: ");
+        String personName = new Scanner(System.in).nextLine();
+
         Member temporaryMember = teamManagementRepository.createMember(personName);
 
         return userOutput(temporaryMember);
