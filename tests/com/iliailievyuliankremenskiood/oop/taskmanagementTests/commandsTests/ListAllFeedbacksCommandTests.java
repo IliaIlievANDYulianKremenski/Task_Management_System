@@ -1,13 +1,10 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ListAllBugsCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ListAllFeedbacksCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
-import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.FeedbackImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.feedbackrelatedtypes.FeedbackStatusType;
 import org.junit.jupiter.api.Assertions;
@@ -69,7 +66,7 @@ public class ListAllFeedbacksCommandTests {
         List<String> list = List.of(
                 "Status"
         );
-        Feedback feedback = createValidFeedback();
+        createValidFeedback();
         /*Arrange,Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
@@ -84,7 +81,7 @@ public class ListAllFeedbacksCommandTests {
                 "New"
         );
         /*Act*/
-        Feedback feedback = createValidFeedback();
+        createValidFeedback();
         /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> listAllFeedbacksCommand.execute(list)

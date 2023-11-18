@@ -31,7 +31,7 @@ public class UnassignBugCommandTests {
 
     /*Arrange*/
     @BeforeEach
-    public void setChangeBugPriorityCommand() {
+    public void setUnassignBugCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         unassignBugCommand = new UnassignBugCommand(teamManagementRepository);
     }
@@ -44,7 +44,7 @@ public class UnassignBugCommandTests {
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
         /*Act, Assert*/
         Assertions.assertThrows(
-                InvalidUserInputException.class,
+                IllegalArgumentException.class,
                 () -> unassignBugCommand.execute(list)
         );
 

@@ -67,17 +67,14 @@ public class ShowAllTeamBoardsTests {
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
         );
         /*Act*/
-        Team team = createValidTeam();
+        createValidTeam();
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> showAllTeamBoardsCommand.execute(list)
         );
     }
-    /*Arrange*/
-    List<String> list = List.of(
-            "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
-    );
+
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
         /*Arrange*/
@@ -86,8 +83,8 @@ public class ShowAllTeamBoardsTests {
                 "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN)
                 );
         /*Act*/
-        Team team = createValidTeam();
-        Board board = createValidBoard();
+        createValidTeam();
+        createValidBoard();
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,

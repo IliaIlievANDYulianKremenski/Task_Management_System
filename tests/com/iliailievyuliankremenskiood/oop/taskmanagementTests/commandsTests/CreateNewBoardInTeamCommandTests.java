@@ -29,7 +29,7 @@ public class CreateNewBoardInTeamCommandTests {
 
     /*Arrange*/
     @BeforeEach
-    public void setChangeFeedbackRatingCommand() {
+    public void setCreateNewBoardInTeamCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         createNewBoardInTeamCommand = new CreateNewBoardInTeamCommand(teamManagementRepository);
     }

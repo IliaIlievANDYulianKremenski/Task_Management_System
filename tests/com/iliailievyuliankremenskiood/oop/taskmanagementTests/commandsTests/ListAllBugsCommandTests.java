@@ -30,7 +30,7 @@ public class ListAllBugsCommandTests {
 
     /*Arrange*/
     @BeforeEach
-    public void setCreateNewBugCommand() {
+    public void setListAllBugsCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         listAllBugsCommand = new ListAllBugsCommand(teamManagementRepository);
 

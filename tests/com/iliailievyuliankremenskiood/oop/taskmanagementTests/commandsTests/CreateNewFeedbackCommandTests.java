@@ -25,7 +25,7 @@ public class CreateNewFeedbackCommandTests {
 
     /*Arrange*/
     @BeforeEach
-    public void setCreateNewBugCommand() {
+    public void setCreateNewFeedbackCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         createNewFeedbackCommand = new CreateNewFeedbackCommand(teamManagementRepository);
 

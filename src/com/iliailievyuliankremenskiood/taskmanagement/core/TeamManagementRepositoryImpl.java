@@ -18,21 +18,21 @@ import java.util.List;
 public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
     /*<-------Constant(s)------->*/
-    public static final String CANNOT_FIND_TASK_BY_ID_ERROR_MESSAGE =
+    private static final String CANNOT_FIND_TASK_BY_ID_ERROR_MESSAGE =
             "There is no Bug/Story/Feedback with the provided id: %d.";
-    public static final String CANNOT_FIND_BUG_BY_ID_ERROR_MESSAGE =
+    private static final String CANNOT_FIND_BUG_BY_ID_ERROR_MESSAGE =
             "There is no Bug with the provided id: %d.";
-    public static final String CANNOT_FIND_STORY_BY_ID_ERROR_MESSAGE =
+    private static final String CANNOT_FIND_STORY_BY_ID_ERROR_MESSAGE =
             "There is no Story with the provided id: %d.";
-    public static final String CANNOT_FIND_FEEDBACK_BY_ID_ERROR_MESSAGE =
+    private static final String CANNOT_FIND_FEEDBACK_BY_ID_ERROR_MESSAGE =
             "There is no Feedback with the provided id: %d.";
-    public static final String NO_TEAM_ERROR_MESSAGE =
+    private static final String NO_TEAM_ERROR_MESSAGE =
             "There is no team with the following name: %s.";
-    public static final String NO_BOARD_ERROR_MESSAGE = "There is no Board with the following name: %s.";
-    public static final String NO_MEMBER_ERROR_MESSAGE = "There is no team member with the following name: %s.";
-    public static final String MEMBER_EXISTS_MESSAGE = "Member with a name %s already exists.";
-    public static final String TEAM_EXISTS_MESSAGE = "Team with a name %s already exists.";
-    public static final String BOARD_EXISTS_MESSAGE = "Team with a name %s already exists.";
+    private static final String NO_BOARD_ERROR_MESSAGE = "There is no Board with the following name: %s.";
+    private static final String NO_MEMBER_ERROR_MESSAGE = "There is no team member with the following name: %s.";
+    private static final String MEMBER_EXISTS_MESSAGE = "Member with a name %s already exists.";
+    private static final String TEAM_EXISTS_MESSAGE = "Team with a name %s already exists.";
+    private static final String BOARD_EXISTS_MESSAGE = "Team with a name %s already exists.";
 
 
     /*<-------Field(s)------->*/

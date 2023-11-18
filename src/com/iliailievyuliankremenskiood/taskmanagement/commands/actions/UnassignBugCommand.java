@@ -4,6 +4,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ParsingHelpers;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class UnassignBugCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-
+        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
         int bugId = ParsingHelpers.parseInteger(
                 parameters.get(0),
                 "Bug ID"
