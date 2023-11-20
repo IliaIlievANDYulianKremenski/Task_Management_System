@@ -126,12 +126,10 @@ public class BugImpl extends TaskImpl implements Bug {
                 this.priorityType, this.severityType, this.statusType, this.assignee.getName());
     }
 
-    public void addStepsToReproduce(List<String> steps) {
+    public void addStepToReproduce(String step) {
         String oldSteps = this.getStepsToReproduce().toString();
-        for (String step : steps) {
-            stepsToReproduce.add(step);
-        }
-        logEvent("Bug Steps_To_Reproduce", oldSteps, steps.toString());
+        stepsToReproduce.add(step);
+        logEvent("Bug Steps_To_Reproduce", oldSteps, step.toString());
     }
 
     @Override /*Bug*/

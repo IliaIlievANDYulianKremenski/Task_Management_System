@@ -147,17 +147,13 @@ public class BugImplTests {
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-        List<String> stepsToReproduce = new ArrayList<>();
-        stepsToReproduce.add(STEP_1);
-        stepsToReproduce.add(STEP_2);
 
         /*Act*/
-        bug.addStepsToReproduce(stepsToReproduce);
+        bug.addStepToReproduce(STEP_1);
 
         /*Assert*/
-        Assertions.assertEquals(2, bug.getStepsToReproduce().size());
+        Assertions.assertEquals(1, bug.getStepsToReproduce().size());
         Assertions.assertEquals(STEP_1, bug.getStepsToReproduce().get(0));
-        Assertions.assertEquals(STEP_2, bug.getStepsToReproduce().get(1));
 
     }
 
