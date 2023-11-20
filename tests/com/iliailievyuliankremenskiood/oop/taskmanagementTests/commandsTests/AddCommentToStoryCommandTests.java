@@ -98,7 +98,7 @@ public class AddCommentToStoryCommandTests {
 
         /*Act, Assert*/
         Assertions.assertThrows(
-                InvalidUserInputException.class,
+                ElementNotFoundException.class,
                 () -> {addCommentToStoryCommand.execute(parameters);});
     }
 

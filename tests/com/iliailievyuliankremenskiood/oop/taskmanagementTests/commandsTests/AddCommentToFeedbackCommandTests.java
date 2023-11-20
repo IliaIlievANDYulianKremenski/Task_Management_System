@@ -7,7 +7,9 @@ import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFound
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.CommentImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.FeedbackImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.feedbackrelatedtypes.FeedbackStatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,6 +87,7 @@ public class AddCommentToFeedbackCommandTests {
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
         /*Act*/
+        createValidMember();
         addCommentToFeedbackCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
@@ -106,5 +109,9 @@ public class AddCommentToFeedbackCommandTests {
                 1,
                 FeedbackStatusType.NEW
         );
+    }
+    private Member createValidMember() {
+        return teamManagementRepository.createMember(
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
     }
 }

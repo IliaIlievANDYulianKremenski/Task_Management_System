@@ -198,6 +198,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
 
     @Override
     public Comment createComment(String commentAuthor, String commentMessage) {
+        findMemberByName(commentAuthor);
         Comment temporaryComment = new CommentImpl(commentAuthor, commentMessage);
         comments.add(temporaryComment);
         return temporaryComment;
@@ -249,6 +250,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     }
 
     /*<-------Helper Method(s)------->*/
+
 
     private void checkIfMemberNameExists(String memberName) {
         for (Member member : getMembers()) {

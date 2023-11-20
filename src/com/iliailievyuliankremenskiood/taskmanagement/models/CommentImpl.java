@@ -6,8 +6,10 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 public class CommentImpl implements Comment {
 
     /*<-------Constant(s)------->*/
-    public static final int AUTHOR_MIN_LEN = 3;
-    public static final int AUTHOR_MAX_LEN = 20;
+
+    //TODO Remove author length validation.
+    public static final int AUTHOR_MIN_LEN = MemberImpl.MEMBER_NAME_MIN_LEN;
+    public static final int AUTHOR_MAX_LEN = MemberImpl.MEMBER_NAME_MAX_LEN;
     private static final String AUTHOR_ERR_LEN = "Author name must be between %d and %d characters long.";
     public static final int MESSAGE_MIN_LEN = 1;
     public static final int MESSAGE_MAX_LEN = 200;

@@ -13,14 +13,15 @@ import java.util.List;
 
 public class CreateNewBugCommand implements Command {
     /*TODO - make the {assiggnee} optional */
-    /** Command format: Create_New_Bug {title} {description} {priority} {severity} {assignee} */
+    /** Command format: Create_New_Bug {title} {description} {priority} {severity} {optional: assignee} */
 
     /*<-------Constant(s)------->*/
     private static final String INVALID_BUG_PRIORITY_MESSAGE =
             "Invalid value for Bug Priority: %s. Should be HIGH, MEDIUM or LOW.";
     private static final String INVALID_BUG_SEVERITY_MESSAGE =
             "Invalid value for Bug Severity: %s. Should be CRITICAL, MAJOR or MINOR.";
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
+    public static final int NUMBER_WITH_ASSIGNEE = 5;
+    public static final int NUMBER_WITHOUT_ASSIGNEE = 4;
 
     /*<-------Field(s)------->*/
 
@@ -36,7 +37,7 @@ public class CreateNewBugCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
+        ValidationHelpers.validateTaskWithAssigneeCount(parameters,NUMBER_WITH_ASSIGNEE,NUMBER_WITHOUT_ASSIGNEE);
 
         String title = parameters.get(0);
         String description = parameters.get(1);
@@ -50,9 +51,13 @@ public class CreateNewBugCommand implements Command {
                 BugSeverityType.class,
                 INVALID_BUG_SEVERITY_MESSAGE
         );
-        String assigneeName = parameters.get(4);
 
-        Member assignee = teamManagementRepository.findMemberByName(assigneeName);
+        Member assignee = null;
+        if (parameters.size() == NUMBER_WITH_ASSIGNEE) {
+            String assigneeName = parameters.get(4);
+            assignee = teamManagementRepository.findMemberByName(assigneeName);
+        }
+
         Bug bug = teamManagementRepository.createBug(
                 title,
                 description,

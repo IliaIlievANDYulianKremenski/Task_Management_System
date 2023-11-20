@@ -331,6 +331,7 @@ public class TeamManagementRepositoryTests {
     @Test
     public void createComment_Should_AddCommentToList() {
         /*Arrange*/
+        createValidMember();
         Comment comment = createValidComment();
         /*Act, Assert*/
         Assertions.assertEquals(1,teamManagementRepository.getComments().size());

@@ -18,7 +18,7 @@ public class CreateNewBugCommandTests {
 
     /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            CreateNewBugCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            CreateNewBugCommand.NUMBER_WITH_ASSIGNEE + 1;
 
     /*<-------Field(s)------->*/
 
@@ -54,8 +54,8 @@ public class CreateNewBugCommandTests {
                 "A".repeat(BugImpl.MIN_TITLE_LENGTH),
                 "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
                 "Not Valid",
-                "CRITICAL",
-                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
+                "CRITICAL"
+//                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act, Assert*/
         Assertions.assertThrows(
