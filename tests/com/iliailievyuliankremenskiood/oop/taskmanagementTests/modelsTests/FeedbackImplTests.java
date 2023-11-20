@@ -167,10 +167,10 @@ public class FeedbackImplTests {
                 VALID_FEEDBACK_RATING, VALID_FEEDBACK_STATUS);
 
         /*Act*/
-        feedback.changeRating(100);
+        feedback.changeRating(FeedbackImpl.FEEDBACK_MIN_RATING);
 
         /*Assert*/
-        Assertions.assertEquals(100, feedback.getRating());
+        Assertions.assertEquals(FeedbackImpl.FEEDBACK_MIN_RATING, feedback.getRating());
         /* ✏️ NOTE ✏️:
          * 1 - I tried testing the exact content of the 2nd element of the ActivityHistory,
          * but it was more difficult than expected,

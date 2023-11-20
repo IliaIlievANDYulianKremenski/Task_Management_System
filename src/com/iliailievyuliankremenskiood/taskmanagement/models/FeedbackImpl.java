@@ -6,6 +6,8 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 public class FeedbackImpl extends TaskImpl implements Feedback {
     /*<-------Constant(s)------->*/
     private static final String INVALID_RATING_MESSAGE = "The rating should be between 1 and 10.";
+    public static final int FEEDBACK_MIN_RATING = 1;
+    public static final int FEEDBACK_MAX_RATING = 10;
 
     /*<-------Field(s)------->*/
     private int rating;
@@ -87,7 +89,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     public boolean validateRating(int rating){
-        if(rating < 1 || rating > 10){
+        if(rating < FEEDBACK_MIN_RATING || rating > FEEDBACK_MAX_RATING){
             throw new IllegalArgumentException(INVALID_RATING_MESSAGE);
         }
         return true;

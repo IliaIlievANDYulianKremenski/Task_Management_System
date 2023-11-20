@@ -24,7 +24,7 @@ public class ChangeFeedbackStatusCommandTests {
     private static final FeedbackStatusType VALID_FEEDBACK_STATUS = FeedbackStatusType.SCHEDULED;
     private static final FeedbackStatusType VALID_FEEDBACK_STATUS2 = FeedbackStatusType.DONE;
     private static final String INVALID_FEEDBACK_STATUS = "SOMETHING_INVALID";
-    private static final int VALID_FEEDBACK_RATING = 100;
+    private static final int VALID_FEEDBACK_RATING = FeedbackImpl.FEEDBACK_MIN_RATING;
 
 
     /*<-------Field(s)------->*/
