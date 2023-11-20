@@ -14,7 +14,7 @@ public class ListAllTasksCommand implements Command {
 
     /*<-------Constant(s)------->*/
     public static final String NO_TASKS_ERROR = "There are no Tasks (Bugs, Stories or Feedbacks) to be listed.";
-    public static final String TASKS_HEADER = "Tasks: ";
+    public static final String TASKS_HEADER = "Tasks with TITLE: %s";
     public static final String SEPARATOR = "-".repeat(14);
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String ALL_TITLES_ARGUMENT = "ALL_TITLES";
@@ -42,7 +42,7 @@ public class ListAllTasksCommand implements Command {
 
         if(taskTitle.equals(ALL_TITLES_ARGUMENT)){
             result.append(SEPARATOR).append(System.lineSeparator());
-            result.append(TASKS_HEADER).append(System.lineSeparator());
+            result.append(String.format(TASKS_HEADER,taskTitle)).append(System.lineSeparator());
             result.append(SEPARATOR).append(System.lineSeparator());
             for (Task task : teamManagementRepository.getTasks()) {
                 result.append(task.print()).append(System.lineSeparator());
@@ -51,7 +51,7 @@ public class ListAllTasksCommand implements Command {
         }
         else{
             result.append(SEPARATOR).append(System.lineSeparator());
-            result.append(TASKS_HEADER).append(System.lineSeparator());
+            result.append(String.format(TASKS_HEADER,taskTitle)).append(System.lineSeparator());
             result.append(SEPARATOR).append(System.lineSeparator());
             for (Task task : teamManagementRepository.getTasks()) {
                 if(task.getTitle().contains(taskTitle)){

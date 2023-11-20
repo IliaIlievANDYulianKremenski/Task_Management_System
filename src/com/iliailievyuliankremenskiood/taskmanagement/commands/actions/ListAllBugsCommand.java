@@ -17,7 +17,7 @@ public class ListAllBugsCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String NO_BUGS_ERROR = "There are currently no Bugs.";
-    private static final String BUGS_HEADER = "Bugs: ";
+    private static final String BUGS_HEADER = "Bugs with STATUS: %s and ASSIGNEE: %s";
     private static final String SEPARATOR = "-".repeat(14);
 
 
@@ -33,9 +33,7 @@ public class ListAllBugsCommand implements Command {
 
     /*<-------Behavioural Method(s)------->*/
 
-    /* TODO We can print the result as point the two filters as a header. For example ** Bugs with parameters: ALL_STATUSES ALL_ASSIGNEES: ** */
 
-    /* TODO When there are no tasks to list we will print just new line */
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
@@ -59,13 +57,12 @@ public class ListAllBugsCommand implements Command {
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
+        output.append(String.format(BUGS_HEADER,statusFilter,assigneeFilter)).append(System.lineSeparator());
         for (Bug bug : bugList) {
             output.append(bug.print()).append(System.lineSeparator());
         }
         return output.toString().trim();
     }
-
-
 
     /* TODO Do we want our filter to be case sensitive or to be able to find no matter upper or lower case. The other option is to parse the enum filter
     *   and search all bugs by their specific enum and that way we can implement to return an exception message to the user that the enum is incorrect and

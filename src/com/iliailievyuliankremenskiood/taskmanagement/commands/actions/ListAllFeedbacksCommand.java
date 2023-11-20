@@ -17,7 +17,7 @@ public class ListAllFeedbacksCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
-    private static final String FEEDBACK_HEADER = "Feedbacks: ";
+    private static final String FEEDBACK_HEADER = "Feedbacks with STATUS: %s";
     private static final String SEPARATOR = "-".repeat(14);
 
 
@@ -52,11 +52,10 @@ public class ListAllFeedbacksCommand implements Command {
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
+        output.append(String.format(FEEDBACK_HEADER,statusFilter)).append(System.lineSeparator());
         for (Feedback feedback : feedbacksList) {
             output.append(feedback.print()).append(System.lineSeparator());
         }
         return output.toString().trim();
     }
-
-    /* TODO Like AllBugsCommand we can print with a header point what filters are choosen */
 }
