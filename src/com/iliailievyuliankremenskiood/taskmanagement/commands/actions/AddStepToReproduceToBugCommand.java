@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddStepToReproduceToBugCommand implements Command {
     /**
-     * Command format: Add_Step_To_Reproduce_To_Bug {step to reproduce} {bug ID}
+     * Command format: Add_Step_To_Reproduce_To_Bug {step to reproduce} {Bug Id}
      * */
 
     /*<-------Constant(s)------->*/

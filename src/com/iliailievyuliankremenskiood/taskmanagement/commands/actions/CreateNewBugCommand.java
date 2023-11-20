@@ -12,7 +12,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class CreateNewBugCommand implements Command {
-
+    /*TODO - make the {assiggnee} optional */
     /** Command format: Create_New_Bug {title} {description} {priority} {severity} {assignee} */
 
     /*<-------Constant(s)------->*/

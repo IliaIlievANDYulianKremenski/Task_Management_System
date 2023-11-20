@@ -33,7 +33,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
 
-    /* ✏️ TODO ✏️ - ask the trainers if the rating can be negative? What is the purpose of the rating?*/
+    /* ✏️ TODO ✏️ - @Yuli - after the meeting with the trainer - implement a validation for the rating to be set between 1 - 10.*/
     /*<-------Setter(s)------->*/
     private void setRating(int rating) {
         this.rating = rating;
