@@ -59,8 +59,6 @@ public class ListAllBugsCommand implements Command {
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
-        output.append(BUGS_HEADER).append(System.lineSeparator());
-        output.append(SEPARATOR).append(System.lineSeparator());
         for (Bug bug : bugList) {
             output.append(bug.print()).append(System.lineSeparator());
         }

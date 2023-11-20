@@ -44,7 +44,7 @@ public class Main {
         //Ilia tests
 //        Board board = new BoardImpl("String");
 //        System.out.println(board.getActivityHistory().get(0));
-        TeamManagementRepositoryImpl teamManagementRepository = new TeamManagementRepositoryImpl();
+/*        TeamManagementRepositoryImpl teamManagementRepository = new TeamManagementRepositoryImpl();
         List<String> list = List.of(
                 "ALL_STATUSES",
                 "ALL_ASSIGNEES"
@@ -72,7 +72,14 @@ public class Main {
         bugList = new ArrayList<>(filteredBugList);
         filteredBugList = FilterHelpers.filterBugsByAssignee(assigneeFilter, bugList);
 
-        System.out.println(filteredBugList.size());
+        System.out.println(filteredBugList.size());*/
+
+        String a = "asd asdasd //asdasdasd// asda;sldjklak;sdkl";
+        String[] asd = a.split("//");
+
+        for (int i = 0; i < asd.length; i++) {
+            System.out.println(asd[i].trim());
+        }
 
     }
 }

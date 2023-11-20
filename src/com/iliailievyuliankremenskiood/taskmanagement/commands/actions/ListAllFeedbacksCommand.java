@@ -52,8 +52,6 @@ public class ListAllFeedbacksCommand implements Command {
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
-        output.append(FEEDBACK_HEADER).append(System.lineSeparator());
-        output.append(SEPARATOR).append(System.lineSeparator());
         for (Feedback feedback : feedbacksList) {
             output.append(feedback.print()).append(System.lineSeparator());
         }

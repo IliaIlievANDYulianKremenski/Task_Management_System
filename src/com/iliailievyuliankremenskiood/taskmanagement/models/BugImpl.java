@@ -18,6 +18,9 @@ public class BugImpl extends TaskImpl implements Bug {
        1 - should we provide the option to substitute the current stepsToReproduce with a brand new List?
        2 - should we provide the option to modify a step in the already existing list of steps?
        3 - should we provide the option to delete an existing step?*/
+
+    /*TODO - when we are 100% ready with the functionality of the program
+        we can color the error messages we send to the user and make it more pleasant to watch.*/
     private final List<String> stepsToReproduce;
 
     private BugPriorityType priorityType;
@@ -99,7 +102,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
         eventSb.append(super.produceCreationLogString(id, title, description));
 
-        eventSb.append(String.format(" Priority: '%s', Severity: '%s', Status: '%s', Assignee: '%s'.",
+        eventSb.append(String.format("\nPriority: '%s'\nSeverity: '%s'\nStatus: '%s'\nAssignee: '%s'.",
                 this.priorityType.toString(),
                 this.severityType.toString(),
                 this.statusType.toString(),
@@ -111,6 +114,8 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override /*TaskImpl*/
     public String print() {
         return String.format("""
+                        --------------
+                        Bug:
                             %s
                             Priority: %s
                             Severity: %s

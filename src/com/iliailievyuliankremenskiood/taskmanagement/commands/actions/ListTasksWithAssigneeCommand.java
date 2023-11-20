@@ -18,7 +18,7 @@ public class ListTasksWithAssigneeCommand implements Command {
     public static final String ALL_STATUSES_ARGUMENT = "ALL_STATUSES";
     public static final String ALL_ASSIGNEES_ARGUMENT = "ALL_ASSIGNEES";
     public static final String NO_TASKS_ERROR = "There are no Tasks with assignees (Bugs or Stories) to be listed.";
-    public static final String TASKS_HEADER = "Tasks: ";
+    public static final String TASKS_HEADER = "Tasks with STATUS: %s and ASSIGNEE: %s";
     public static final String SEPARATOR = "-".repeat(14);
 
     /*<-------Field(s)------->*/

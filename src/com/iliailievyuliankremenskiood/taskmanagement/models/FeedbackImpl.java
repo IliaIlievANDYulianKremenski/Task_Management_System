@@ -48,6 +48,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     @Override
     public String print() {
         return String.format("""
+                        --------------
+                        Feedback:    
                             %s
                             Rating: %d
                             Status: %s

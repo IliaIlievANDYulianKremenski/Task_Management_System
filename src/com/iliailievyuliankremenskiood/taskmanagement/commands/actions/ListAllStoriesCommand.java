@@ -54,8 +54,6 @@ public class ListAllStoriesCommand implements Command {
 
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
-        output.append(STORIES_HEADER).append(System.lineSeparator());
-        output.append(SEPARATOR).append(System.lineSeparator());
         for (Story story : storyList) {
             output.append(story.print()).append(System.lineSeparator());
         }
