@@ -34,6 +34,7 @@ public class ShowAllTeamBoardsTests {
         showAllTeamBoardsCommand = new ShowAllTeamBoardsCommand(teamManagementRepository);
 
     }
+    /*<-------Test(s)------->*/
 
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {

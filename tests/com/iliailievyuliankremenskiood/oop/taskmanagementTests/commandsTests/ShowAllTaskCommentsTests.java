@@ -1,15 +1,16 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddTaskToBoardCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ListAllBugsCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.ShowAllTaskCommentsCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
+import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.*;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Board;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Team;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugPriorityType;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.bugrelatedtypes.BugSeverityType;
 import org.junit.jupiter.api.Assertions;
@@ -18,22 +19,23 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class AddTaskToBoardCommandTests {
+public class ShowAllTaskCommentsTests {
 
     /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
-            AddTaskToBoardCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+            ListAllBugsCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
+
 
     /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
-    private AddTaskToBoardCommand addTaskToBoardCommand;
+    private ShowAllTaskCommentsCommand showAllTaskCommentsCommand;
 
     /*Arrange*/
     @BeforeEach
-    public void setAddTaskToBoardCommand() {
+    public void setShowAllTaskCommentsCommand(){
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        addTaskToBoardCommand = new AddTaskToBoardCommand(teamManagementRepository);
+        showAllTaskCommentsCommand = new ShowAllTaskCommentsCommand(teamManagementRepository);
+
     }
 
     /*<-------Test(s)------->*/
@@ -46,46 +48,65 @@ public class AddTaskToBoardCommandTests {
         /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> addTaskToBoardCommand.execute(list)
+                () -> showAllTaskCommentsCommand.execute(list)
         );
-
     }
     @Test
-    public void execute_Should_ThrowException_WhenTaskIdNotNumber() {
+    public void execute_Should_ThrowException_When_TaskIdNotNumber() {
         /*Arrange*/
         List<String> list = List.of(
-                "Task ID",
-                "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
-                "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
+                "Task ID"
+
         );
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
-                () -> addTaskToBoardCommand.execute(list)
+                () -> showAllTaskCommentsCommand.execute(list)
         );
     }
     @Test
-    public void execute_Should_AddTaskToBoard_When_PassedValidInput() {
+    public void execute_Should_ThrowException_When_BugDoNotExist() {
+        /*Arrange*/
+        List<String> list = List.of(
+                "1"
+        );
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                ElementNotFoundException.class,
+                () -> showAllTaskCommentsCommand.execute(list)
+        );
+    }
+    @Test
+    public void execute_ThrowException_When_ThereAreNoComments() {
         /*Arrange*/
         Bug bug = createValidBug();
-        Team team = createValidTeam();
-        Board board = createValidBoard();
         List<String> list = List.of(
-                "1",
-                "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
-                "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
+                "1"
         );
-        /*Act*/
-        addTaskToBoardCommand.execute(list);
         /*Act, Assert*/
-        Assertions.assertEquals(
-                1,
-                board.getBoardTasks().size()
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> showAllTaskCommentsCommand.execute(list)
         );
-}
+
+    }
+    @Test
+    public void execute_Should_NotThrowException_When_PassedValidInput() {
+        /*Arrange*/
+        Bug bug = createValidBug();
+        List<String> list = List.of(
+                "1"
+        );
+        Comment comment = createValidComment();
+        bug.addCommentToTask(comment);
+        /*Act, Assert*/
+        Assertions.assertDoesNotThrow(
+                () -> showAllTaskCommentsCommand.execute(list)
+        );
+
+    }
 
     /*<-------Helper Method(s)------->*/
-
     private Bug createValidBug() {
         Member member = createValidMember();
         return teamManagementRepository.createBug(
@@ -96,20 +117,15 @@ public class AddTaskToBoardCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
     }
-    private Board createValidBoard() {
-        return teamManagementRepository.creteBoard(
-                "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
-                "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
-        );
+    private Comment createValidComment() {
+        return teamManagementRepository.createComment(
+                "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
+                "A".repeat(CommentImpl.MESSAGE_MIN_LEN)
+                );
     }
-    private Team createValidTeam() {
-        return teamManagementRepository.createTeam("A".repeat(TeamImpl.TEAM_NAME_MIN_LEN));
-    }
-
 }
-
-
