@@ -5,7 +5,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
     /*<-------Constant(s)------->*/
-
+    private static final String INVALID_RATING_MESSAGE = "The rating should be between 1 and 10.";
 
     /*<-------Field(s)------->*/
     private int rating;
@@ -33,10 +33,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
 
-    /* ✏️ TODO ✏️ - @Yuli - after the meeting with the trainer - implement a validation for the rating to be set between 1 - 10.*/
     /*<-------Setter(s)------->*/
     private void setRating(int rating) {
-        this.rating = rating;
+        if(validateRating(rating)) {
+            this.rating = rating;
+        }
     }
 
     private void setStatus(FeedbackStatusType status) {
@@ -83,5 +84,12 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         logEvent("Feedback status",
                 String.format("%s", oldStatus.toString()),
                 String.format("%s", status.toString()));
+    }
+
+    public boolean validateRating(int rating){
+        if(rating < 1 || rating > 10){
+            throw new IllegalArgumentException(INVALID_RATING_MESSAGE);
+        }
+        return true;
     }
 }
