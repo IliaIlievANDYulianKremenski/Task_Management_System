@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CreateNewStoryCommand implements Command {
     /**
-     * Command format: Create_New_Story {title} {description} {priority} {size} {status} {assignee}
+     * Command format: Create_New_Story {title} {description} {priority} {size} {status} {optional: assignee}
      */
 
     /*<-------Constant(s)------->*/
@@ -25,7 +25,8 @@ public class CreateNewStoryCommand implements Command {
     private static final String INVALID_STORY_STATUS_MESSAGE =
             "Invalid value for Story Status: %s. Should be NOT_DONE, IN_PROGRESS or DONE.";
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
+    public static final int NUMBER_WITH_ASSIGNEE = 6;
+    public static final int NUMBER_WITHOUT_ASSIGNEE = 5;
 
 
     /*<-------Field(s)------->*/
@@ -41,7 +42,7 @@ public class CreateNewStoryCommand implements Command {
     /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        ValidationHelpers.validateTaskWithAssigneeCount(parameters,NUMBER_WITH_ASSIGNEE,NUMBER_WITHOUT_ASSIGNEE);
 
         String storyTitle = parameters.get(0);
         String storyDescription = parameters.get(1);
@@ -65,8 +66,11 @@ public class CreateNewStoryCommand implements Command {
                 INVALID_STORY_STATUS_MESSAGE
         );
 
-        String assigneeName = parameters.get(5);
-        Member assignee = teamManagementRepository.findMemberByName(assigneeName);
+        Member assignee = null;
+        if (parameters.size() == NUMBER_WITH_ASSIGNEE) {
+            String assigneeName = parameters.get(5);
+            assignee = teamManagementRepository.findMemberByName(assigneeName);
+        }
 
         Story temporarStory = teamManagementRepository.createStory(
                 storyTitle,

@@ -65,7 +65,7 @@ public class CreateNewStoryCommandTests {
         parameters.add(VALID_MEMBER_NAME);
 
         /*Act*/
-        String resultFromSuccessfullStoryCreation =    createNewStoryCommand.execute(parameters);
+        String resultFromSuccessfullStoryCreation = createNewStoryCommand.execute(parameters);
 
         /*Assert*/
         Assertions.assertEquals(
