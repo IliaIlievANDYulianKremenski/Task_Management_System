@@ -13,7 +13,7 @@ public class ListAllStoriesCommand implements Command {
      * Command format: List_All_Stories {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private static final String NO_STORIES_ERROR = "There are currently no Stories.";
+    private static final String NO_STORIES_ERROR = "There are currently no Stories with STATUS: %s and ASSIGNEE: %s";
     private static final String STORIES_HEADER = "Stories with STATUS: %s and ASSIGNEE: %s";
     private static final String SEPARATOR = "-".repeat(14);
     private final TeamManagementRepository teamManagementRepository;
@@ -30,13 +30,16 @@ public class ListAllStoriesCommand implements Command {
         List<Story> storyList = teamManagementRepository.getStories();
         storyList = FilterHelpers.filterStoriesByStatus(
                 statusFilter,
-                storyList);
+                storyList,
+                String.format(NO_STORIES_ERROR,storyList,assigneeFilter)
+        );
         storyList = FilterHelpers.filterTasksByAssignee(
                 assigneeFilter,
-                storyList
+                storyList,
+                String.format(NO_STORIES_ERROR,storyList,assigneeFilter)
         );
         if (storyList.isEmpty()) {
-            throw new IllegalArgumentException(NO_STORIES_ERROR);
+            throw new IllegalArgumentException(String.format(NO_STORIES_ERROR,storyList,assigneeFilter));
         }
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());

@@ -13,7 +13,7 @@ public class ListAllBugsCommand implements Command {
      * Command format: List_All_Bugs {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private static final String NO_BUGS_ERROR = "There are currently no Bugs.";
+    private static final String NO_BUGS_ERROR = "There are currently no Bugs with STATUS: %s and ASSIGNEE: %s";
     private static final String BUGS_HEADER = "Bugs with STATUS: %s and ASSIGNEE: %s";
     private static final String SEPARATOR = "-".repeat(14);
 
@@ -31,14 +31,16 @@ public class ListAllBugsCommand implements Command {
         List<Bug> bugList = teamManagementRepository.getBugs();
         bugList = FilterHelpers.filterBugsByStatus(
                 statusFilter,
-                bugList
+                bugList,
+                String.format(NO_BUGS_ERROR,statusFilter,assigneeFilter)
         );
         bugList = FilterHelpers.filterBugsByAssignee(
                 assigneeFilter,
-                bugList
+                bugList,
+                String.format(NO_BUGS_ERROR,statusFilter,assigneeFilter)
         );
         if (bugList.isEmpty()) {
-            throw new IllegalArgumentException(NO_BUGS_ERROR);
+            throw new IllegalArgumentException(String.format(NO_BUGS_ERROR,statusFilter,assigneeFilter));
         }
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());

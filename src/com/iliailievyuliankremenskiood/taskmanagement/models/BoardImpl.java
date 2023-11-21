@@ -65,7 +65,7 @@ public class BoardImpl implements Board {
         logCreation(String.format(
                 TASK_CREATED_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
-                task.getClass().getSimpleName(),
+                task.getClass().getSimpleName().substring(0,task.getClass().getSimpleName().length()-4),
                 task.getTitle(),
                 getName())
         );
@@ -76,7 +76,7 @@ public class BoardImpl implements Board {
         logCreation(String.format(
                 TASK_REMOVED_MESSAGE,
                 LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
-                task.getClass().getSimpleName(),
+                task.getClass().getSimpleName().substring(0,task.getClass().getSimpleName().length()-4),
                 task.getTitle(),
                 getName())
         );

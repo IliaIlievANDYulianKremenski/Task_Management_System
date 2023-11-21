@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterHelpers {
-    private static final String NO_BUGS_ERROR = "There are currently no Bugs.";
-    private static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
-    private static final String NO_STORIES_ERROR = "There are currently no Stories.";
-    private static final String NO_TASKS_ERROR = "There are currently no elements of this task type.";
 
-    public static List<Bug> filterBugsByStatus(String statusFilter, List<Bug> bugList) {
+    public static List<Bug> filterBugsByStatus(String statusFilter, List<Bug> bugList, String message) {
         if (bugList.isEmpty()) {
-            throw new IllegalArgumentException(NO_BUGS_ERROR);
+            throw new IllegalArgumentException(message);
         }
         List<Bug> filteredBugList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
@@ -28,9 +24,9 @@ public class FilterHelpers {
         return filteredBugList;
     }
 
-    public static List<Feedback> filterFeedbacksByStatus(String statusFilter, List<Feedback> feedbacksList) {
+    public static List<Feedback> filterFeedbacksByStatus(String statusFilter, List<Feedback> feedbacksList, String message) {
         if (feedbacksList.isEmpty()) {
-            throw new IllegalArgumentException(NO_FEEDBACKS_ERROR);
+            throw new IllegalArgumentException(message);
         }
         List<Feedback> filteredFeedbackList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
@@ -45,9 +41,9 @@ public class FilterHelpers {
         return filteredFeedbackList;
     }
 
-    public static List<Story> filterStoriesByStatus(String statusFilter, List<Story> storyList) {
+    public static List<Story> filterStoriesByStatus(String statusFilter, List<Story> storyList, String message) {
         if (storyList.isEmpty()) {
-            throw new IllegalArgumentException(NO_STORIES_ERROR);
+            throw new IllegalArgumentException(message);
         }
         List<Story> filteredStoryList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
@@ -62,9 +58,9 @@ public class FilterHelpers {
         return filteredStoryList;
     }
 
-    public static List<Bug> filterBugsByAssignee(String assigneeFilter, List<Bug> bugList) {
+    public static List<Bug> filterBugsByAssignee(String assigneeFilter, List<Bug> bugList, String message) {
         if (bugList.isEmpty()) {
-            throw new IllegalArgumentException(NO_BUGS_ERROR);
+            throw new IllegalArgumentException(message);
         }
         List<Bug> filteredBugList = new ArrayList<>();
         if (!assigneeFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {
@@ -80,9 +76,9 @@ public class FilterHelpers {
         return filteredBugList;
     }
 
-    public static <E extends Assignable> List<E> filterTasksByAssignee(String assigneeFilter, List<E> taskList) {
+    public static <E extends Assignable> List<E> filterTasksByAssignee(String assigneeFilter, List<E> taskList, String message) {
         if (taskList.isEmpty()) {
-            throw new IllegalArgumentException(NO_TASKS_ERROR);
+            throw new IllegalArgumentException(message);
         }
         List<E> filteredList = new ArrayList<>();
         if (!assigneeFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {

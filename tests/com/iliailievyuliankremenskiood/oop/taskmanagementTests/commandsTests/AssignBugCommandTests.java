@@ -1,7 +1,6 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
 import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestUtilities;
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddCommentToBugCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AssignBugCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
@@ -81,7 +80,7 @@ public class AssignBugCommandTests {
     @Test
     public void execute_Should_ThrowException_When_MemberDoNotExist() {
         /*Arrange*/
-        Bug bug = createValidBug();
+        createValidBug();
         List<String> list = List.of(
                 "1",
                 "B".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
@@ -101,7 +100,7 @@ public class AssignBugCommandTests {
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
         /*Act*/
-        Bug bug = createValidBug();
+        createValidBug();
         /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,

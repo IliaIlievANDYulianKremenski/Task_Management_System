@@ -15,7 +15,7 @@ public class ListTasksWithAssigneeCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String ALL_STATUSES_ARGUMENT = "ALL_STATUSES";
     public static final String ALL_ASSIGNEES_ARGUMENT = "ALL_ASSIGNEES";
-    public static final String NO_TASKS_ERROR = "There are no Tasks with assignees (Bugs or Stories) to be listed.";
+    public static final String NO_TASKS_ERROR = "There are no Tasks with assignees (Bugs or Stories) with STATUS: %s and ASSIGNEE: %s";
     public static final String TASKS_HEADER = "Tasks with STATUS: %s and ASSIGNEE: %s";
     public static final String SEPARATOR = "-".repeat(14);
     private final TeamManagementRepository teamManagementRepository;
@@ -27,12 +27,13 @@ public class ListTasksWithAssigneeCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        if (teamManagementRepository.getBugs().isEmpty()
-                && teamManagementRepository.getStories().isEmpty()) {
-            throw new IllegalArgumentException(NO_TASKS_ERROR);
-        }
+
         String taskStatus = parameters.get(0);
         String taskAssignee = parameters.get(1);
+        if (teamManagementRepository.getBugs().isEmpty()
+                && teamManagementRepository.getStories().isEmpty()) {
+            throw new IllegalArgumentException(String.format(NO_TASKS_ERROR,taskStatus,taskAssignee));
+        }
         StringBuilder result = new StringBuilder();
         result.append(String.format(TASKS_HEADER, taskStatus, taskAssignee)).append(System.lineSeparator());
         if (taskStatus.equalsIgnoreCase(ALL_STATUSES_ARGUMENT)

@@ -12,7 +12,7 @@ public class ListAllTasksCommand implements Command {
     /**
      * Command format: List_All_Tasks {filter title / ALL_TITLES}
      */
-    public static final String NO_TASKS_ERROR = "There are no Tasks (Bugs, Stories or Feedbacks) to be listed.";
+    public static final String NO_TASKS_ERROR = "There are no Tasks (Bugs, Stories or Feedbacks) with TITLE: %s";
     public static final String TASKS_HEADER = "Tasks with TITLE: %s";
     public static final String SEPARATOR = "-".repeat(14);
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
@@ -27,11 +27,10 @@ public class ListAllTasksCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         List<Task> tasks = teamManagementRepository.getTasks();
-        if (tasks.isEmpty()) {
-            throw new IllegalArgumentException(NO_TASKS_ERROR);
-        }
-
         String taskTitle = parameters.get(0);
+        if (tasks.isEmpty()) {
+            throw new IllegalArgumentException(String.format(NO_TASKS_ERROR,taskTitle));
+        }
         StringBuilder result = new StringBuilder();
         if (taskTitle.equals(ALL_TITLES_ARGUMENT)) {
             result.append(SEPARATOR).append(System.lineSeparator());
@@ -53,7 +52,7 @@ public class ListAllTasksCommand implements Command {
             result.append(System.lineSeparator());
         }
         if (result.toString().trim().isEmpty()) {
-            throw new IllegalArgumentException(NO_TASKS_ERROR);
+            throw new IllegalArgumentException(String.format(NO_TASKS_ERROR,taskTitle));
         } else {
             return result.toString().trim();
         }

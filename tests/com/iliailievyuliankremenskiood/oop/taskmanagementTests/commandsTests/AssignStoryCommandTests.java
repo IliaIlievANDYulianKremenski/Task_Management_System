@@ -7,7 +7,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFound
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.StoryImpl;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StoryPriorityType;
