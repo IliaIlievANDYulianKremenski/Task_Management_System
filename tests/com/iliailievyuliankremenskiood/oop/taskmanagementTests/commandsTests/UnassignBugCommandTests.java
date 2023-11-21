@@ -73,12 +73,6 @@ public class UnassignBugCommandTests {
         );
     }
 
-    /*TODO To finish this test after discussing the Unassign Command approach
-    *  with Yuli. When we change the assignee to null, we get an error in his
-    * logEvent() method in BugImpl. We can't call .getName() method by an
-    * object that is null.*/
-    /* This will be the same with Unassign Story Command. */
-
     @Test
     public void execute_Should_UnassignBug_When_PassedValidInput() {
         /*Arrange*/

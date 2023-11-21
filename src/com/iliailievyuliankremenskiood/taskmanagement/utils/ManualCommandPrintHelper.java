@@ -10,7 +10,6 @@ public class ManualCommandPrintHelper {
     private static final String ANSI_PURPLE = "\u001B[35m";
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_WHITE = "\u001B[37m";
-    private static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
 
     public static String print() {
         return ANSI_BLUE + "Commands format:\n" + ANSI_RESET +

@@ -26,7 +26,7 @@ public class ValidationHelpers {
 
     public static void validateTaskWithAssigneeCount(List<String> list, int argumentsWithAssignee, int argumentsWithoutAssignee) {
         if (list.size() < argumentsWithoutAssignee || list.size() > argumentsWithAssignee) {
-            throw new IllegalArgumentException(String.format(INVALID_NUMBER_OF_ARGUMENTS, argumentsWithoutAssignee, argumentsWithAssignee, list.size()));
+            throw new IllegalArgumentException(String.format(INVALID_ARGUMENTS_TASK_WITH_ASSIGNEE, argumentsWithoutAssignee, argumentsWithAssignee, list.size()));
         }
     }
 }

@@ -49,8 +49,4 @@ public class ListAllBugsCommand implements Command {
         }
         return output.toString().trim();
     }
-
-    /* TODO Do we want our filter to be case sensitive or to be able to find no matter upper or lower case. The other option is to parse the enum filter
-     *   and search all bugs by their specific enum and that way we can implement to return an exception message to the user that the enum is incorrect and
-     * "Should be ACTIVE or DONE.   */
 }

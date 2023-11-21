@@ -22,7 +22,7 @@ public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngin
 
     @Override
     public void start() {
-        System.out.println("Hello! Type a command, type 'manual' to see all commands available or 'exit' to abort program.");
+        System.out.println("Hello! Type a command, type 'manual' to see all commands available or type 'exit' to abort program.");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {

@@ -17,8 +17,6 @@ public class BugImpl extends TaskImpl implements Bug {
     private BugPriorityType priorityType;
     private BugSeverityType severityType;
     private BugStatusType statusType;
-    /* ✏️ TODO ✏️ Ask the trainers if it is necessary the task to have an assignee, in other words can we use null as a default value for Member assignee or
-    it is mandatory to have assignee when creating a new task?*/
     private Member assignee;
 
     public BugImpl(int id, String title, String description, BugPriorityType priorityType,
