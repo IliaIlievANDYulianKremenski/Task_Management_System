@@ -74,12 +74,12 @@ public class Main {
 
         System.out.println(filteredBugList.size());*/
 
-        String a = "asd asdasd //asdasdasd// asda;sldjklak;sdkl";
+/*        String a = "asd asdasd //asdasdasd// asda;sldjklak;sdkl";
         String[] asd = a.split("//");
 
         for (int i = 0; i < asd.length; i++) {
             System.out.println(asd[i].trim());
-        }
+        }*/
 
     }
 }

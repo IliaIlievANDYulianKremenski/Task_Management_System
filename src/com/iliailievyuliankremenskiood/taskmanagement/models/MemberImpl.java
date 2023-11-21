@@ -13,8 +13,6 @@ import java.util.List;
 
 public class MemberImpl implements Member {
 
-    /*<-------Constant(s)------->*/
-
     public static final int MEMBER_NAME_MIN_LEN = 5;
     public static final int MEMBER_NAME_MAX_LEN = 15;
     private static final String MEMBER_NAME_ERR_LEN = "Member name must be between %d and %d characters long!";
@@ -25,15 +23,9 @@ public class MemberImpl implements Member {
     private static final String NO_TASKS_MESSAGE = "No tasks are assigned to %s.";
     private static final String TASK_INFO_HEADER = "%s tasks: ";
     private static final String SEPARATOR = "--------------";
-
-
-    /*<-------Field(s)------->*/
-
     private String name;
     private final List<Task> tasks;
     private final List<String> activityHistory;
-
-    /*<-------Constructor(s)------->*/
 
     public MemberImpl(String name) {
         setName(name);
@@ -46,8 +38,6 @@ public class MemberImpl implements Member {
         );
     }
 
-    /*<-------Getter(s)------->*/
-
     @Override
     public String getName() {
         return this.name;
@@ -57,24 +47,21 @@ public class MemberImpl implements Member {
     public List<Task> getMemberTasks() {
         return new ArrayList<>(tasks);
     }
+
     @Override
     public List<String> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
-
-    /*<-------Setter(s)------->*/
 
     private void setName(String name) {
         ValidationHelpers.validateStringLength(
                 name,
                 MEMBER_NAME_MIN_LEN,
                 MEMBER_NAME_MAX_LEN,
-                String.format(MEMBER_NAME_ERR_LEN,MEMBER_NAME_MIN_LEN,MEMBER_NAME_MAX_LEN)
+                String.format(MEMBER_NAME_ERR_LEN, MEMBER_NAME_MIN_LEN, MEMBER_NAME_MAX_LEN)
         );
         this.name = name;
     }
-
-    /*<-------Behavioural Method(s)------->*/
 
     public void assignTask(Task task) {
         tasks.add(task);
@@ -85,6 +72,7 @@ public class MemberImpl implements Member {
                 getName())
         );
     }
+
     public void unassignTask(Task task) {
         tasks.remove(task);
         logCreation(String.format(
@@ -139,8 +127,6 @@ public class MemberImpl implements Member {
         return activityInfo.toString().trim();
     }
 
-
-    /*<-------Helper Method(s)------->*/
     @Override
     public void logCreation(String creationString) {
         this.activityHistory.add(creationString);
@@ -149,5 +135,4 @@ public class MemberImpl implements Member {
     private void sortTasks() {
         tasks.sort(Comparator.comparing(Task::getTitle));
     }
-
 }

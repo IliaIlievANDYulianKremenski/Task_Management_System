@@ -12,14 +12,12 @@ public class ListTasksWithAssigneeCommand implements Command {
     /**
      * Command format: List_Tasks_With_Assignee {filter status / ALL_STATUSES} {filter assignee / ALL_ASSIGNEES}
      */
-
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String ALL_STATUSES_ARGUMENT = "ALL_STATUSES";
     public static final String ALL_ASSIGNEES_ARGUMENT = "ALL_ASSIGNEES";
     public static final String NO_TASKS_ERROR = "There are no Tasks with assignees (Bugs or Stories) to be listed.";
     public static final String TASKS_HEADER = "Tasks with STATUS: %s and ASSIGNEE: %s";
     public static final String SEPARATOR = "-".repeat(14);
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ListTasksWithAssigneeCommand(TeamManagementRepository teamManagementRepository) {

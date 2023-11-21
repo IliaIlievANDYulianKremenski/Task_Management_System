@@ -12,7 +12,6 @@ public class ManualCommandPrintHelper {
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
 
-
     public static String print() {
         return ANSI_BLUE + "Commands format:\n" + ANSI_RESET +
                 "\tAdd_Comment_to_Bug " + ANSI_GREEN + "--{bug ID} --{author} --{comment}\n" + ANSI_RESET +
@@ -49,12 +48,11 @@ public class ManualCommandPrintHelper {
                 "\tShow_All_Team_Members " + ANSI_GREEN + "--{team name}\n" + ANSI_RESET +
                 "\tShow_All_Teams\n" + ANSI_RESET +
                 "\tShow_Board_Activity " + ANSI_GREEN + "--{board name} --{team name}\n" + ANSI_RESET +
-                "\tShow_Person_Activity " + ANSI_GREEN +" --{person name}\n" + ANSI_RESET +
-                "\tShow_Steps_To_Reproduce " + ANSI_GREEN +" --{bug ID}\n" + ANSI_RESET +
+                "\tShow_Person_Activity " + ANSI_GREEN + " --{person name}\n" + ANSI_RESET +
+                "\tShow_Steps_To_Reproduce " + ANSI_GREEN + " --{bug ID}\n" + ANSI_RESET +
                 "\tShow_Task_Activity " + ANSI_GREEN + "--{task ID}\n" + ANSI_RESET +
                 "\tShow_Team_Activity " + ANSI_GREEN + "--{team name}\n" + ANSI_RESET +
                 "\tUnassign_Bug " + ANSI_GREEN + "--{bug ID}\n" + ANSI_RESET +
                 "\tUnassign_Story " + ANSI_GREEN + "--{story ID}" + ANSI_RESET;
     }
-
 }

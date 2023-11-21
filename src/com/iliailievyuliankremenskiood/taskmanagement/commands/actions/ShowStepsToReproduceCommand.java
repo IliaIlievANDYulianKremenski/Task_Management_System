@@ -12,32 +12,22 @@ public class ShowStepsToReproduceCommand implements Command {
     /**
      * Command format: Show_Steps_To_Reproduce {bug ID}
      */
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String BUG_STEPS_TO_REPRODUCE_MESSAGE = "Bug ID: %d, steps to reproduce:";
     public static final String SEPARATOR = "--------------";
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public ShowStepsToReproduceCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         int bugId = ParsingHelpers.parseInteger(parameters.get(0), "Bug Id");
-
         Bug bug = teamManagementRepository.findBugById(bugId);
         List<String> stepsToReproduce = bug.getStepsToReproduce();
-
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(BUG_STEPS_TO_REPRODUCE_MESSAGE, bugId))
                 .append(SEPARATOR)
@@ -47,8 +37,6 @@ public class ShowStepsToReproduceCommand implements Command {
             sb.append(stepsToReproduce.get(i)).append(System.lineSeparator());
         }
         sb.append(SEPARATOR);
-
         return sb.toString();
     }
-
 }

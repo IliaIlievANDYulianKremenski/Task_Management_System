@@ -13,8 +13,6 @@ import java.util.List;
 
 public class TeamImpl implements Team {
 
-    /*<-------Constant(s)------->*/
-
     public static final int TEAM_NAME_MIN_LEN = 5;
     public static final int TEAM_NAME_MAX_LEN = 15;
     private static final String TEAM_NAME_ERR_LEN = "Team name must be between %d and %d characters long!";
@@ -29,17 +27,10 @@ public class TeamImpl implements Team {
     private static final String CREATE_BOARD_MESSAGE = "[%s] Team %s has created board %s.";
     private static final String REMOVE_BOARD_MESSAGE = "[%s] Team %s has removed board %s.";
     private static final String ACTIVITY_HISTORY_HEADER = "%s activity history: ";
-
-
-    /*<-------Field(s)------->*/
-
     private String name;
     private final List<Member> members;
     private final List<Board> boards;
     private final List<String> activityHistory;
-
-
-    /*<-------Constructor(s)------->*/
 
     public TeamImpl(String name) {
         setName(name);
@@ -54,11 +45,11 @@ public class TeamImpl implements Team {
         );
     }
 
-    /*<-------Getter(s)------->*/
     @Override
     public String getName() {
         return this.name;
     }
+
     @Override
     public List<Member> getTeamMembers() {
         return new ArrayList<>(members);
@@ -68,24 +59,21 @@ public class TeamImpl implements Team {
     public List<Board> getTeamBoards() {
         return new ArrayList<>(boards);
     }
+
     @Override
     public List<String> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
-
-    /*<-------Setter(s)------->*/
 
     private void setName(String name) {
         ValidationHelpers.validateStringLength(
                 name,
                 TEAM_NAME_MIN_LEN,
                 TEAM_NAME_MAX_LEN,
-                String.format(TEAM_NAME_ERR_LEN,TEAM_NAME_MIN_LEN,TEAM_NAME_MAX_LEN)
+                String.format(TEAM_NAME_ERR_LEN, TEAM_NAME_MIN_LEN, TEAM_NAME_MAX_LEN)
         );
         this.name = name;
     }
-
-    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public void addMember(Member member) {
@@ -202,7 +190,6 @@ public class TeamImpl implements Team {
         return activityInfo.toString().trim();
     }
 
-    /*<-------Helper Method(s)------->*/
     @Override
     public void logCreation(String creationString) {
         this.activityHistory.add(creationString);

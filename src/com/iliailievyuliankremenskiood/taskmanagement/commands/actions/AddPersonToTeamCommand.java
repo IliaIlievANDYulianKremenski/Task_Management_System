@@ -12,31 +12,21 @@ public class AddPersonToTeamCommand implements Command {
     /**
      * Command format: Add_Person_to_Team {person name} {team name}
      */
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public AddPersonToTeamCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         String personName = parameters.get(0);
         String teamName = parameters.get(1);
-
         Member person = teamManagementRepository.findMemberByName(personName);
         Team team = teamManagementRepository.findTeamByName(teamName);
-
         team.addMember(person);
         return userOutput(team);
     }

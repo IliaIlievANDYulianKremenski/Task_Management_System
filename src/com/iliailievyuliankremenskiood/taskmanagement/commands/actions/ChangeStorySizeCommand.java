@@ -13,41 +13,29 @@ public class ChangeStorySizeCommand implements Command {
     /**
      * Command format: Change_Story_Size {story ID} {new size}
      */
-
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_STORY_SIZE_MESSAGE =
             "Invalid value for Story Size: %s. Should be LARGE, MEDIUM or SMALL.";
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public ChangeStorySizeCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         int storyId = ParsingHelpers.parseInteger(
                 parameters.get(0),
                 "Story ID"
         );
-
         StorySizeType newSize = ParsingHelpers.parseEnum(
                 parameters.get(1),
                 StorySizeType.class,
                 INVALID_STORY_SIZE_MESSAGE);
-
         Story temporaryStory = teamManagementRepository.findStoryById(storyId);
         temporaryStory.changeSize(newSize);
-
         return userOutput(temporaryStory);
     }
 

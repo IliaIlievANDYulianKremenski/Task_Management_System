@@ -10,24 +10,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TeamManagementSystemEngineImpl implements TeamManagementSystemEngine {
-    /*<-------Constant(s)------->*/
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
-
-
-    /*<-------Field(s)------->*/
     private final CommandFactory commandFactory;
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public TeamManagementSystemEngineImpl() {
         this.commandFactory = new CommandFactoryImpl();
         this.teamManagementRepository = new TeamManagementRepositoryImpl();
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public void start() {
         System.out.println("Hello! Type a command, type 'manual' to see all commands available or 'exit' to abort program.");

@@ -3,7 +3,6 @@ package com.iliailievyuliankremenskiood.taskmanagement.utils;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 
 public class ParsingHelpers {
-
     private static final String INVALID_NUMBER_MESSAGE = "Invalid value for %s. Should be an integer number.";
 
     public static <E extends Enum<E>> E parseEnum(String valueToParse, Class<E> type, String errorMessage) {

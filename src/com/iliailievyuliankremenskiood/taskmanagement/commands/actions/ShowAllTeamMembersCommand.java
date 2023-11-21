@@ -12,48 +12,34 @@ public class ShowAllTeamMembersCommand implements Command {
     /**
      * Command format: Show_All_Team_Members {team name}
      */
-
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String NO_TEAM_MEMBERS_ERROR = "There are no team members in this team.";
-
     private static final String MEMBERS_HEADER = "%s's team members: ";
     private static final String SEPARATOR = "-".repeat(14);
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public ShowAllTeamMembersCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         String teamName = parameters.get(0);
         Team temporaryTeam = teamManagementRepository.findTeamByName(teamName);
-
         if (temporaryTeam.getTeamMembers().isEmpty()) {
             throw new IllegalArgumentException(NO_TEAM_MEMBERS_ERROR);
         }
-
         StringBuilder result = new StringBuilder();
         result.append(String.format(MEMBERS_HEADER, teamName))
                 .append(System.lineSeparator())
                 .append(SEPARATOR)
                 .append(System.lineSeparator());
-
         for (Member member : temporaryTeam.getTeamMembers()) {
             result.append(member.getName())
                     .append(System.lineSeparator());
         }
         result.append(SEPARATOR).append(System.lineSeparator());
-
         return result.toString().trim();
     }
 }

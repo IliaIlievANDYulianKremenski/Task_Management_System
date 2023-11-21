@@ -20,6 +20,6 @@ public interface Bug extends Task, Assignable {
     void changeBugSeverity(BugSeverityType bugSeverityType);
 
     void changeBugStatus();
-    void addStepToReproduce(String step);
 
+    void addStepToReproduce(String step);
 }

@@ -11,26 +11,21 @@ import java.util.List;
 
 public class AddTaskToBoardCommand implements Command {
 
-    /** Command format: Add_Task_to_Board {task ID} {board name} {team name}  */
+    /**
+     * Command format: Add_Task_to_Board {task ID} {board name} {team name}
+     */
 
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public AddTaskToBoardCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         int taskId = ParsingHelpers.parseInteger(
                 parameters.get(0),
                 "Task ID"
@@ -38,7 +33,6 @@ public class AddTaskToBoardCommand implements Command {
         Task task = teamManagementRepository.findTaskById(taskId);
         String boardName = parameters.get(1);
         String teamName = parameters.get(2);
-
         Board board = teamManagementRepository.findBoardByName(boardName, teamName);
         board.createTaskInBoard(task);
 
@@ -46,8 +40,6 @@ public class AddTaskToBoardCommand implements Command {
 
         return userOutput(board);
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private static String userOutput(Board board) {
         return board.getActivityHistory().get(board.getActivityHistory().size() - 1);

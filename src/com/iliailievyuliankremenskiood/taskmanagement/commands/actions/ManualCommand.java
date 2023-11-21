@@ -7,7 +7,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ManualCommandPrintHe
 import java.util.List;
 
 public class ManualCommand implements Command {
-
     /** Command format: Manual */
     private final TeamManagementRepository teamManagementRepository;
 

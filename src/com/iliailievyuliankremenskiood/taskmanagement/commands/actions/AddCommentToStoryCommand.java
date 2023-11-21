@@ -13,36 +13,26 @@ public class AddCommentToStoryCommand implements Command {
     /**
      * Command format: Add_Comment_to_Story {story ID} {author} {comment}
      */
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public AddCommentToStoryCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         int storyId = ParsingHelpers.parseInteger(
                 parameters.get(0),
                 "Story ID"
         );
         String author = parameters.get(1);
         String message = parameters.get(2);
-
         Story temporaryStory = teamManagementRepository.findStoryById(storyId);
         Comment comment = teamManagementRepository.createComment(author, message);
         temporaryStory.addCommentToTask(comment);
-
         return userOutput(temporaryStory);
     }
 

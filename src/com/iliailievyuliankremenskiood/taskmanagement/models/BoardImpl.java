@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BoardImpl implements Board {
-
-    /*<-------Constant(s)------->*/
     public static final int BOARD_NAME_MIN_LEN = 5;
     public static final int BOARD_NAME_MAX_LEN = 10;
     private static final String BOARD_NAME_ERR_LEN = "Board name must be between %d and %d characters long!";
@@ -21,13 +19,9 @@ public class BoardImpl implements Board {
     private static final String TASK_REMOVED_MESSAGE = "[%s] %s %s has been removed from the board %s.";
     private static final String ACTIVITY_HISTORY_HEADER = "%s activity history: ";
     private static final String SEPARATOR = "--------------";
-
-    /*<-------Field(s)------->*/
     private String name;
     private final List<Task> tasks;
     private final List<String> activityHistory;
-
-    /*<-------Constructor(s)------->*/
 
     public BoardImpl(String name) {
         setName(name);
@@ -40,12 +34,11 @@ public class BoardImpl implements Board {
         );
     }
 
-    /*<-------Getter(s)------->*/
-
     @Override
     public String getName() {
         return this.name;
     }
+
     @Override
     public List<Task> getBoardTasks() {
         return new ArrayList<>(tasks);
@@ -56,19 +49,15 @@ public class BoardImpl implements Board {
         return new ArrayList<>(activityHistory);
     }
 
-    /*<-------Setter(s)------->*/
-
     private void setName(String name) {
         ValidationHelpers.validateStringLength(
                 name,
                 BOARD_NAME_MIN_LEN,
                 BOARD_NAME_MAX_LEN,
-                String.format(BOARD_NAME_ERR_LEN,BOARD_NAME_MIN_LEN,BOARD_NAME_MAX_LEN)
+                String.format(BOARD_NAME_ERR_LEN, BOARD_NAME_MIN_LEN, BOARD_NAME_MAX_LEN)
         );
         this.name = name;
     }
-
-    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public void createTaskInBoard(Task task) {
@@ -81,6 +70,7 @@ public class BoardImpl implements Board {
                 getName())
         );
     }
+
     public void removeTaskFromBoard(Task task) {
         tasks.remove(task);
         logCreation(String.format(
@@ -110,7 +100,6 @@ public class BoardImpl implements Board {
         return activityInfo.toString().trim();
     }
 
-    /*<-------Helper Method(s)------->*/
     @Override
     public void logCreation(String creationString) {
         this.activityHistory.add(creationString);

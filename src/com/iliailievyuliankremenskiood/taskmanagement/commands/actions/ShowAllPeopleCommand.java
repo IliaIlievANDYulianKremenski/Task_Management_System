@@ -8,31 +8,24 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import java.util.List;
 
 public class ShowAllPeopleCommand implements Command {
-
-    /** Command format: Show_All_People */
-
-    /*<-------Constant(s)------->*/
+    /**
+     * Command format: Show_All_People
+     */
     private static final String NO_PEOPLE_ERROR = "There are currently no registered members.";
     private static final String MEMBERS_HEADER = "All registered members: ";
     private static final String SEPARATOR = "-".repeat(14);
 
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
-
-    /*<-------Constructor(s)------->*/
 
     public ShowAllPeopleCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
-
-    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public String execute(List<String> parameters) {
         if (teamManagementRepository.getMembers().isEmpty()) {
             throw new IllegalArgumentException(NO_PEOPLE_ERROR);
         }
-
         StringBuilder output = new StringBuilder();
         output.append(SEPARATOR).append(System.lineSeparator());
         output.append(MEMBERS_HEADER).append(System.lineSeparator());

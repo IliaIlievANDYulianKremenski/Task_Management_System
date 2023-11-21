@@ -12,45 +12,31 @@ import java.util.List;
 public class AddCommentToBugCommand implements Command {
 
     /*✏️ TODO ✏️- do the trainers want us to make the author a member, or is it OK to leave it this, so that
-    *  even anonymous ppl can leave comments?*/
-
-    /** Command format: Add_Comment_to_Bug {bug ID} {author} {comment} */
-    
-    /*<-------Constant(s)------->*/
-
+     *  even anonymous ppl can leave comments?*/
+    /**
+     * Command format: Add_Comment_to_Bug {bug ID} {author} {comment}
+     */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-
-    /*<-------Field(s)------->*/
-
     private final TeamManagementRepository teamManagementRepository;
-
-    /*<-------Constructor(s)------->*/
 
     public AddCommentToBugCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-    /*<-------Behavioural Method(s)------->*/
-
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
-
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         int bugId = ParsingHelpers.parseInteger(
                 parameters.get(0),
                 "Bug ID"
         );
         String author = parameters.get(1);
         String message = parameters.get(2);
-
         Bug bug = teamManagementRepository.findBugById(bugId);
         Comment comment = teamManagementRepository.createComment(author, message);
         bug.addCommentToTask(comment);
-
         return userOutput(bug);
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private static String userOutput(Bug bug) {
         return bug.getActivityHistory().get(bug.getActivityHistory().size() - 1);

@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeamManagementRepositoryImpl implements TeamManagementRepository {
-
-    /*<-------Constant(s)------->*/
     private static final String CANNOT_FIND_TASK_BY_ID_ERROR_MESSAGE =
             "There is no Bug/Story/Feedback with the provided id: %d.";
     private static final String CANNOT_FIND_BUG_BY_ID_ERROR_MESSAGE =
@@ -34,9 +32,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     private static final String TEAM_EXISTS_MESSAGE = "Team with a name %s already exists.";
     private static final String BOARD_EXISTS_MESSAGE = "Team with a name %s already exists.";
 
-
-    /*<-------Field(s)------->*/
-
     private int nextId;
     private final List<Member> members = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
@@ -46,14 +41,9 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     private final List<Team> teams = new ArrayList<>();
     private final List<Comment> comments = new ArrayList<>();
 
-
-    /*<-------Constructor(s)------->*/
     public TeamManagementRepositoryImpl() {
         nextId = 1;
     }
-
-
-    /*<-------Getter(s)------->*/
 
     @Override
     public List<Member> getMembers() {
@@ -89,9 +79,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     public List<Comment> getComments() {
         return new ArrayList<>(comments);
     }
-
-
-    /*<-------Behavioural Method(s)------->*/
 
     @Override
     public Member findMemberByName(String memberName) {
@@ -137,6 +124,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         throw new ElementNotFoundException(
                 String.format(CANNOT_FIND_TASK_BY_ID_ERROR_MESSAGE, taskId));
     }
+
     @Override
     public Bug findBugById(int bugId) {
         for (Bug bug : getBugs()) {
@@ -147,6 +135,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         throw new ElementNotFoundException(
                 String.format(CANNOT_FIND_BUG_BY_ID_ERROR_MESSAGE, bugId));
     }
+
     @Override
     public Story findStoryById(int storyId) {
         for (Story story : getStories()) {
@@ -177,8 +166,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         return temporaryMember;
     }
 
-
-
     @Override
     public Team createTeam(String teamName) {
         checkIfTeamNameExists(teamName);
@@ -194,7 +181,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         findTeamByName(teamName).createBoard(temporaryBoard);
         return temporaryBoard;
     }
-
 
     @Override
     public Comment createComment(String commentAuthor, String commentMessage) {
@@ -220,7 +206,11 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     }
 
     @Override
-    public Feedback createFeedback(String title, String description, int feedbackRating, FeedbackStatusType feedbackStatus) {
+    public Feedback createFeedback(
+            String title,
+            String description,
+            int feedbackRating,
+            FeedbackStatusType feedbackStatus) {
         Feedback temporaryFeedback = new FeedbackImpl(
                 nextId++,
                 title,
@@ -234,7 +224,13 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
     }
 
     @Override
-    public Story createStory(String title, String description, StoryPriorityType storyPriority, StorySizeType storySize, StoryStatusType storyStatus, Member assignee) {
+    public Story createStory(
+            String title,
+            String description,
+            StoryPriorityType storyPriority,
+            StorySizeType storySize,
+            StoryStatusType storyStatus,
+            Member assignee) {
         Story temporaryStory = new StoryImpl(
                 nextId++,
                 title,
@@ -249,9 +245,6 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
         return temporaryStory;
     }
 
-    /*<-------Helper Method(s)------->*/
-
-
     private void checkIfMemberNameExists(String memberName) {
         for (Member member : getMembers()) {
             if (member.getName().equals(memberName)) {
@@ -259,6 +252,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
             }
         }
     }
+
     private void checkIfBoardNameExists(String boardName, String teamName) {
         Team team = findTeamByName(teamName);
         for (Board board : team.getTeamBoards()) {
@@ -267,6 +261,7 @@ public class TeamManagementRepositoryImpl implements TeamManagementRepository {
             }
         }
     }
+
     private void checkIfTeamNameExists(String teamName) {
         for (Team team : getTeams()) {
             if (team.getName().equals(teamName)) {

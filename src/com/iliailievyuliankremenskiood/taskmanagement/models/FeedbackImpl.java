@@ -4,17 +4,12 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.enums.feedbackrelat
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
-    /*<-------Constant(s)------->*/
     private static final String INVALID_RATING_MESSAGE = "The rating should be between 1 and 10.";
     public static final int FEEDBACK_MIN_RATING = 1;
     public static final int FEEDBACK_MAX_RATING = 10;
-
-    /*<-------Field(s)------->*/
     private int rating;
     private FeedbackStatusType status;
 
-
-    /*<-------Constructor(s)------->*/
     public FeedbackImpl(int id, String title, String description, int rating, FeedbackStatusType status) {
         super(id, title, description);
         setRating(rating);
@@ -22,8 +17,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         logCreation(produceCreationLogString(id, title, description));
     }
 
-
-    /*<-------Getter(s)------->*/
     @Override
     public int getRating() {
         return this.rating;
@@ -34,10 +27,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         return this.status;
     }
 
-
-    /*<-------Setter(s)------->*/
     private void setRating(int rating) {
-        if(validateRating(rating)) {
+        if (validateRating(rating)) {
             this.rating = rating;
         }
     }
@@ -46,8 +37,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         this.status = status;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String print() {
         return String.format("""
@@ -88,8 +77,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
                 String.format("%s", status.toString()));
     }
 
-    public boolean validateRating(int rating){
-        if(rating < FEEDBACK_MIN_RATING || rating > FEEDBACK_MAX_RATING){
+    public boolean validateRating(int rating) {
+        if (rating < FEEDBACK_MIN_RATING || rating > FEEDBACK_MAX_RATING) {
             throw new IllegalArgumentException(INVALID_RATING_MESSAGE);
         }
         return true;

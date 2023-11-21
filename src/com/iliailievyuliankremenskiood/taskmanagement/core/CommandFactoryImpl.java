@@ -9,12 +9,13 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ParsingHelpers;
 
 
 public class CommandFactoryImpl implements CommandFactory {
-
     private static final String INVALID_COMMAND = "Invalid command name: %s!";
 
     public Command createCommandFromCommandName(String commandName, TeamManagementRepository teamManagementRepository) {
-        CommandType commandType = ParsingHelpers.parseEnum(commandName, CommandType.class, String.format(INVALID_COMMAND, commandName));
-
+        CommandType commandType = ParsingHelpers.parseEnum(
+                commandName,
+                CommandType.class,
+                String.format(INVALID_COMMAND, commandName));
         switch (commandType) {
             case CREATE_NEW_PERSON:
                 return new CreateNewPersonCommand(teamManagementRepository);

@@ -12,7 +12,8 @@ public class AddStepToReproduceToBugCommand implements Command {
     /**
      * Command format: Add_Step_To_Reproduce_To_Bug {step to reproduce} {Bug Id}
      * */
-
+    /*TODO - @Yuli - make it so that the command can accept one string, which will after that
+    *  be split by ";".*/
     /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 

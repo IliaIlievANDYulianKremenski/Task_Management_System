@@ -1,7 +1,6 @@
 package com.iliailievyuliankremenskiood.taskmanagement.commands.enums;
 
 public enum CommandType {
-
     CREATE_NEW_PERSON,
     SHOW_ALL_PEOPLE,
     SHOW_PERSON_ACTIVITY,
@@ -42,5 +41,4 @@ public enum CommandType {
     SHOW_ALL_TASK_COMMENTS,
     SHOW_STEPS_TO_REPRODUCE,
     SHOW_TASK_ACTIVITY
-
 }

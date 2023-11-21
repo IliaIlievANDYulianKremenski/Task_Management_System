@@ -4,9 +4,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 public class CommentImpl implements Comment {
-
-    /*<-------Constant(s)------->*/
-
     //TODO Remove author length validation.
     public static final int AUTHOR_MIN_LEN = MemberImpl.MEMBER_NAME_MIN_LEN;
     public static final int AUTHOR_MAX_LEN = MemberImpl.MEMBER_NAME_MAX_LEN;
@@ -14,10 +11,6 @@ public class CommentImpl implements Comment {
     public static final int MESSAGE_MIN_LEN = 1;
     public static final int MESSAGE_MAX_LEN = 200;
     private static final String MESSAGE_ERR_LEN = "Comment must be between %d and %d characters long.";
-
-
-    /*<-------Field(s)------->*/
-
     private String author;
     private String message;
 
@@ -25,8 +18,6 @@ public class CommentImpl implements Comment {
         setAuthor(author);
         setMessage(message);
     }
-
-    /*<-------Getter(s)------->*/
 
     public String getAuthor() {
         return author;
@@ -36,14 +27,12 @@ public class CommentImpl implements Comment {
         return message;
     }
 
-    /*<-------Setter(s)------->*/
-
     private void setAuthor(String author) {
         ValidationHelpers.validateStringLength(
                 author,
                 AUTHOR_MIN_LEN,
                 AUTHOR_MAX_LEN,
-                String.format(AUTHOR_ERR_LEN,AUTHOR_MIN_LEN,AUTHOR_MAX_LEN)
+                String.format(AUTHOR_ERR_LEN, AUTHOR_MIN_LEN, AUTHOR_MAX_LEN)
         );
         this.author = author;
     }
@@ -53,19 +42,17 @@ public class CommentImpl implements Comment {
                 message,
                 MESSAGE_MIN_LEN,
                 MESSAGE_MAX_LEN,
-                String.format(MESSAGE_ERR_LEN,MESSAGE_MIN_LEN,MESSAGE_MAX_LEN)
+                String.format(MESSAGE_ERR_LEN, MESSAGE_MIN_LEN, MESSAGE_MAX_LEN)
         );
         this.message = message;
     }
 
-    /*<-------Behavioural Method(s)------->*/
-
     @Override
     public String print() {
         return String.format("""   
-                    Author: %s
-                    Comment: %s                  
-                --------------""",
+                            Author: %s
+                            Comment: %s                  
+                        --------------""",
                 getAuthor(),
                 getMessage()
         );

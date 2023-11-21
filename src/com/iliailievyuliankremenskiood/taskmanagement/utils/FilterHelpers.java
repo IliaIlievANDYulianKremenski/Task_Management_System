@@ -6,16 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterHelpers {
-
-    /*<-------Constant(s)------->*/
-
     private static final String NO_BUGS_ERROR = "There are currently no Bugs.";
     private static final String NO_FEEDBACKS_ERROR = "There are currently no Feedbacks.";
     private static final String NO_STORIES_ERROR = "There are currently no Stories.";
     private static final String NO_TASKS_ERROR = "There are currently no elements of this task type.";
-
-
-    /*<-------Behavioural Method(s)------->*/
 
     public static List<Bug> filterBugsByStatus(String statusFilter, List<Bug> bugList) {
         if (bugList.isEmpty()) {
@@ -101,5 +95,4 @@ public class FilterHelpers {
         }
         return filteredList;
     }
-
 }

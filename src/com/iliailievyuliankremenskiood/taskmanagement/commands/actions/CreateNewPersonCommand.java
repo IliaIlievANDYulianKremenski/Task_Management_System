@@ -10,30 +10,20 @@ import java.util.List;
 public class CreateNewPersonCommand implements Command {
     /**
      * Command format: Create_New_Person {person name}
-     * */
-    /*<-------Constant(s)------->*/
+     */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public CreateNewPersonCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
-
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String personName = parameters.get(0);
-
         Member temporaryMember = teamManagementRepository.createMember(personName);
-
         return userOutput(temporaryMember);
     }
 

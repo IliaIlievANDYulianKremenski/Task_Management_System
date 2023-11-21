@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TaskImpl implements Task {
-    /*<-------Constant(s)------->*/
     public static final int MIN_TITLE_LENGTH = 10;
     public static final int MAX_TITLE_LENGTH = 100;
     private static final String INVALID_TITLE_LENGTH_MESSAGE = String.format("""
@@ -21,15 +20,12 @@ public abstract class TaskImpl implements Task {
                     description's length should be between %d and %d characters!""",
             MIN_DESCRIPTION_LENGTH, MAX_DESCRIPTION_LENGTH);
 
-    /*<-------Field(s)------->*/
     private int id;
     private String title;
     private String description;
     private List<Comment> comments;
     private List<String> activityHistory;
 
-
-    /*<-------Constructor(s)------->*/
     public TaskImpl(int id, String title, String description) {
         setId(id);
         setTitle(title);
@@ -38,8 +34,6 @@ public abstract class TaskImpl implements Task {
         this.activityHistory = new ArrayList<>();
     }
 
-
-    /*<-------Getter(s)------->*/
     @Override /*Task*/
     public int getId() {
         return this.id;
@@ -65,12 +59,9 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(this.activityHistory);
     }
 
-
-    /*<-------Setter(s)------->*/
     private void setId(int id) {
         this.id = id;
     }
-
 
     private void setTitle(String title) {
         if (validateTitle(title)) {
@@ -84,17 +75,14 @@ public abstract class TaskImpl implements Task {
         }
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override /*Printable*/
     public String print() {
         return String.format("""
-              Id: %d
-              \tTitle: %s
-              \tDescription: %s""",
+                        Id: %d
+                        \tTitle: %s
+                        \tDescription: %s""",
                 this.id, this.title, this.description);
     }
-
 
     protected boolean validateTitle(String title) {
         if (title.length() < MIN_TITLE_LENGTH || title.length() > MAX_TITLE_LENGTH) {
@@ -145,7 +133,7 @@ public abstract class TaskImpl implements Task {
     }
 
     /*TODO - make a test for this method.*/
-    public void addCommentToTask(Comment commentToBeAddedToTheTask){
+    public void addCommentToTask(Comment commentToBeAddedToTheTask) {
         this.comments.add(commentToBeAddedToTheTask);
         logEvent("Comment",
                 "",

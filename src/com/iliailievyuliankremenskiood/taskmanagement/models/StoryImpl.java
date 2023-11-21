@@ -7,21 +7,11 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedt
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 
 public class StoryImpl extends TaskImpl implements Story {
-    /*<-------Constant(s)------->*/
-
-
-    /*<-------Field(s)------->*/
-
     private StoryPriorityType priorityType;
-
     private StorySizeType sizeType;
-
     private StoryStatusType statusType;
-
     private Member assignee;
 
-
-    /*<-------Constructor(s)------->*/
     public StoryImpl(int id, String title, String description, StoryPriorityType priorityType,
                      StorySizeType sizeType, StoryStatusType statusType, Member assignee) {
         super(id, title, description);
@@ -32,8 +22,6 @@ public class StoryImpl extends TaskImpl implements Story {
         logCreation(produceCreationLogString(id, title, description));
     }
 
-
-    /*<-------Getter(s)------->*/
     @Override /*Story*/
     public StoryPriorityType getPriority() {
         return this.priorityType;
@@ -54,8 +42,6 @@ public class StoryImpl extends TaskImpl implements Story {
         return this.assignee;
     }
 
-
-    /*<-------Setter(s)------->*/
     private void setAssignee(Member assignee) {
         this.assignee = assignee;
     }
@@ -72,8 +58,6 @@ public class StoryImpl extends TaskImpl implements Story {
         this.statusType = statusType;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override /*TaskImpl - Printable*/
     public String print() {
         return String.format("""
@@ -93,15 +77,12 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override /*TaskImpl*/
     protected String produceCreationLogString(int id, String title, String description) {
         StringBuilder eventSb = new StringBuilder();
-
         eventSb.append(super.produceCreationLogString(id, title, description));
-
         eventSb.append(String.format(" Priority: '%s', Size: '%s', Status: '%s', Assignee: '%s'.",
                 this.priorityType.toString(),
                 this.sizeType.toString(),
                 this.statusType.toString(),
                 this.assignee.getName()));
-
         return eventSb.toString();
     }
 
@@ -133,5 +114,4 @@ public class StoryImpl extends TaskImpl implements Story {
         setPriorityType(priority);
         logEvent("Story Priority", oldPriority.toString(), priority.toString());
     }
-
 }

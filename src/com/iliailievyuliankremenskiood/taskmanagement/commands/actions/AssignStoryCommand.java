@@ -14,36 +14,25 @@ public class AssignStoryCommand implements Command {
      * Command format: Assign_Story {story ID} {assignee}
      */
 
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
     public AssignStoryCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
         int storyId = ParsingHelpers.parseInteger(
                 parameters.get(0),
                 "Story ID"
         );
         String memberName = parameters.get(1);
-
         Story temproaryStory = teamManagementRepository.findStoryById(storyId);
         Member temporaryMember = teamManagementRepository.findMemberByName(memberName);
-
         temproaryStory.changeAssignee(temporaryMember);
-
         return userOutput(temproaryStory);
     }
 

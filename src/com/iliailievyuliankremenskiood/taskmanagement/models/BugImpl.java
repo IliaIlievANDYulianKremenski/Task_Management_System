@@ -10,28 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BugImpl extends TaskImpl implements Bug {
-    /*<-------Constant(s)------->*/
-
-
-    /*<-------Field(s)------->*/
 
     /*TODO - when we are 100% ready with the functionality of the program
         we can color the error messages we send to the user and make it more pleasant to watch.*/
     private final List<String> stepsToReproduce;
-
     private BugPriorityType priorityType;
-
     private BugSeverityType severityType;
-    
     private BugStatusType statusType;
-
     /* ✏️ TODO ✏️ Ask the trainers if it is necessary the task to have an assignee, in other words can we use null as a default value for Member assignee or
     it is mandatory to have assignee when creating a new task?*/
     private Member assignee;
-
-
-    /*<-------Constructor(s)------->*/
-
 
     public BugImpl(int id, String title, String description, BugPriorityType priorityType,
                    BugSeverityType severityType, Member assignee) {
@@ -44,13 +32,6 @@ public class BugImpl extends TaskImpl implements Bug {
         logCreation(produceCreationLogString(id, title, description));
     }
 
-/*    public BugImpl(int id, String title, String description, BugPriorityType priorityType,
-                   BugSeverityType severityType, Member assignee) {
-        this(id, title, description, priorityType, severityType);
-        changeAssignee(assignee);
-    }*/
-
-    /*<-------Getter(s)------->*/
     @Override /*Bug*/
     public List<String> getStepsToReproduce() {
         return new ArrayList<>(stepsToReproduce);
@@ -94,22 +75,15 @@ public class BugImpl extends TaskImpl implements Bug {
         this.statusType = bugStatusType;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
-
-
     @Override /*TaskImpl*/
     protected String produceCreationLogString(int id, String title, String description) {
         StringBuilder eventSb = new StringBuilder();
-
         eventSb.append(super.produceCreationLogString(id, title, description));
-
         eventSb.append(String.format("\nPriority: '%s'\nSeverity: '%s'\nStatus: '%s'\nAssignee: '%s'.",
                 this.priorityType.toString(),
                 this.severityType.toString(),
                 this.statusType.toString(),
                 this.assignee.getName()));
-
         return eventSb.toString();
     }
 
@@ -139,11 +113,11 @@ public class BugImpl extends TaskImpl implements Bug {
         if (this.statusType == BugStatusType.ACTIVE) {
             this.statusType = BugStatusType.DONE;
             logEvent("Bug Status",
-                    BugStatusType.ACTIVE.toString(),BugStatusType.DONE.toString());
+                    BugStatusType.ACTIVE.toString(), BugStatusType.DONE.toString());
         } else if (this.statusType == BugStatusType.DONE) {
             this.statusType = BugStatusType.ACTIVE;
             logEvent("Bug Status",
-                    BugStatusType.DONE.toString(),BugStatusType.ACTIVE.toString());
+                    BugStatusType.DONE.toString(), BugStatusType.ACTIVE.toString());
         }
     }
 
@@ -158,7 +132,7 @@ public class BugImpl extends TaskImpl implements Bug {
     public void changeBugSeverity(BugSeverityType bugSeverityType) {
         BugSeverityType oldSeverity = this.getSeverity();
         setSeverityType(bugSeverityType);
-        logEvent("Bug Severity", oldSeverity.toString(),bugSeverityType.toString());
+        logEvent("Bug Severity", oldSeverity.toString(), bugSeverityType.toString());
     }
 
     @Override /*Bug*/
@@ -168,6 +142,4 @@ public class BugImpl extends TaskImpl implements Bug {
         setAssignee(assignee);
         logEvent("Bug Assignee", oldAssignee, newAssignee);
     }
-
-
 }
