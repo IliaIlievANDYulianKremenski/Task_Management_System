@@ -70,8 +70,10 @@ public class StoryImpl extends TaskImpl implements Story {
                             Assignee: %s
                         --------------""",
                 super.print(),
-                this.priorityType.toString(), this.sizeType.toString(),
-                this.statusType.toString(), this.assignee.getName());
+                this.priorityType.toString(),
+                this.sizeType.toString(),
+                this.statusType.toString(),
+                assignee == null ? "" : this.assignee.getName());
     }
 
     @Override /*TaskImpl*/

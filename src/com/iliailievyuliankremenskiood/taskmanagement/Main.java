@@ -16,70 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_GREEN = "\u001B[32m";
     public static void main(String[] args) {
 
-        /*Needed this test for the FeedbackImpl.print().
-        Feedback feedback = new FeedbackImpl(1,
-                "Something, something darkSid.",
-                "Description should be something that is long.", 1, FeedbackStatusType.NEW);
-         System.out.println(feedback.print());
-        System.out.println(feedback.getActivityHistory());
-        System.out.println("=".repeat(30));
-        feedback.changeStatus(FeedbackStatusType.SCHEDULED);
-        feedback.changeRating(1234567);
-        System.out.println(feedback.getActivityHistory());*/
-
-/*      Member member = new MemberImpl("Юлиан Кременски");
-        Bug bug = new BugImpl(1, "The program freezes when the Log In button is clicked.",
-                "This needs to be fixed quickly!", BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-        System.out.println(bug.print());*/
-
-
-/*        Member member = new MemberImpl("Юлиан Кременски");
-        Story story = new StoryImpl(1, "Some random title.", "Some random description that is.",
-                StoryPriorityType.HIGH, StorySizeType.LARGE, StoryStatusType.IN_PROGRESS, member);
-        System.out.println(story.print());*/
-
-
-        //Ilia tests
-//        Board board = new BoardImpl("String");
-//        System.out.println(board.getActivityHistory().get(0));
-/*        TeamManagementRepositoryImpl teamManagementRepository = new TeamManagementRepositoryImpl();
-        List<String> list = List.of(
-                "ALL_STATUSES",
-                "ALL_ASSIGNEES"
-        );
-
-        String statusFilter = list.get(0);
-        String assigneeFilter = list.get(1);
-
-        Member member = teamManagementRepository.createMember("Member");
-        teamManagementRepository.createBug(
-                "A".repeat(BugImpl.MIN_TITLE_LENGTH),
-                "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
-                BugPriorityType.HIGH,
-                BugSeverityType.CRITICAL,
-                member
-        );
-
-        List<Bug> bugList = teamManagementRepository.getBugs();
-        System.out.println(bugList.size());
-
-        List<Bug> filteredBugList = FilterHelpers.filterBugsByStatus(
-                statusFilter,
-                bugList);
-        System.out.println(filteredBugList.size());
-        bugList = new ArrayList<>(filteredBugList);
-        filteredBugList = FilterHelpers.filterBugsByAssignee(assigneeFilter, bugList);
-
-        System.out.println(filteredBugList.size());*/
-
-/*        String a = "asd asdasd //asdasdasd// asda;sldjklak;sdkl";
-        String[] asd = a.split("//");
-
-        for (int i = 0; i < asd.length; i++) {
-            System.out.println(asd[i].trim());
-        }*/
+    String string = "This is a String!";
+    StringBuilder builder = new StringBuilder();
+    String filter = "tri";
+    int index = string.indexOf(filter);
+        System.out.println(index);
+     String firstPart = string.substring(0,index);
+     String secondPart = ANSI_GREEN + string.substring(index,index + filter.length()) + ANSI_RESET;
+     String thirdPart = string.substring(index + filter.length());
+        System.out.println(firstPart+secondPart+thirdPart);
 
     }
 }

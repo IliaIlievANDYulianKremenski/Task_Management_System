@@ -93,7 +93,10 @@ public class BugImpl extends TaskImpl implements Bug {
                             Assignee: %s
                         --------------""",
                 super.print(),
-                this.priorityType, this.severityType, this.statusType, this.assignee.getName());
+                this.priorityType,
+                this.severityType,
+                this.statusType,
+                assignee == null ? "" : this.assignee.getName());
     }
 
     public void addStepToReproduce(String step) {
