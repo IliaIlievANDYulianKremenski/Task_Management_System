@@ -82,7 +82,7 @@ public class StoryImpl extends TaskImpl implements Story {
                 this.priorityType.toString(),
                 this.sizeType.toString(),
                 this.statusType.toString(),
-                this.assignee.getName()));
+                assignee == null ? "" : this.assignee.getName()));
         return eventSb.toString();
     }
 

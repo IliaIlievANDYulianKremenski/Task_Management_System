@@ -18,7 +18,7 @@ public class FilterHelpers {
         List<Bug> filteredBugList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
             for (Bug bug : bugList) {
-                if(bug.getStatus().toString().contains(statusFilter.toUpperCase())) {
+                if (bug.getStatus().toString().contains(statusFilter.toUpperCase())) {
                     filteredBugList.add(bug);
                 }
             }
@@ -35,7 +35,7 @@ public class FilterHelpers {
         List<Feedback> filteredFeedbackList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
             for (Feedback feedback : feedbacksList) {
-                if(feedback.getStatus().toString().contains(statusFilter.toUpperCase())) {
+                if (feedback.getStatus().toString().contains(statusFilter.toUpperCase())) {
                     filteredFeedbackList.add(feedback);
                 }
             }
@@ -52,7 +52,7 @@ public class FilterHelpers {
         List<Story> filteredStoryList = new ArrayList<>();
         if (!statusFilter.equalsIgnoreCase("ALL_STATUSES")) {
             for (Story story : storyList) {
-                if(story.getStatus().toString().contains(statusFilter.toUpperCase())) {
+                if (story.getStatus().toString().contains(statusFilter.toUpperCase())) {
                     filteredStoryList.add(story);
                 }
             }
@@ -69,7 +69,8 @@ public class FilterHelpers {
         List<Bug> filteredBugList = new ArrayList<>();
         if (!assigneeFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {
             for (Bug bug : bugList) {
-                if(bug.getAssignee().getName().toUpperCase().contains(assigneeFilter.toUpperCase())) {
+                if (bug.getAssignee() != null
+                        && bug.getAssignee().getName().toUpperCase().contains(assigneeFilter.toUpperCase())) {
                     filteredBugList.add(bug);
                 }
             }
@@ -79,14 +80,15 @@ public class FilterHelpers {
         return filteredBugList;
     }
 
-    public static <E extends Assignable> List<E> filterTasksByAssignee (String assigneeFilter, List<E> taskList) {
+    public static <E extends Assignable> List<E> filterTasksByAssignee(String assigneeFilter, List<E> taskList) {
         if (taskList.isEmpty()) {
             throw new IllegalArgumentException(NO_TASKS_ERROR);
         }
         List<E> filteredList = new ArrayList<>();
         if (!assigneeFilter.equalsIgnoreCase("ALL_ASSIGNEES")) {
             for (E e : taskList) {
-                if(e.getAssignee().getName().toUpperCase().contains(assigneeFilter.toUpperCase())) {
+                if (e.getAssignee() != null
+                        && e.getAssignee().getName().toUpperCase().contains(assigneeFilter.toUpperCase())) {
                     filteredList.add(e);
                 }
             }

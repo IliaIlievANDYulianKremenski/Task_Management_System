@@ -70,12 +70,14 @@ public class ListTasksWithAssigneeCommand implements Command {
         result.append(TASKS_HEADER).append(System.lineSeparator());
         result.append(SEPARATOR).append(System.lineSeparator());
         for (Bug bug : teamManagementRepository.getBugs()) {
-            if (bug.getAssignee().getName().contains(taskAssignee)) {
+            if (bug.getAssignee() != null
+                    && bug.getAssignee().getName().contains(taskAssignee)) {
                 result.append(bug.print()).append(System.lineSeparator());
             }
         }
         for (Story story : teamManagementRepository.getStories()) {
-            if (story.getAssignee().getName().contains(taskAssignee)) {
+            if (story.getAssignee() != null
+                    && story.getAssignee().getName().contains(taskAssignee)) {
                 result.append(story.print()).append(System.lineSeparator());
             }
         }
@@ -106,12 +108,14 @@ public class ListTasksWithAssigneeCommand implements Command {
         result.append(SEPARATOR).append(System.lineSeparator());
         for (Bug bug : teamManagementRepository.getBugs()) {
             if (bug.getStatus().toString().contains(taskStatus.toUpperCase())
+                    && bug.getAssignee() != null
                     && bug.getAssignee().getName().contains(taskAssignee)) {
                 result.append(bug.print()).append(System.lineSeparator());
             }
         }
         for (Story story : teamManagementRepository.getStories()) {
             if (story.getStatus().toString().contains(taskStatus.toUpperCase())
+                    && story.getAssignee() != null
                     && story.getAssignee().getName().contains(taskAssignee)) {
                 result.append(story.print()).append(System.lineSeparator());
             }

@@ -11,8 +11,6 @@ import java.util.List;
 
 public class BugImpl extends TaskImpl implements Bug {
 
-    /*TODO - when we are 100% ready with the functionality of the program
-        we can color the error messages we send to the user and make it more pleasant to watch.*/
     private final List<String> stepsToReproduce;
     private BugPriorityType priorityType;
     private BugSeverityType severityType;
@@ -55,8 +53,6 @@ public class BugImpl extends TaskImpl implements Bug {
         return this.assignee;
     }
 
-
-    /*<-------Setter(s)------->*/
     private void setAssignee(Member assignee) {
         this.assignee = assignee;
     }
@@ -69,7 +65,6 @@ public class BugImpl extends TaskImpl implements Bug {
         this.severityType = severityType;
     }
 
-    /*TODO Here we have private setter of Status that it is always ACTIVE when creating a Bug.*/
     private void setBugStatusType(BugStatusType bugStatusType) {
         this.statusType = bugStatusType;
     }
@@ -82,7 +77,7 @@ public class BugImpl extends TaskImpl implements Bug {
                 this.priorityType.toString(),
                 this.severityType.toString(),
                 this.statusType.toString(),
-                this.assignee.getName()));
+                assignee == null ? "" : this.assignee.getName()));
         return eventSb.toString();
     }
 

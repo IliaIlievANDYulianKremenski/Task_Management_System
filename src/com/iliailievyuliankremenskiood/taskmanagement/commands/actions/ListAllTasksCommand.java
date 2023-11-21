@@ -5,6 +5,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagem
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ListAllTasksCommand implements Command {
@@ -25,16 +26,18 @@ public class ListAllTasksCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        if (teamManagementRepository.getTasks().isEmpty()) {
+        List<Task> tasks = teamManagementRepository.getTasks();
+        if (tasks.isEmpty()) {
             throw new IllegalArgumentException(NO_TASKS_ERROR);
         }
+
         String taskTitle = parameters.get(0);
         StringBuilder result = new StringBuilder();
         if (taskTitle.equals(ALL_TITLES_ARGUMENT)) {
             result.append(SEPARATOR).append(System.lineSeparator());
             result.append(String.format(TASKS_HEADER, taskTitle)).append(System.lineSeparator());
             result.append(SEPARATOR).append(System.lineSeparator());
-            for (Task task : teamManagementRepository.getTasks()) {
+            for (Task task : tasks) {
                 result.append(task.print()).append(System.lineSeparator());
             }
             result.append(System.lineSeparator());
@@ -42,7 +45,7 @@ public class ListAllTasksCommand implements Command {
             result.append(SEPARATOR).append(System.lineSeparator());
             result.append(String.format(TASKS_HEADER, taskTitle)).append(System.lineSeparator());
             result.append(SEPARATOR).append(System.lineSeparator());
-            for (Task task : teamManagementRepository.getTasks()) {
+            for (Task task : tasks) {
                 if (task.getTitle().contains(taskTitle)) {
                     result.append(task.print()).append(System.lineSeparator());
                 }

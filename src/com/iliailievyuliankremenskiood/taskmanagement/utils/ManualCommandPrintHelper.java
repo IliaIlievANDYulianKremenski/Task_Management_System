@@ -17,7 +17,7 @@ public class ManualCommandPrintHelper {
                 "\tAdd_Comment_to_Feedback " + ANSI_GREEN + "--{feedback ID} --{author} --{comment}\n" + ANSI_RESET +
                 "\tAdd_Comment_to_Story " + ANSI_GREEN + "--{story ID} --{author} --{comment}\n" + ANSI_RESET +
                 "\tAdd_Person_to_Team " + ANSI_GREEN + "--{person name} --{team name}\n" + ANSI_RESET +
-                "\tAdd_Step_To_Reproduce_To_Bug " + ANSI_GREEN + "--{step to reproduce} --{bug ID}\n" + ANSI_RESET +
+                "\tAdd_Step_To_Reproduce_To_Bug " + ANSI_GREEN + "--{step(s) to reproduce, separated by \";\"} --{bug ID}\n" + ANSI_RESET +
                 "\tAdd_Task_to_Board " + ANSI_GREEN + "--{task ID} --{board name} --{team name}\n" + ANSI_RESET +
                 "\tAssign_Bug " + ANSI_GREEN + "--{bug ID} --{assignee}\n" + ANSI_RESET +
                 "\tAssign_Story " + ANSI_GREEN + "--{story ID} --{assignee}\n" + ANSI_RESET +
@@ -30,9 +30,9 @@ public class ManualCommandPrintHelper {
                 "\tChange_Story_Size " + ANSI_GREEN + "--{story ID} --{new size}\n" + ANSI_RESET +
                 "\tChange_Story_Status " + ANSI_GREEN + "--{story ID} --{new status}\n" + ANSI_RESET +
                 "\tCreate_New_Board_In_Team " + ANSI_GREEN + "--{board name} --{team name}\n" + ANSI_RESET +
-                "\tCreate_New_Bug " + ANSI_GREEN + "--{title} --{description} --{priority} --{severity} --{assignee}\n" + ANSI_RESET +
+                "\tCreate_New_Bug " + ANSI_GREEN + "--{title} --{description} --{priority} --{severity} --{assignee (OPTIONAL)}\n" + ANSI_RESET +
                 "\tCreate_New_Feedback " + ANSI_GREEN + "--{title} --{description} --{rating} --{status}\n" + ANSI_RESET +
-                "\tCreate_New_Story " + ANSI_GREEN + "--{title} --{description} --{priority} --{size} --{status} --{assignee}\n" + ANSI_RESET +
+                "\tCreate_New_Story " + ANSI_GREEN + "--{title} --{description} --{priority} --{size} --{status} --{assignee (OPTIONAL)}\n" + ANSI_RESET +
                 "\tCreate_New_Team " + ANSI_GREEN + "--{team name}\n" + ANSI_RESET +
                 "\tCreate_New_Person " + ANSI_GREEN + "--{person name}\n" + ANSI_RESET +
                 "\tList_All_Bugs " + ANSI_GREEN + "--{filter status / ALL_STATUSES} --{filter assignee / ALL_ASSIGNEES}\n" + ANSI_RESET +

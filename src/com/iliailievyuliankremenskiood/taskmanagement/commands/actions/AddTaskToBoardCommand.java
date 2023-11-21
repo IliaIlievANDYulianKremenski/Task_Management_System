@@ -32,9 +32,6 @@ public class AddTaskToBoardCommand implements Command {
         String teamName = parameters.get(2);
         Board board = teamManagementRepository.findBoardByName(boardName, teamName);
         board.createTaskInBoard(task);
-
-        /*TODO We can only add general task to board, not a specific one. */
-
         return userOutput(board);
     }
 

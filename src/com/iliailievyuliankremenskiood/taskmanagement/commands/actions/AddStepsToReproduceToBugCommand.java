@@ -26,7 +26,7 @@ public class AddStepsToReproduceToBugCommand implements Command {
         int bugId = ParsingHelpers.parseInteger(parameters.get(1),"Bug Id");
         Bug bug = teamManagementRepository.findBugById(bugId);
         for (int i = 0; i < stepsToReproduce.length; i++) {
-            bug.addStepToReproduce(stepsToReproduce[i]);
+            bug.addStepToReproduce(stepsToReproduce[i].trim());
         }
         return userOutput(bug);
     }

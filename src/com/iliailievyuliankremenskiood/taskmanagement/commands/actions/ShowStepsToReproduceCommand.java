@@ -30,6 +30,7 @@ public class ShowStepsToReproduceCommand implements Command {
         List<String> stepsToReproduce = bug.getStepsToReproduce();
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(BUG_STEPS_TO_REPRODUCE_MESSAGE, bugId))
+                .append(System.lineSeparator())
                 .append(SEPARATOR)
                 .append(System.lineSeparator());
 

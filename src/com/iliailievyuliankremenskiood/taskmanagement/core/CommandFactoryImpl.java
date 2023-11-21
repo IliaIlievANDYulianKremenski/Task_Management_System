@@ -85,7 +85,7 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListTasksWithAssigneeCommand(teamManagementRepository);
             case SHOW_ALL_TEAM_MEMBERS:
                 return new ShowAllTeamMembersCommand(teamManagementRepository);
-            case ADD_STEPS_TO_REPRODUCE:
+            case ADD_STEPS_TO_REPRODUCE_TO_BUG:
                 return new AddStepsToReproduceToBugCommand(teamManagementRepository);
             case ADD_TASK_TO_BOARD:
                 return new AddTaskToBoardCommand(teamManagementRepository);

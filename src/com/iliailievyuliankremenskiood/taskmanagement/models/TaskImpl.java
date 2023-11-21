@@ -2,6 +2,7 @@ package com.iliailievyuliankremenskiood.taskmanagement.models;
 
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Comment;
+import com.iliailievyuliankremenskiood.taskmanagement.utils.FormatterHelpers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -105,16 +106,14 @@ public abstract class TaskImpl implements Task {
     }
 
     protected String produceCreationLogString(int id, String title, String description) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
         StringBuilder eventSb = new StringBuilder();
         eventSb.append(String.format("""
-                        A %s with ID: '%d', Title: '%s', Description: '%s' was created on the following date and time: %s.""",
+                        [%s] A %s with ID: '%d', Title: '%s', Description: '%s'.""",
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
                 this.getClass().getSimpleName(),
                 id,
                 title,
-                description,
-                dtf.format(now)));
+                description));
         return eventSb.toString();
     }
 
@@ -122,17 +121,19 @@ public abstract class TaskImpl implements Task {
                             String attributeOldContent,
                             String attributeNewContent) {
         StringBuilder eventSb = new StringBuilder();
-        eventSb.append(String.format("The '%s' was changed from: '%s' to: '%s'. ",
-                attributeForWhichWeAreLogging, attributeOldContent, attributeNewContent));
+        eventSb.append(String.format("[%s] The '%s' was changed from: '%s' to: '%s'. ",
+                LocalDateTime.now().format(FormatterHelpers.dateTimePattern()),
+                attributeForWhichWeAreLogging,
+                attributeOldContent,
+                attributeNewContent));
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+       /* DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
 
-        eventSb.append(String.format("The change was done on the following date and time: %s.", dtf.format(now)));
+        eventSb.append(String.format("The change was done on the following date and time: %s.", dtf.format(now)));*/
         activityHistory.add(eventSb.toString());
     }
 
-    /*TODO - make a test for this method.*/
     public void addCommentToTask(Comment commentToBeAddedToTheTask) {
         this.comments.add(commentToBeAddedToTheTask);
         logEvent("Comment",
