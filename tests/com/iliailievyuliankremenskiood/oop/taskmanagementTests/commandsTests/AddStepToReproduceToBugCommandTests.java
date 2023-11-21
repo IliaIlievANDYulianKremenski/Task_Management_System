@@ -1,6 +1,6 @@
 package com.iliailievyuliankremenskiood.oop.taskmanagementTests.commandsTests;
 
-import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddStepToReproduceToBugCommand;
+import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AddStepsToReproduceToBugCommand;
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
@@ -30,7 +30,7 @@ public class AddStepToReproduceToBugCommandTests {
     /*<-------Field(s)------->*/
 
     private TeamManagementRepository teamManagementRepository;
-    private AddStepToReproduceToBugCommand addStepToReproduceToBugCommand;
+    private AddStepsToReproduceToBugCommand addStepToReproduceToBugCommand;
     private Bug bug;
     private Member member;
     private List<String> parameters;
@@ -38,7 +38,7 @@ public class AddStepToReproduceToBugCommandTests {
     @BeforeEach
     public void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
-        addStepToReproduceToBugCommand = new AddStepToReproduceToBugCommand(teamManagementRepository);
+        addStepToReproduceToBugCommand = new AddStepsToReproduceToBugCommand(teamManagementRepository);
         parameters = new ArrayList<>();
         member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
         bug = teamManagementRepository.createBug(

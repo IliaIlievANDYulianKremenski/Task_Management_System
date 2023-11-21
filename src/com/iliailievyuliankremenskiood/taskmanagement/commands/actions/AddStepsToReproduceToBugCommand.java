@@ -8,41 +8,28 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class AddStepToReproduceToBugCommand implements Command {
+public class AddStepsToReproduceToBugCommand implements Command {
     /**
      * Command format: Add_Step_To_Reproduce_To_Bug {step to reproduce} {Bug Id}
      * */
-    /*TODO - @Yuli - make it so that the command can accept one string, which will after that
-    *  be split by ";".*/
-    /*<-------Constant(s)------->*/
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
-
-    /*<-------Field(s)------->*/
     private final TeamManagementRepository teamManagementRepository;
 
-
-    /*<-------Constructor(s)------->*/
-    public AddStepToReproduceToBugCommand(TeamManagementRepository teamManagementRepository) {
+    public AddStepsToReproduceToBugCommand(TeamManagementRepository teamManagementRepository) {
         this.teamManagementRepository = teamManagementRepository;
     }
 
-
-    /*<-------Behavioural Method(s)------->*/
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
-
-        String stepToReproduce = parameters.get(0);
+        String[] stepsToReproduce = parameters.get(0).split(";");
         int bugId = ParsingHelpers.parseInteger(parameters.get(1),"Bug Id");
-
         Bug bug = teamManagementRepository.findBugById(bugId);
-        bug.addStepToReproduce(stepToReproduce);
-
+        for (int i = 0; i < stepsToReproduce.length; i++) {
+            bug.addStepToReproduce(stepsToReproduce[i]);
+        }
         return userOutput(bug);
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private static String userOutput(Bug bug) {
         return bug.getActivityHistory().get(bug.getActivityHistory().size() - 1);
