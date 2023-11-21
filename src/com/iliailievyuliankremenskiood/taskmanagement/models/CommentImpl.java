@@ -50,7 +50,7 @@ public class CommentImpl implements Comment {
     public String print() {
         return String.format("""   
                             Author: %s
-                            Comment: %s                  
+                            Comment: %s                
                         --------------""",
                 getAuthor(),
                 getMessage()

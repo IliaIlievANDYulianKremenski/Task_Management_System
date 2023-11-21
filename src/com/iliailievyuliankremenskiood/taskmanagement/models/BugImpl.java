@@ -69,6 +69,7 @@ public class BugImpl extends TaskImpl implements Bug {
         this.severityType = severityType;
     }
 
+    /*TODO Here we have private setter of Status that it is always ACTIVE when creating a Bug.*/
     private void setBugStatusType(BugStatusType bugStatusType) {
         this.statusType = bugStatusType;
     }

@@ -6,7 +6,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllBugsCommand implements Command {
