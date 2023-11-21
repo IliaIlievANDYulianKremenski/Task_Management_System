@@ -14,7 +14,6 @@ public class AssignBugCommand implements Command {
      * Command format: Assign_Bug {bug ID} {assignee}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public AssignBugCommand(TeamManagementRepository teamManagementRepository) {

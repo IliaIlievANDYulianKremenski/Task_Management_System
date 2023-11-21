@@ -13,7 +13,6 @@ public class ChangeBugStatusCommand implements Command {
      * Command format: Change_Bug_Status {bug ID}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeBugStatusCommand(TeamManagementRepository teamManagementRepository) {

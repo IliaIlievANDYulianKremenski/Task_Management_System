@@ -16,7 +16,6 @@ public class ChangeFeedbackStatusCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_FEEDBACK_STATUS_MESSAGE =
             "Invalid value for Feedback Status: %s. Should be NEW, UNSCHEDULED, SCHEDULED or DONE.";
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeFeedbackStatusCommand(TeamManagementRepository teamManagementRepository) {

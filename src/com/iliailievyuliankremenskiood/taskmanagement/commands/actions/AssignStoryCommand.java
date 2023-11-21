@@ -13,9 +13,7 @@ public class AssignStoryCommand implements Command {
     /**
      * Command format: Assign_Story {story ID} {assignee}
      */
-
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public AssignStoryCommand(TeamManagementRepository teamManagementRepository) {

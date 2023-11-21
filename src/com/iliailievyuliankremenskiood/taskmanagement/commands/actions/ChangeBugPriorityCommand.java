@@ -10,13 +10,10 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class ChangeBugPriorityCommand implements Command {
-
     /** Command format: Change_Bug_Priority {bug ID} {new priority} */
-
     private static final String INVALID_BUG_PRIORITY_MESSAGE =
             "Invalid value for Bug Priority: %s. Should be HIGH, MEDIUM or LOW.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeBugPriorityCommand(TeamManagementRepository teamManagementRepository) {

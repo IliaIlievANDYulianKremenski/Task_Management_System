@@ -13,7 +13,6 @@ public class CreateNewBoardInTeamCommand implements Command {
      * Command format: Create_New_Board_In_Team {board name} {team name}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public CreateNewBoardInTeamCommand(TeamManagementRepository teamManagementRepository) {

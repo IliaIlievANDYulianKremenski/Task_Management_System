@@ -10,13 +10,10 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class AddTaskToBoardCommand implements Command {
-
     /**
      * Command format: Add_Task_to_Board {task ID} {board name} {team name}
      */
-
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public AddTaskToBoardCommand(TeamManagementRepository teamManagementRepository) {

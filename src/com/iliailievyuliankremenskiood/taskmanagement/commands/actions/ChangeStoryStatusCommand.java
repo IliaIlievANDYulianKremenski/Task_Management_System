@@ -16,7 +16,6 @@ public class ChangeStoryStatusCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_STORY_STATUS_MESSAGE =
             "Invalid value for Story Status: %s. Should be NOT_DONE, IN_PROGRESS or DONE.";
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeStoryStatusCommand(TeamManagementRepository teamManagementRepository) {

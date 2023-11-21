@@ -14,7 +14,6 @@ public class ChangeFeedbackRatingCommand implements Command {
      * Command format: Change_Feedback_Rating {feedback ID} {feedback rating}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeFeedbackRatingCommand(TeamManagementRepository teamManagementRepository) {

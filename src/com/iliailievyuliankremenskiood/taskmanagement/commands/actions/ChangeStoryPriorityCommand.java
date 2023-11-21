@@ -13,11 +13,9 @@ public class ChangeStoryPriorityCommand implements Command {
     /**
      * Command format: Change_Story_Priority {story ID} {new priority}
      */
-
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_STORY_PRIORITY_MESSAGE =
             "Invalid value for Story Priority: %s. Should be HIGH, MEDIUM or LOW.";
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeStoryPriorityCommand(TeamManagementRepository teamManagementRepository) {

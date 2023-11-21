@@ -16,7 +16,6 @@ public class ChangeStorySizeCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_STORY_SIZE_MESSAGE =
             "Invalid value for Story Size: %s. Should be LARGE, MEDIUM or SMALL.";
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeStorySizeCommand(TeamManagementRepository teamManagementRepository) {

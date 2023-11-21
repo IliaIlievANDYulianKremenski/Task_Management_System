@@ -10,15 +10,12 @@ import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class ChangeBugSeverityCommand implements Command {
-
     /**
      * Command format: Change_Bug_Severity {bug ID} {new severity}
      */
-
     private static final String INVALID_BUG_SEVERITY_MESSAGE =
             "Invalid value for Bug Severity: %s. Should be CRITICAL, MAJOR or MINOR.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
     private final TeamManagementRepository teamManagementRepository;
 
     public ChangeBugSeverityCommand(TeamManagementRepository teamManagementRepository) {
