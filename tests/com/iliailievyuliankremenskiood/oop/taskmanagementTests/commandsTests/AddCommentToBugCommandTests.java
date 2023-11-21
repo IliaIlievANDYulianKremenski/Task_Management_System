@@ -20,12 +20,8 @@ import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestU
 import java.util.List;
 
 public class AddCommentToBugCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             AddCommentToBugCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
 
     private TeamManagementRepository teamManagementRepository;
     private AddCommentToBugCommand addCommentToBugCommand;
@@ -37,30 +33,23 @@ public class AddCommentToBugCommandTests {
         addCommentToBugCommand = new AddCommentToBugCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> addCommentToBugCommand.execute(list)
         );
-
     }
 
     @Test
     public void execute_Should_ThrowException_When_BugIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Bug ID",
                 "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> addCommentToBugCommand.execute(list)
@@ -69,13 +58,11 @@ public class AddCommentToBugCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_BugDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1",
                 "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> addCommentToBugCommand.execute(list)
@@ -84,27 +71,23 @@ public class AddCommentToBugCommandTests {
 
     @Test
     public void execute_Should_AddCommentToBug_When_PassedValidInput() {
-        /*Arrange*/
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1",
                 "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
-        /*Act*/
         addCommentToBugCommand.execute(list);
         /*Act, Assert*/
         Assertions.assertEquals(
-            1,
-            bug.getComments().size()
+                1,
+                bug.getComments().size()
         );
         Assertions.assertEquals(
                 1,
                 teamManagementRepository.getComments().size()
         );
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -116,9 +99,9 @@ public class AddCommentToBugCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
     }
-
 }

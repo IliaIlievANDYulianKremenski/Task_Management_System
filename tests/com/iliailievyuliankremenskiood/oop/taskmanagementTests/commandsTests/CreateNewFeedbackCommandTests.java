@@ -13,17 +13,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class CreateNewFeedbackCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             CreateNewFeedbackCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private CreateNewFeedbackCommand createNewFeedbackCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setCreateNewFeedbackCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -31,14 +25,10 @@ public class CreateNewFeedbackCommandTests {
 
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> createNewFeedbackCommand.execute(list)
@@ -47,14 +37,12 @@ public class CreateNewFeedbackCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_FeedbackRatingNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(FeedbackImpl.MIN_TITLE_LENGTH),
                 "A".repeat(FeedbackImpl.MIN_DESCRIPTION_LENGTH),
                 "Invalid rating",
                 "NEW"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> createNewFeedbackCommand.execute(list)
@@ -63,14 +51,12 @@ public class CreateNewFeedbackCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_StatusTypeNotValid() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(FeedbackImpl.MIN_TITLE_LENGTH),
                 "A".repeat(FeedbackImpl.MIN_DESCRIPTION_LENGTH),
                 "1",
                 "Invalid status"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> createNewFeedbackCommand.execute(list)
@@ -79,19 +65,15 @@ public class CreateNewFeedbackCommandTests {
 
     @Test
     public void execute_Should_CreateNewFeedback_When_PassedValidInput() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(FeedbackImpl.MIN_TITLE_LENGTH),
                 "A".repeat(FeedbackImpl.MIN_DESCRIPTION_LENGTH),
                 "1",
                 "NEW"
         );
-        /*Act*/
         createNewFeedbackCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
-                1,teamManagementRepository.getFeedbacks().size()
+                1, teamManagementRepository.getFeedbacks().size()
         );
     }
-
 }

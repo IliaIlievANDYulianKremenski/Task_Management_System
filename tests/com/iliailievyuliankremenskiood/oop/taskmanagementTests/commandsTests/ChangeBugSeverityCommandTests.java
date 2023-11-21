@@ -19,95 +19,77 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ChangeBugSeverityCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ChangeBugSeverityCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private ChangeBugSeverityCommand changeBugSeverityCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setChangeBugSeverityCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         changeBugSeverityCommand = new ChangeBugSeverityCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> changeBugSeverityCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Bug ID",
                 "CRITICAL"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> changeBugSeverityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_SeverityTypeNotValid() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1",
                 "Not Valid"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> changeBugSeverityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1",
                 "MEDIUM"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> changeBugSeverityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ChangeBugSeverity_When_PassedValidInput() {
-        /*Arrange*/
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1",
                 "MINOR"
         );
-        /*Act*/
         changeBugSeverityCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
                 "MINOR",
                 bug.getSeverity().toString()
         );
 
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -119,6 +101,7 @@ public class ChangeBugSeverityCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

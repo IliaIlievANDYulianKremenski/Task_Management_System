@@ -10,18 +10,13 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ManualCommandTests {
-
     private ManualCommand manualCommand;
 
-    /*<-------Behavioural Method(s)------->*/
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
-        /*<-------Field(s)------->*/
         TeamManagementRepository teamManagementRepository = new TeamManagementRepositoryImpl();
         manualCommand = new ManualCommand(teamManagementRepository);
         List<String> list = TestUtilities.createDesiredList(0);
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> manualCommand.execute(list)
         );

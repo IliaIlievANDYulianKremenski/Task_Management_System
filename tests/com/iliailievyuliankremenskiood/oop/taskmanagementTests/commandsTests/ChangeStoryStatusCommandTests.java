@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChangeStoryStatusCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_MEMBER_NAME = "a".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
     private static final String VALID_STORY_TITLE = "a".repeat(StoryImpl.MIN_TITLE_LENGTH + 1);
     private static final String VALID_STORY_DESCRIPTION = "a".repeat(StoryImpl.MIN_DESCRIPTION_LENGTH + 1);
@@ -28,17 +27,11 @@ public class ChangeStoryStatusCommandTests {
     private static final StoryStatusType VALID_STORY_STATUS = StoryStatusType.IN_PROGRESS;
     private static final StoryStatusType VALID_STORY_STATUS2 = StoryStatusType.DONE;
     private static final String INVALID_STORY_STATUS = "SOMETHING_INVALID";
-
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ChangeStoryStatusCommand changeStoryStatusCommand;
     private List<String> parameters;
     private Story story;
     private Member member;
-
-
-    /*<-------Behavioural Method(s)------->*/
 
     @BeforeEach
     private void setUp() {
@@ -54,15 +47,11 @@ public class ChangeStoryStatusCommandTests {
                 VALID_STORY_STATUS,
                 member
         );
-
     }
 
     @Test
     public void execute_Should_ThrowException_When_ListWithInvalidNumberOfParamsPassed() {
-        /*Arrange*/
         parameters.add("test");
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     changeStoryStatusCommand.execute(parameters);
@@ -71,11 +60,8 @@ public class ChangeStoryStatusCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_InvalidStoryIdPassed() {
-        /*Arrange*/
         parameters.add("100");
         parameters.add(VALID_STORY_STATUS2.toString());
-
-        /*Act, Assert*/
         Assertions.assertThrows(ElementNotFoundException.class,
                 () -> {
                     changeStoryStatusCommand.execute(parameters);
@@ -84,11 +70,8 @@ public class ChangeStoryStatusCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_InvalidStatusPassed() {
-        /*Arrange*/
         parameters.add("1");
         parameters.add(INVALID_STORY_STATUS.toString());
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     changeStoryStatusCommand.execute(parameters);
@@ -97,14 +80,9 @@ public class ChangeStoryStatusCommandTests {
 
     @Test
     public void execute_Should_executeSuccessfully_When_validParamsPassed() {
-        /*Arrange*/
         parameters.add("1");
         parameters.add(VALID_STORY_STATUS2.toString());
-
-        /*Act*/
         String resultFromSuccessfullStoryStatusChange = changeStoryStatusCommand.execute(parameters);
-
-        /*Assert*/
         Assertions.assertEquals(
                 story.getActivityHistory().get(story.getActivityHistory().size() - 1),
                 resultFromSuccessfullStoryStatusChange

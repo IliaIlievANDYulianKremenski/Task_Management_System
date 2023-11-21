@@ -13,13 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAllPeopleCommandTests {
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ShowAllPeopleCommand showAllPeopleCommand;
     private List<String> list;
 
-    /*Arrange*/
     @BeforeEach
     public void setShowAllPeopleCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -27,28 +24,21 @@ public class ShowAllPeopleCommandTests {
         list = new ArrayList<>();
     }
 
-    /*<-------Test(s)------->*/
     @Test
     public void should_ThrowException_When_THereAreNoMembersToList() {
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> showAllPeopleCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
         Member member = createValidMember();
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> showAllPeopleCommand.execute(list)
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Member createValidMember() {
         return teamManagementRepository.createMember(

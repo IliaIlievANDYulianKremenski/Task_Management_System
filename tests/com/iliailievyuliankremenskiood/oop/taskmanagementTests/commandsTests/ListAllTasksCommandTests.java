@@ -14,74 +14,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListAllTasksCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_FEEDBACK_TITlE = "a".repeat(FeedbackImpl.MIN_TITLE_LENGTH);
     private static final String VALID_FEEDBACK_DESCRIPTION = "a".repeat(FeedbackImpl.MIN_DESCRIPTION_LENGTH);
-
     private static final FeedbackStatusType VALID_FEEDBACK_STATUS = FeedbackStatusType.SCHEDULED;
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ListAllTasksCommand listAllTasksCommand;
     private List<String> parameters;
     private Feedback feedback;
 
-    /*<-------Behavioural Method(s)------->*/
-
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         listAllTasksCommand = new ListAllTasksCommand(teamManagementRepository);
         parameters = new ArrayList<>();
     }
 
     @Test
-    public void execute_Should_ThrowException_When_WrongAmountOfParamsPassed(){
-        /*Act, Assert*/
+    public void execute_Should_ThrowException_When_WrongAmountOfParamsPassed() {
         Assertions.assertThrows(IllegalArgumentException.class,
-                ()->{
+                () -> {
                     listAllTasksCommand.execute(parameters);
                 });
     }
 
     @Test
-    public void execute_Should_ThrowException_When_ThereAreNoTasks(){
-        /*Arrange*/
+    public void execute_Should_ThrowException_When_ThereAreNoTasks() {
         parameters.add("ALL_TITLES");
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
-                ()->{
+                () -> {
                     listAllTasksCommand.execute(parameters);
                 });
     }
 
     @Test
-    public void execute_Should_NotThrowException_When_ThereAreTasksToBeListed(){
-        /*Arrange*/
+    public void execute_Should_NotThrowException_When_ThereAreTasksToBeListed() {
         parameters.add(VALID_FEEDBACK_TITlE);
         feedback = teamManagementRepository.createFeedback(
                 VALID_FEEDBACK_TITlE,
                 VALID_FEEDBACK_DESCRIPTION,
                 1,
                 VALID_FEEDBACK_STATUS);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(()->{listAllTasksCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listAllTasksCommand.execute(parameters);
+        });
     }
 
     @Test
-    public void execute_Should_NotThrowException_When_ThereAreTasksToBeListedAndAllTitlesPassed(){
-        /*Arrange*/
+    public void execute_Should_NotThrowException_When_ThereAreTasksToBeListedAndAllTitlesPassed() {
         parameters.add("ALL_TITLES");
         feedback = teamManagementRepository.createFeedback(
                 VALID_FEEDBACK_TITlE,
                 VALID_FEEDBACK_DESCRIPTION,
                 1,
                 VALID_FEEDBACK_STATUS);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(()->{listAllTasksCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listAllTasksCommand.execute(parameters);
+        });
     }
-
 }

@@ -19,24 +19,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowStepsToReproduceCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_MEMBER_NAME = "a".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
     private static final String VALID_BUG_TITLE = "a".repeat(BugImpl.MIN_TITLE_LENGTH + 1);
     private static final String VALID_BUG_DESCRIPTION = "a".repeat(BugImpl.MIN_DESCRIPTION_LENGTH + 1);
     private static final BugPriorityType VALID_BUG_PRIORITY = BugPriorityType.HIGH;
     private static final BugSeverityType VALID_BUG_SEVERITY = BugSeverityType.CRITICAL;
     public static final String VALID_STEP_TO_REPRODUCE = "Random text.";
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ShowStepsToReproduceCommand showStepsToReproduceCommand;
     private Bug bug;
     private Member member;
     private List<String> parameters;
 
-    /*<-------Behavioural Method(s)------->*/
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         showStepsToReproduceCommand = new ShowStepsToReproduceCommand(teamManagementRepository);
         parameters = new ArrayList<>();
@@ -48,38 +44,30 @@ public class ShowStepsToReproduceCommandTests {
                 VALID_BUG_SEVERITY,
                 member
         );
-
         bug.addStepToReproduce("Step 1.");
         bug.addStepToReproduce("Step 2.");
-    };
+    }
+
+    ;
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidAmountOfArgusProvided(){
-        /*Act, Assert*/
-        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+    public void execute_Should_ThrowException_When_InvalidAmountOfArgusProvided() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             showStepsToReproduceCommand.execute(parameters);
         });
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidAmountBugIdProvided(){
-        /*Arrange*/
+    public void execute_Should_ThrowException_When_InvalidAmountBugIdProvided() {
         parameters.add("123123123");
-        /*Act, Assert*/
-        Assertions.assertThrows(ElementNotFoundException.class, ()->{
+        Assertions.assertThrows(ElementNotFoundException.class, () -> {
             showStepsToReproduceCommand.execute(parameters);
         });
     }
 
     @Test
-    public void execute_Should_ShowNotThrowAnyException_When_ValidArgPassed(){
-        /*Arrange*/
+    public void execute_Should_ShowNotThrowAnyException_When_ValidArgPassed() {
         parameters.add("1");
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(() -> showStepsToReproduceCommand.execute(parameters));
     }
-
-
-
-
 }

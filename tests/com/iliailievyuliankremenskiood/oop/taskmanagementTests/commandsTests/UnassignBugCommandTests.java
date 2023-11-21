@@ -19,54 +19,43 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class UnassignBugCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             UnassignBugCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private UnassignBugCommand unassignBugCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setUnassignBugCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         unassignBugCommand = new UnassignBugCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> unassignBugCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Bug ID"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> unassignBugCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> unassignBugCommand.execute(list)
@@ -75,19 +64,13 @@ public class UnassignBugCommandTests {
 
     @Test
     public void execute_Should_UnassignBug_When_PassedValidInput() {
-        /*Arrange*/
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1"
         );
-        /*Act*/
         unassignBugCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertNull(bug.getAssignee());
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -99,6 +82,7 @@ public class UnassignBugCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

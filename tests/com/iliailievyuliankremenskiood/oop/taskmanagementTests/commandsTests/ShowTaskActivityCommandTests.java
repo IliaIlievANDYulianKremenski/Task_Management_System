@@ -33,37 +33,31 @@ public class ShowTaskActivityCommandTests {
 
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> showTaskActivityCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Bug ID"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> showTaskActivityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1"
         );
-        /*Act*/
         createValidFeedback();
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> showTaskActivityCommand.execute(list)
         );

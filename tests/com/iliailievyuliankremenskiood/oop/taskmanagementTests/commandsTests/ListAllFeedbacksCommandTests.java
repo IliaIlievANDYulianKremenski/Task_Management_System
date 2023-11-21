@@ -14,18 +14,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ListAllFeedbacksCommandTests {
-
-    /*<-------Constant(s)------->*/
-
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ListAllFeedbacksCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private ListAllFeedbacksCommand listAllFeedbacksCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setListAllFeedbacksCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -33,63 +26,49 @@ public class ListAllFeedbacksCommandTests {
 
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllFeedbacksCommand.execute(list)
         );
-
     }
+
     @Test
     public void should_ThrowException_When_THereAreNoFeedbacksToList() {
-        /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES"
         );
-        /*Arrange,Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllFeedbacksCommand.execute(list)
         );
-
     }
+
     @Test
     public void should_ThrowException_When_THereAreNoFeedbacksAfterFilter() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Status"
         );
         createValidFeedback();
-        /*Arrange,Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllFeedbacksCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
         List<String> list = List.of(
                 "New"
         );
-        /*Act*/
         createValidFeedback();
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> listAllFeedbacksCommand.execute(list)
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Feedback createValidFeedback() {
         return teamManagementRepository.createFeedback(

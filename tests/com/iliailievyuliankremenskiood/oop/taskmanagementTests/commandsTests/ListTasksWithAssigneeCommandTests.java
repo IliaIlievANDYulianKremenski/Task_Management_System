@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListTasksWithAssigneeCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_MEMBER_NAME = "a".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
     private static final String VALID_TASK_TITLE = "a".repeat(StoryImpl.MIN_TITLE_LENGTH);
     private static final String VALID_TASK_DESCRIPTION = "a".repeat(BugImpl.MIN_DESCRIPTION_LENGTH);
@@ -35,13 +34,10 @@ public class ListTasksWithAssigneeCommandTests {
     private static final BugStatusType VALID_BUG_STATUS = BugStatusType.DONE;
 
     private static final BugStatusType BUG_STATUS_ACTIVE = BugStatusType.ACTIVE;
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ListTasksWithAssigneeCommand listTasksWithAssigneeCommand;
     private List<String> parameters;
 
-    /*<-------Behavioural Method(s)------->*/
     @BeforeEach
     public void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -51,10 +47,7 @@ public class ListTasksWithAssigneeCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_InvalidAmountOfArgsPassed() {
-        /*Arrange*/
         parameters.add("Test");
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     listTasksWithAssigneeCommand.execute(parameters);
@@ -63,11 +56,8 @@ public class ListTasksWithAssigneeCommandTests {
 
     @Test
     public void execute_Should_ThrowException_When_ThereAreNoTasksWithAssigneeToBeListed() {
-        /*Arrange*/
         parameters.add("ALL_STATUSES");
         parameters.add("ALL_ASSIGNEES");
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     listTasksWithAssigneeCommand.execute(parameters);
@@ -76,7 +66,6 @@ public class ListTasksWithAssigneeCommandTests {
 
     @Test
     public void execute_Should_NotThrowException_When_AllStatusesAllAssigneesPassed() {
-        /*Arrange*/
         parameters.add("ALL_STATUSES");
         parameters.add("ALL_ASSIGNEES");
         Member member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
@@ -93,14 +82,13 @@ public class ListTasksWithAssigneeCommandTests {
                 VALID_BUG_PRIORITY,
                 VALID_BUG_SEVERITY,
                 member);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(() -> {listTasksWithAssigneeCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listTasksWithAssigneeCommand.execute(parameters);
+        });
     }
 
     @Test
     public void execute_Should_NotThrowException_When_AllStatusesSpecificAssigneeNamePassed() {
-        /*Arrange*/
         parameters.add("ALL_STATUSES");
         parameters.add(VALID_MEMBER_NAME);
         Member member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
@@ -117,14 +105,13 @@ public class ListTasksWithAssigneeCommandTests {
                 VALID_BUG_PRIORITY,
                 VALID_BUG_SEVERITY,
                 member);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(() -> {listTasksWithAssigneeCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listTasksWithAssigneeCommand.execute(parameters);
+        });
     }
 
     @Test
     public void execute_Should_NotThrowException_When_AllAssigneesSpecificStoryStatusPassed() {
-        /*Arrange*/
         parameters.add(VALID_STORY_STATUS.toString());
         parameters.add("ALL_ASSIGNEES");
         Member member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
@@ -141,14 +128,13 @@ public class ListTasksWithAssigneeCommandTests {
                 VALID_BUG_PRIORITY,
                 VALID_BUG_SEVERITY,
                 member);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(() -> {listTasksWithAssigneeCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listTasksWithAssigneeCommand.execute(parameters);
+        });
     }
 
     @Test
     public void execute_Should_NotThrowException_When_AllAssigneesSpecificBugStatusPassed() {
-        /*Arrange*/
         parameters.add(VALID_BUG_STATUS.toString());
         parameters.add("ALL_ASSIGNEES");
         Member member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
@@ -165,14 +151,13 @@ public class ListTasksWithAssigneeCommandTests {
                 VALID_BUG_PRIORITY,
                 VALID_BUG_SEVERITY,
                 member);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(() -> {listTasksWithAssigneeCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listTasksWithAssigneeCommand.execute(parameters);
+        });
     }
 
     @Test
     public void execute_Should_NotThrowException_When_SpecificStatusAndAssiggneePassed() {
-        /*Arrange*/
         parameters.add(VALID_BUG_STATUS.toString());
         parameters.add(VALID_MEMBER_NAME);
         Member member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
@@ -189,14 +174,13 @@ public class ListTasksWithAssigneeCommandTests {
                 VALID_BUG_PRIORITY,
                 VALID_BUG_SEVERITY,
                 member);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(() -> {listTasksWithAssigneeCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listTasksWithAssigneeCommand.execute(parameters);
+        });
     }
 
     @Test
     public void execute_Should_NotThrowException_When_ActiveStatusAndAssiggneePassed() {
-        /*Arrange*/
         parameters.add(BUG_STATUS_ACTIVE.toString());
         parameters.add(VALID_MEMBER_NAME);
         Member member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
@@ -213,9 +197,8 @@ public class ListTasksWithAssigneeCommandTests {
                 VALID_BUG_PRIORITY,
                 VALID_BUG_SEVERITY,
                 member);
-
-        /*Act, Assert*/
-        Assertions.assertDoesNotThrow(() -> {listTasksWithAssigneeCommand.execute(parameters);});
+        Assertions.assertDoesNotThrow(() -> {
+            listTasksWithAssigneeCommand.execute(parameters);
+        });
     }
-
 }

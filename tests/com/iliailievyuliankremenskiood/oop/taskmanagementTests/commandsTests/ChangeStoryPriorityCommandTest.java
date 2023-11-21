@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChangeStoryPriorityCommandTest {
-    /*<-------Constant(s)------->*/
     private static final String VALID_MEMBER_NAME = "a".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
     private static final String VALID_STORY_TITLE = "a".repeat(StoryImpl.MIN_TITLE_LENGTH + 1);
     private static final String VALID_STORY_DESCRIPTION = "a".repeat(StoryImpl.MIN_DESCRIPTION_LENGTH + 1);
@@ -29,17 +28,11 @@ public class ChangeStoryPriorityCommandTest {
     private static final StorySizeType VALID_STORY_SIZE = StorySizeType.LARGE;
     private static final StoryStatusType VALID_STORY_STATUS = StoryStatusType.IN_PROGRESS;
     private static final String INVALID_STORY_PRIORITY = "SOMETHING_INVALID";
-
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ChangeStoryPriorityCommand changeStoryPriorityCommand;
     private List<String> parameters;
     private Story story;
     private Member member;
-
-
-    /*<-------Behavioural Method(s)------->*/
 
     @BeforeEach
     private void setUp() {
@@ -55,15 +48,11 @@ public class ChangeStoryPriorityCommandTest {
                 VALID_STORY_STATUS,
                 member
         );
-
     }
 
     @Test
     public void execute_Should_ThrowException_When_ListWithInvalidNumberOfParamsPassed() {
-        /*Arrange*/
         parameters.add("test");
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     changeStoryPriorityCommand.execute(parameters);
@@ -72,11 +61,8 @@ public class ChangeStoryPriorityCommandTest {
 
     @Test
     public void execute_Should_ThrowException_When_InvalidStoryIdPassed() {
-        /*Arrange*/
         parameters.add("100");
         parameters.add(VALID_STORY_PRIORITY.toString());
-
-        /*Act, Assert*/
         Assertions.assertThrows(ElementNotFoundException.class,
                 () -> {
                     changeStoryPriorityCommand.execute(parameters);
@@ -85,11 +71,8 @@ public class ChangeStoryPriorityCommandTest {
 
     @Test
     public void execute_Should_ThrowException_When_InvalidPriorityPassed() {
-        /*Arrange*/
         parameters.add("1");
         parameters.add(INVALID_STORY_PRIORITY.toString());
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     changeStoryPriorityCommand.execute(parameters);
@@ -98,14 +81,9 @@ public class ChangeStoryPriorityCommandTest {
 
     @Test
     public void execute_Should_executeSuccessfully_When_validParamsPassed() {
-        /*Arrange*/
         parameters.add("1");
         parameters.add(VALID_STORY_PRIORITY2.toString());
-
-        /*Act*/
         String resultFromSuccessfullStoryPriorityChange = changeStoryPriorityCommand.execute(parameters);
-
-        /*Assert*/
         Assertions.assertEquals(
                 story.getActivityHistory().get(story.getActivityHistory().size() - 1),
                 resultFromSuccessfullStoryPriorityChange

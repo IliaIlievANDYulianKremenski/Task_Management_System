@@ -17,18 +17,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ListAllBugsCommandTests {
-
-    /*<-------Constant(s)------->*/
-
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ListAllBugsCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private ListAllBugsCommand listAllBugsCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setListAllBugsCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -36,84 +29,65 @@ public class ListAllBugsCommandTests {
 
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllBugsCommand.execute(list)
         );
-
     }
+
     @Test
     public void should_ThrowException_When_THereAreNoBugsToList() {
-        /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES",
                 "ALL_ASSIGNEES"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllBugsCommand.execute(list)
         );
-
     }
 
     @Test
     public void should_ThrowException_When_THereAreNoBugsToFilterByAssignee() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Status",
                 "ALL_ASSIGNEES"
         );
-        /*Act*/
         createValidBug();
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllBugsCommand.execute(list)
         );
-
     }
+
     @Test
     public void should_ThrowException_When_THereAreNoBugsInFilteredList() {
-        /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES",
                 "Assignee"
         );
-         /*Act*/
         createValidBug();
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllBugsCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
         List<String> list = List.of(
                 "ACT",
                 "A"
         );
-        /*Act*/
         createValidBug();
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> listAllBugsCommand.execute(list)
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -125,6 +99,7 @@ public class ListAllBugsCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

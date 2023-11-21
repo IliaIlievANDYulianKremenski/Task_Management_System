@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddCommentToStoryCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_STORY_TITLE = "a".repeat(TaskImpl.MIN_TITLE_LENGTH + 1);
     private static final String VALID_STORY_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH + 1);
     private static final StoryPriorityType VALID_STORY_PRIORITY = StoryPriorityType.HIGH;
@@ -30,13 +29,10 @@ public class AddCommentToStoryCommandTests {
     private static final StorySizeType VALID_STORY_SIZE = StorySizeType.LARGE;
     private static final String VALID_MEMBER_NAME = "a".repeat(MemberImpl.MEMBER_NAME_MIN_LEN + 1);
     private static final String VALID_COMMENT_AUTHOR = "a".repeat(CommentImpl.AUTHOR_MIN_LEN + 1);
-    private static final String INVALID_COMMENT_AUTHOR = "a".repeat(CommentImpl.AUTHOR_MIN_LEN -1);
-
+    private static final String INVALID_COMMENT_AUTHOR = "a".repeat(CommentImpl.AUTHOR_MIN_LEN - 1);
     private static final String VALID_COMMENT_MESSAGE = "a".repeat(CommentImpl.MESSAGE_MIN_LEN + 1);
     private static final String INVALID_COMMENT_MESSAGE = "a".repeat(CommentImpl.MESSAGE_MIN_LEN - 1);
 
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private AddCommentToStoryCommand addCommentToStoryCommand;
     private List<String> parameters;
@@ -44,15 +40,11 @@ public class AddCommentToStoryCommandTests {
     private Member member;
     private Comment comment;
 
-
-    /*<-------Behavioural Method(s)------->*/
     @BeforeEach
     public void setUp() {
-
         teamManagementRepository = new TeamManagementRepositoryImpl();
         addCommentToStoryCommand = new AddCommentToStoryCommand(teamManagementRepository);
         parameters = new ArrayList<>();
-
         member = teamManagementRepository.createMember(VALID_MEMBER_NAME);
         story = teamManagementRepository.createStory(
                 VALID_STORY_TITLE,
@@ -62,73 +54,61 @@ public class AddCommentToStoryCommandTests {
                 VALID_STORY_STATUS, member);
     }
 
-
     @Test
-    public void execute_Should_ThrowException_When_ListWithInvalidNumberOfParamsPassed(){
-        /*Arrange*/
+    public void execute_Should_ThrowException_When_ListWithInvalidNumberOfParamsPassed() {
         parameters.add("1");
         parameters.add("2");
-
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> {addCommentToStoryCommand.execute(parameters);});
+                () -> {
+                    addCommentToStoryCommand.execute(parameters);
+                });
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidStoryIDPassed(){
-        /*Arrange*/
+    public void execute_Should_ThrowException_When_InvalidStoryIDPassed() {
         parameters.add("100");
         parameters.add(VALID_COMMENT_AUTHOR);
         parameters.add(VALID_COMMENT_MESSAGE);
-
-
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
-                () -> {addCommentToStoryCommand.execute(parameters);});
+                () -> {
+                    addCommentToStoryCommand.execute(parameters);
+                });
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidAuthorProvided(){
-        /*Arrange*/
+    public void execute_Should_ThrowException_When_InvalidAuthorProvided() {
         parameters.add("1");
         parameters.add(INVALID_COMMENT_AUTHOR);
         parameters.add(VALID_COMMENT_MESSAGE);
-
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
-                () -> {addCommentToStoryCommand.execute(parameters);});
+                () -> {
+                    addCommentToStoryCommand.execute(parameters);
+                });
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidMessageProvided(){
-        /*Arrange*/
+    public void execute_Should_ThrowException_When_InvalidMessageProvided() {
         parameters.add("1");
         parameters.add(VALID_COMMENT_AUTHOR);
         parameters.add(INVALID_COMMENT_MESSAGE);
-
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
-                () -> {addCommentToStoryCommand.execute(parameters);});
+                () -> {
+                    addCommentToStoryCommand.execute(parameters);
+                });
     }
 
     @Test
-    public void execute_Should_executeSuccessfully_When_ValidParamsPassed(){
-        /*Arrange*/
+    public void execute_Should_executeSuccessfully_When_ValidParamsPassed() {
         parameters.add("1");
         parameters.add(VALID_COMMENT_AUTHOR);
         parameters.add(VALID_COMMENT_MESSAGE);
-
-        /*Act*/
         String resultFromSuccessfullCommentAddOperation = addCommentToStoryCommand.execute(parameters);
-
-        /*Assert*/
         Assertions.assertEquals(
-                story.getActivityHistory().get(story.getActivityHistory().size()-1),
+                story.getActivityHistory().get(story.getActivityHistory().size() - 1),
                 resultFromSuccessfullCommentAddOperation);
     }
-
 }

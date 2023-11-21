@@ -13,17 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateNewTeamCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_TEAM_NAME = "a".repeat(TeamImpl.TEAM_NAME_MIN_LEN + 1);
-
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private CreateNewTeamCommand createNewTeamCommand;
     private List<String> parameters;
-
-
-    /*<-------Behavioural Method(s)------->*/
 
     @BeforeEach
     public void setUp() {
@@ -41,13 +34,8 @@ public class CreateNewTeamCommandTests {
 
     @Test
     public void execute_Should_CreateAValidNewTeam_When_ValidNumberOfParamsPassed() {
-        /*Arrange*/
         parameters.add(VALID_TEAM_NAME);
-
-        /*Act*/
         String resultFromSuccessfulTeamCreation = createNewTeamCommand.execute(parameters);
-
-        /*Assert*/
         Assertions.assertEquals(
                 teamManagementRepository.findTeamByName(VALID_TEAM_NAME).getActivityHistory().get(
                         teamManagementRepository.findTeamByName(VALID_TEAM_NAME).getActivityHistory().size() - 1),

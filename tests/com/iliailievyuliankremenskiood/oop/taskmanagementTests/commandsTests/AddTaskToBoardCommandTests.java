@@ -19,54 +19,42 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class AddTaskToBoardCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             AddTaskToBoardCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private AddTaskToBoardCommand addTaskToBoardCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setAddTaskToBoardCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         addTaskToBoardCommand = new AddTaskToBoardCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> addTaskToBoardCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_WhenTaskIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Task ID",
                 "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> addTaskToBoardCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_AddTaskToBoard_When_PassedValidInput() {
-        /*Arrange*/
         Bug bug = createValidBug();
         Team team = createValidTeam();
         Board board = createValidBoard();
@@ -75,16 +63,12 @@ public class AddTaskToBoardCommandTests {
                 "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
         );
-        /*Act*/
         addTaskToBoardCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
                 1,
                 board.getBoardTasks().size()
         );
-}
-
-    /*<-------Helper Method(s)------->*/
+    }
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -96,20 +80,22 @@ public class AddTaskToBoardCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
     }
+
     private Board createValidBoard() {
         return teamManagementRepository.creteBoard(
                 "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN),
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
         );
     }
+
     private Team createValidTeam() {
         return teamManagementRepository.createTeam("A".repeat(TeamImpl.TEAM_NAME_MIN_LEN));
     }
-
 }
 
 

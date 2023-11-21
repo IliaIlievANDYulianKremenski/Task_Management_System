@@ -19,77 +19,63 @@ import com.iliailievyuliankremenskiood.oop.taskmanagementTests.utils.Tests.TestU
 import java.util.List;
 
 public class AddCommentToFeedbackCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             AddCommentToFeedbackCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private AddCommentToFeedbackCommand addCommentToFeedbackCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setAddCommentToFeedbackCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         addCommentToFeedbackCommand = new AddCommentToFeedbackCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> addCommentToFeedbackCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_FeedbackIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Feedback ID",
                 "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> addCommentToFeedbackCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_FeedbackDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1",
                 "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> addCommentToFeedbackCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_AddCommentToBug_When_PassedValidInput() {
-        /*Arrange*/
         Feedback feedback = createValidFeedback();
         List<String> list = List.of(
                 "1",
                 "A".repeat(CommentImpl.AUTHOR_MIN_LEN),
                 "C".repeat(CommentImpl.MESSAGE_MIN_LEN)
         );
-        /*Act*/
         createValidMember();
         addCommentToFeedbackCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
                 1,
                 feedback.getComments().size()
@@ -100,8 +86,6 @@ public class AddCommentToFeedbackCommandTests {
         );
     }
 
-    /*<-------Helper Method(s)------->*/
-
     private Feedback createValidFeedback() {
         return teamManagementRepository.createFeedback(
                 "A".repeat(FeedbackImpl.MIN_TITLE_LENGTH),
@@ -110,6 +94,7 @@ public class AddCommentToFeedbackCommandTests {
                 FeedbackStatusType.NEW
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

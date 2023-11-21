@@ -15,17 +15,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class CreateNewBugCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             CreateNewBugCommand.NUMBER_WITH_ASSIGNEE + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private CreateNewBugCommand createNewBugCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setCreateNewBugCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -33,23 +27,18 @@ public class CreateNewBugCommandTests {
 
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> createNewBugCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_PriorityTypeNotValid() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(BugImpl.MIN_TITLE_LENGTH),
                 "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
@@ -57,15 +46,14 @@ public class CreateNewBugCommandTests {
                 "CRITICAL"
 //                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> createNewBugCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_SeverityTypeNotValid() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(BugImpl.MIN_TITLE_LENGTH),
                 "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
@@ -73,15 +61,14 @@ public class CreateNewBugCommandTests {
                 "Not Valid",
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> createNewBugCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_MemberDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(BugImpl.MIN_TITLE_LENGTH),
                 "A".repeat(BugImpl.MIN_DESCRIPTION_LENGTH),
@@ -89,13 +76,12 @@ public class CreateNewBugCommandTests {
                 "CRITICAL",
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> createNewBugCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_CreateNewBug_When_PassedValidInput() {
         List<String> list = List.of(
@@ -105,17 +91,12 @@ public class CreateNewBugCommandTests {
                 "CRITICAL",
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
         );
-        /*Act*/
         Member member = createValidMember();
         createNewBugCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
-                1,teamManagementRepository.getBugs().size()
+                1, teamManagementRepository.getBugs().size()
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Member createValidMember() {
         return teamManagementRepository.createMember(

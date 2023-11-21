@@ -19,79 +19,61 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ChangeBugStatusCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ChangeBugStatusCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private ChangeBugStatusCommand changeBugStatusCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setChangeBugStatusCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         changeBugStatusCommand = new ChangeBugStatusCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
-
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> changeBugStatusCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Bug ID"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> changeBugStatusCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> changeBugStatusCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ChangeBugStatus_When_PassedValidInput() {
-        /*Arrange*/
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1"
         );
-        /*Act*/
         changeBugStatusCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
                 "DONE",
                 bug.getStatus().toString()
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -103,6 +85,7 @@ public class ChangeBugStatusCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

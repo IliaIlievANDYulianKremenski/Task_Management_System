@@ -17,31 +17,22 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ShowAllTeamBoardsTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ListAllBugsCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ShowAllTeamBoardsCommand showAllTeamBoardsCommand;
 
-    /*<-------Behavioural Method(s)------->*/
     @BeforeEach
-    public void setShowAllTeamBoardsCommand(){
+    public void setShowAllTeamBoardsCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         showAllTeamBoardsCommand = new ShowAllTeamBoardsCommand(teamManagementRepository);
 
     }
-    /*<-------Test(s)------->*/
 
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> showAllTeamBoardsCommand.execute(list)
@@ -49,12 +40,10 @@ public class ShowAllTeamBoardsTests {
     }
 
     @Test
-    public void execute_Should_ThrowAnException_When_ThereAreNoTeamWithTheProvidedName(){
-        /*Arrange*/
+    public void execute_Should_ThrowAnException_When_ThereAreNoTeamWithTheProvidedName() {
         List<String> list = List.of(
                 "Team"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> showAllTeamBoardsCommand.execute(list)
@@ -62,14 +51,11 @@ public class ShowAllTeamBoardsTests {
     }
 
     @Test
-    public void execute_Should_ThrowAnException_When_ThereAreNoBoardsInTheTeam(){
-        /*Arrange*/
+    public void execute_Should_ThrowAnException_When_ThereAreNoBoardsInTheTeam() {
         List<String> list = List.of(
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
         );
-        /*Act*/
         createValidTeam();
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> showAllTeamBoardsCommand.execute(list)
@@ -78,21 +64,17 @@ public class ShowAllTeamBoardsTests {
 
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
         List<String> list = List.of(
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN),
                 "A".repeat(BoardImpl.BOARD_NAME_MIN_LEN)
-                );
-        /*Act*/
+        );
         createValidTeam();
         createValidBoard();
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> showAllTeamBoardsCommand.execute(list)
         );
     }
-    /*<-------Helper Method(s)------->*/
 
     private Board createValidBoard() {
         return teamManagementRepository.creteBoard(
@@ -100,6 +82,7 @@ public class ShowAllTeamBoardsTests {
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)
         );
     }
+
     private Team createValidTeam() {
         return teamManagementRepository.createTeam(
                 "A".repeat(TeamImpl.TEAM_NAME_MIN_LEN)

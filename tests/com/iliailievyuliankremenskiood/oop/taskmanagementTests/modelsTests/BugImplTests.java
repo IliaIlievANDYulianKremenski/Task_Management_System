@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BugImplTests {
-
-    /*<-------Constant(s)------->*/
     private static final String VALID_BUG_TITLE = "a".repeat(TaskImpl.MIN_TITLE_LENGTH + 1);
     private static final String VALID_BUG_DESCRIPTION = "a".repeat(TaskImpl.MIN_DESCRIPTION_LENGTH + 1);
     private static final String VALID_MEMBER_NAME = "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN);
@@ -43,17 +41,11 @@ public class BugImplTests {
     public static final String STEP_1 = "Step 1.";
     public static final String STEP_2 = "Step 2.";
 
-    /*<-------Test(s)------->*/
     @Test
     public void Constructor_Should_CreateNewBug_When_ValidArgumentsPassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-
-        /*Act*/
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Assess*/
         Assertions.assertNotNull(bug);
         Assertions.assertEquals(1, bug.getId());
         Assertions.assertEquals(VALID_BUG_TITLE, bug.getTitle());
@@ -65,11 +57,7 @@ public class BugImplTests {
 
     @Test
     public void constructor_Should_ThrowError_When_ShorterTitlePassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     Bug bug = new BugImpl(1, SHORTER_BUG_TITLE, VALID_BUG_DESCRIPTION,
@@ -79,11 +67,7 @@ public class BugImplTests {
 
     @Test
     public void constructor_Should_ThrowError_When_LongerTitlePassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     Bug bug = new BugImpl(1, LONGER_BUG_TITLE, VALID_BUG_DESCRIPTION,
@@ -93,11 +77,7 @@ public class BugImplTests {
 
     @Test
     public void constructor_Should_ThrowError_When_ShorterDescriptionPassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     Bug bug = new BugImpl(1, VALID_BUG_TITLE, SHORTER_BUG_DESCRIPTION,
@@ -107,11 +87,7 @@ public class BugImplTests {
 
     @Test
     public void constructor_Should_ThrowError_When_LongerDescriptionPassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
-
-
-        /*Act, Assert*/
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
                     Bug bug = new BugImpl(1, VALID_BUG_TITLE, LONGER_BUG_DESCRIPTION,
@@ -121,111 +97,67 @@ public class BugImplTests {
 
     @Test
     public void getStepsToReproduce_Should_ReturnACopyOfTheOriginalList() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act, Assert*/
         Assertions.assertEquals(0, bug.getStepsToReproduce().size());
     }
 
-/*    @Test
-    public void print_Should_PrintCorrectMessage() {
-        *//*Arrange*//*
-        Member member = new MemberImpl(VALID_MEMBER_NAME);
-        Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
-                BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        *//*Act, Assert*//*
-        Assertions.assertEquals(VALID_BUG_PRINT, bug.print());
-    }*/
-
     @Test
     public void addStepsToReproduce_Should_AddListOfStepsToTheBug_When_ValidStepsPassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
         bug.addStepToReproduce(STEP_1);
-
-        /*Assert*/
         Assertions.assertEquals(1, bug.getStepsToReproduce().size());
         Assertions.assertEquals(STEP_1, bug.getStepsToReproduce().get(0));
-
     }
 
 
     @Test
     public void changeBugStatus_Should_ChangeStatus() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
         bug.changeBugStatus();
-
-        /*Assert*/
         Assertions.assertEquals(BugStatusType.DONE.toString(), bug.getStatus().toString());
     }
 
     @Test
     public void changeBugPriority_Should_ChangePriority() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
         bug.changeBugPriority(BugPriorityType.MEDIUM);
-
-        /*Assert*/
         Assertions.assertEquals(BugPriorityType.MEDIUM.toString(), bug.getPriority().toString());
     }
 
     @Test
     public void changeBugSeverity_Should_ChangeSeverity() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
         bug.changeBugSeverity(BugSeverityType.MINOR);
-
-        /*Assert*/
         Assertions.assertEquals(BugSeverityType.MINOR.toString(), bug.getSeverity().toString());
     }
 
     @Test
     public void changeAssignee_Should_ChangeAssignee_When_ValidAssigneePassed() {
-        /*Arrange*/
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Member member2 = new MemberImpl(VALID_MEMBER2_NAME);
         Bug bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
-        /*Act*/
         bug.changeAssignee(member2);
-
-        /*Assert*/
         Assertions.assertEquals(VALID_MEMBER2_NAME, bug.getAssignee().getName());
     }
 
     @Test
-    public void addCommentToTask_Should_AddACommentToTheListOfComments(){
+    public void addCommentToTask_Should_AddACommentToTheListOfComments() {
         Comment comment = new CommentImpl(VALID_MEMBER_NAME, VALID_BUG_DESCRIPTION);
         Member member = new MemberImpl(VALID_MEMBER_NAME);
         Task bug = new BugImpl(1, VALID_BUG_TITLE, VALID_BUG_DESCRIPTION,
                 BugPriorityType.HIGH, BugSeverityType.CRITICAL, member);
-
         bug.addCommentToTask(comment);
-
         Assertions.assertEquals(VALID_BUG_DESCRIPTION, bug.getComments().get(0).getMessage());
-
     }
-
 }

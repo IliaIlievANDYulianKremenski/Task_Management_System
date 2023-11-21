@@ -12,41 +12,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAllTeamsCommandTests {
-    /*<-------Constant(s)------->*/
     private static final String VALID_TEAM_NAME1 = "a".repeat(TeamImpl.TEAM_NAME_MIN_LEN);
     private static final String VALID_TEAM_NAME2 = "b".repeat(TeamImpl.TEAM_NAME_MIN_LEN);
-
-    /*<-------Field(s)------->*/
     private TeamManagementRepository teamManagementRepository;
     private ShowAllTeamsCommand showAllTeamsCommand;
     private List<String> parameters;
 
-    /*<-------Behavioural Method(s)------->*/
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         showAllTeamsCommand = new ShowAllTeamsCommand(teamManagementRepository);
         parameters = new ArrayList<>();
     }
 
     @Test
-    public void execute_Should_ThrowException_When_ThereAreNoTeamsInTheRepository(){
-        /*Act, Assert*/
+    public void execute_Should_ThrowException_When_ThereAreNoTeamsInTheRepository() {
         Assertions.assertThrows(IllegalArgumentException.class,
-                ()->{
+                () -> {
                     showAllTeamsCommand.execute(parameters);
                 });
     }
 
     @Test
-    public void execute_Should_NotThrowException_When_ThereAreTeamsToBeShown(){
-        /*Arrange*/
+    public void execute_Should_NotThrowException_When_ThereAreTeamsToBeShown() {
         teamManagementRepository.createTeam(VALID_TEAM_NAME1);
         teamManagementRepository.createTeam(VALID_TEAM_NAME2);
-
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
-                ()->{
+                () -> {
                     showAllTeamsCommand.execute(parameters);
                 });
     }

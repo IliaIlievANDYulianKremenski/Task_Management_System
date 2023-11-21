@@ -19,94 +19,76 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ChangeBugPriorityCommandTests {
-
-    /*<-------Constant(s)------->*/
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ChangeBugPriorityCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private ChangeBugPriorityCommand changeBugPriorityCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setChangeBugPriorityCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         changeBugPriorityCommand = new ChangeBugPriorityCommand(teamManagementRepository);
     }
 
-    /*<-------Test(s)------->*/
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> changeBugPriorityCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugIdNotNumber() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Bug ID",
                 "MEDIUM"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 InvalidUserInputException.class,
                 () -> changeBugPriorityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_PriorityTypeNotValid() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1",
                 "Not Valid"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> changeBugPriorityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ThrowException_When_BugDoNotExist() {
-        /*Arrange*/
         List<String> list = List.of(
                 "1",
                 "MEDIUM"
         );
-        /*Act, Assert*/
         Assertions.assertThrows(
                 ElementNotFoundException.class,
                 () -> changeBugPriorityCommand.execute(list)
         );
     }
+
     @Test
     public void execute_Should_ChangeBugPriority_When_PassedValidInput() {
-        /*Arrange*/
         Bug bug = createValidBug();
         List<String> list = List.of(
                 "1",
                 "MEDIUM"
         );
-        /*Act*/
         changeBugPriorityCommand.execute(list);
-        /*Act, Assert*/
         Assertions.assertEquals(
                 "MEDIUM",
                 bug.getPriority().toString()
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Bug createValidBug() {
         Member member = createValidMember();
@@ -118,6 +100,7 @@ public class ChangeBugPriorityCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));

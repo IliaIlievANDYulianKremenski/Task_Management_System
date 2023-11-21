@@ -18,18 +18,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class ListAllStoriesCommandTests {
-
-    /*<-------Constant(s)------->*/
-
     private static final int DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS =
             ListAllStoriesCommand.EXPECTED_NUMBER_OF_ARGUMENTS + 1;
-
-    /*<-------Field(s)------->*/
-
     private TeamManagementRepository teamManagementRepository;
     private ListAllStoriesCommand listAllStoriesCommand;
 
-    /*Arrange*/
     @BeforeEach
     public void setListAllStoriesCommand() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
@@ -37,83 +30,65 @@ public class ListAllStoriesCommandTests {
 
     }
 
-    /*<-------Test(s)------->*/
     @Test
     public void should_ThrowException_When_ArgumentCountDifferentThanExpected() {
-        /*Arrange*/
         List<String> list = TestUtilities.createDesiredList(
                 DIFFERENT_THAN_EXPECTED_NUMBER_OF_ARGUMENTS);
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllStoriesCommand.execute(list)
         );
-
     }
+
     @Test
     public void should_ThrowException_When_THereAreNoStoriesToList() {
-        /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES",
                 "ALL_ASSIGNEES"
         );
-        /*Arrange,Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllStoriesCommand.execute(list)
         );
-
     }
 
     @Test
     public void should_ThrowException_When_THereAreNoStoriesToFilterByAssignee() {
-        /*Arrange*/
         List<String> list = List.of(
                 "Status",
                 "ALL_ASSIGNEES"
         );
-        /*Act*/
         Story story = createValidStory();
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllStoriesCommand.execute(list)
         );
-
     }
+
     @Test
     public void should_ThrowException_When_THereAreNoStoriesInFilteredList() {
-        /*Arrange*/
         List<String> list = List.of(
                 "ALL_STATUSES",
                 "Assignee"
         );
-        /*Act*/
         Story story = createValidStory();
-        /*Act, Assert*/
         Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> listAllStoriesCommand.execute(list)
         );
-
     }
+
     @Test
     public void execute_Should_NotThrowException_When_PassedValidInput() {
-        /*Arrange*/
         List<String> list = List.of(
                 "In",
                 "A"
         );
-        /*Act*/
         Story story = createValidStory();
-        /*Act, Assert*/
         Assertions.assertDoesNotThrow(
                 () -> listAllStoriesCommand.execute(list)
         );
-
     }
-
-    /*<-------Helper Method(s)------->*/
 
     private Story createValidStory() {
         Member member = createValidMember();
@@ -126,9 +101,9 @@ public class ListAllStoriesCommandTests {
                 member
         );
     }
+
     private Member createValidMember() {
         return teamManagementRepository.createMember(
                 "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN));
     }
-
 }
