@@ -39,7 +39,7 @@ public class AssignStoryCommandTests {
 
     /*<-------Behavioural Method(s)------->*/
     @BeforeEach
-    private void setUp() {
+    public void setUp() {
         teamManagementRepository = new TeamManagementRepositoryImpl();
         assignStoryCommand = new AssignStoryCommand(teamManagementRepository);
         parameters = new ArrayList<>();

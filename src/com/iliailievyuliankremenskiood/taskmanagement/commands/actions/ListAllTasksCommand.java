@@ -5,7 +5,6 @@ import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagem
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class ListAllTasksCommand implements Command {
