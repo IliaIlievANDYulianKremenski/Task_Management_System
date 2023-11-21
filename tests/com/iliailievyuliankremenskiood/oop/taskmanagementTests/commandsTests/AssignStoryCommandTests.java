@@ -4,8 +4,10 @@ import com.iliailievyuliankremenskiood.taskmanagement.commands.actions.AssignSto
 import com.iliailievyuliankremenskiood.taskmanagement.core.TeamManagementRepositoryImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.exceptions.ElementNotFoundException;
+import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.MemberImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.StoryImpl;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.taskmanagement.models.enums.storyrelatedtypes.StoryPriorityType;
@@ -92,7 +94,20 @@ public class AssignStoryCommandTests {
                     assignStoryCommand.execute(parameters);
                 });
     }
+    @Test
+    public void execute_Should_ThrowException_When_MemberAlreadyAssigned() {
+        /*Arrange*/
+        List<String> list = List.of(
+                "1",
+                VALID_MEMBER_NAME
+        );
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                InvalidUserInputException.class,
+                () -> assignStoryCommand.execute(list)
+        );
 
+    }
     @Test
     public void execute_Should_executeSuccessfully_When_validParamsPassed() {
         /*Arrange*/

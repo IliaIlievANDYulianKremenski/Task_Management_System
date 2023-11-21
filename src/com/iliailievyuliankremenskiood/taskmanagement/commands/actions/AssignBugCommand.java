@@ -32,8 +32,7 @@ public class AssignBugCommand implements Command {
         String memberName = parameters.get(1);
         Bug bug = teamManagementRepository.findBugById(bugId);
         Member member = teamManagementRepository.findMemberByName(memberName);
-        /*TODO - @Iliya - add a test for this line.*/
-        if(bug.getAssignee().equals(member.getName())){
+        if(bug.getAssignee().getName().equals(member.getName())){
             throw new InvalidUserInputException(String.format(BUG_ALREADY_ASSIGNED_MESSAGE,memberName));
         }
         bug.changeAssignee(member);

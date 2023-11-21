@@ -93,6 +93,22 @@ public class AssignBugCommandTests {
         );
 
     }
+    @Test
+    public void execute_Should_ThrowException_When_MemberAlreadyAssigned() {
+        /*Arrange*/
+        List<String> list = List.of(
+                "1",
+                "A".repeat(MemberImpl.MEMBER_NAME_MIN_LEN)
+        );
+        /*Act*/
+        Bug bug = createValidBug();
+        /*Act, Assert*/
+        Assertions.assertThrows(
+                InvalidUserInputException.class,
+                () -> assignBugCommand.execute(list)
+        );
+
+    }
 
     @Test
     public void execute_Should_AddCommentToBug_When_PassedValidInput() {

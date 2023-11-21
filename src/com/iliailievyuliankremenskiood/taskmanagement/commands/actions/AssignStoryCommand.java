@@ -2,6 +2,7 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
+import com.iliailievyuliankremenskiood.taskmanagement.exceptions.InvalidUserInputException;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Member;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ParsingHelpers;
@@ -14,6 +15,7 @@ public class AssignStoryCommand implements Command {
      * Command format: Assign_Story {story ID} {assignee}
      */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    private static final String STORY_ALREADY_ASSIGNED_MESSAGE = "The story is already assigned to %s.";
     private final TeamManagementRepository teamManagementRepository;
 
     public AssignStoryCommand(TeamManagementRepository teamManagementRepository) {
@@ -30,6 +32,9 @@ public class AssignStoryCommand implements Command {
         String memberName = parameters.get(1);
         Story temproaryStory = teamManagementRepository.findStoryById(storyId);
         Member temporaryMember = teamManagementRepository.findMemberByName(memberName);
+        if(temproaryStory.getAssignee().getName().equals(temporaryMember.getName())){
+            throw new InvalidUserInputException(String.format(STORY_ALREADY_ASSIGNED_MESSAGE,memberName));
+        }
         temproaryStory.changeAssignee(temporaryMember);
         return userOutput(temproaryStory);
     }
