@@ -2,10 +2,12 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
+import com.iliailievyuliankremenskiood.taskmanagement.models.BugImpl;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ListTasksWithAssigneeCommand implements Command {
@@ -27,62 +29,59 @@ public class ListTasksWithAssigneeCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
-        /*TODO We have to implement sort method in this command. Sorting has to be by title only.
-        *  This is the method: ** tasks.sort(Comparator.comparing(Task::getTitle)); **
-        * To work properly my idea is to firstly unite getBugs() & getStories() into 1 collection.
-        * Then sort the collection, and after that use that collection in the filter methods below. */
-
-
+        List<Bug> bugs = teamManagementRepository.getBugs();
+        bugs.sort(Comparator.comparing(Bug::getTitle));
+        List<Story> stories = teamManagementRepository.getStories();
+        stories.sort(Comparator.comparing(Story::getTitle));
         String taskStatus = parameters.get(0);
         String taskAssignee = parameters.get(1);
-        if (teamManagementRepository.getBugs().isEmpty()
-                && teamManagementRepository.getStories().isEmpty()) {
-            throw new IllegalArgumentException(String.format(NO_TASKS_ERROR,taskStatus,taskAssignee));
+        if (bugs.isEmpty()
+                && stories.isEmpty()) {
+            throw new IllegalArgumentException(String.format(NO_TASKS_ERROR, taskStatus, taskAssignee));
         }
         StringBuilder result = new StringBuilder();
         result.append(String.format(TASKS_HEADER, taskStatus, taskAssignee)).append(System.lineSeparator());
         if (taskStatus.equalsIgnoreCase(ALL_STATUSES_ARGUMENT)
                 && taskAssignee.equalsIgnoreCase(ALL_ASSIGNEES_ARGUMENT)) {
-            displayAllTasksWithoutFiltering(result);
+            displayAllTasksWithoutFiltering(bugs, stories, result);
         } else if (taskStatus.equalsIgnoreCase(ALL_STATUSES_ARGUMENT)
                 && !taskAssignee.equalsIgnoreCase(ALL_ASSIGNEES_ARGUMENT)) {
-            displayAllTasksWithSpecificAssignee(result, taskAssignee);
+            displayAllTasksWithSpecificAssignee(bugs, stories, result, taskAssignee);
         } else if (!taskStatus.equalsIgnoreCase(ALL_STATUSES_ARGUMENT)
                 && taskAssignee.equalsIgnoreCase(ALL_ASSIGNEES_ARGUMENT)) {
-            displayAllTasksWithSpecificStatus(result, taskStatus);
+            displayAllTasksWithSpecificStatus(bugs, stories, result, taskStatus);
         } else if (!taskStatus.equalsIgnoreCase(ALL_STATUSES_ARGUMENT)
                 && !taskAssignee.equalsIgnoreCase(ALL_ASSIGNEES_ARGUMENT)) {
-            displayAllTasksWithSpecificStatusAndAssignee(result, taskStatus, taskAssignee);
+            displayAllTasksWithSpecificStatusAndAssignee(bugs, stories, result, taskStatus, taskAssignee);
         }
         return result.toString().trim();
     }
 
-    private void displayAllTasksWithoutFiltering(StringBuilder result) {
+    private void displayAllTasksWithoutFiltering(List<Bug> bugs, List<Story> stories, StringBuilder result) {
         result.append(SEPARATOR).append(System.lineSeparator());
         result.append(TASKS_HEADER).append(System.lineSeparator());
         result.append(SEPARATOR).append(System.lineSeparator());
 
-        for (Bug bug : teamManagementRepository.getBugs()) {
+        for (Bug bug : bugs) {
             result.append(bug.print()).append(System.lineSeparator());
         }
-        for (Story story : teamManagementRepository.getStories()) {
+        for (Story story : stories) {
             result.append(story.print()).append(System.lineSeparator());
         }
         result.append(System.lineSeparator());
     }
 
-    private void displayAllTasksWithSpecificAssignee(StringBuilder result, String taskAssignee) {
+    private void displayAllTasksWithSpecificAssignee(List<Bug> bugs, List<Story> stories, StringBuilder result, String taskAssignee) {
         result.append(SEPARATOR).append(System.lineSeparator());
         result.append(TASKS_HEADER).append(System.lineSeparator());
         result.append(SEPARATOR).append(System.lineSeparator());
-        for (Bug bug : teamManagementRepository.getBugs()) {
+        for (Bug bug : bugs) {
             if (bug.getAssignee() != null
                     && bug.getAssignee().getName().contains(taskAssignee)) {
                 result.append(bug.print()).append(System.lineSeparator());
             }
         }
-        for (Story story : teamManagementRepository.getStories()) {
+        for (Story story : stories) {
             if (story.getAssignee() != null
                     && story.getAssignee().getName().contains(taskAssignee)) {
                 result.append(story.print()).append(System.lineSeparator());
@@ -91,16 +90,16 @@ public class ListTasksWithAssigneeCommand implements Command {
         result.append(System.lineSeparator());
     }
 
-    private void displayAllTasksWithSpecificStatus(StringBuilder result, String taskStatus) {
+    private void displayAllTasksWithSpecificStatus(List<Bug> bugs, List<Story> stories, StringBuilder result, String taskStatus) {
         result.append(SEPARATOR).append(System.lineSeparator());
         result.append(TASKS_HEADER).append(System.lineSeparator());
         result.append(SEPARATOR).append(System.lineSeparator());
-        for (Bug bug : teamManagementRepository.getBugs()) {
+        for (Bug bug : bugs) {
             if (bug.getStatus().toString().contains(taskStatus.toUpperCase())) {
                 result.append(bug.print()).append(System.lineSeparator());
             }
         }
-        for (Story story : teamManagementRepository.getStories()) {
+        for (Story story : stories) {
             if (story.getStatus().toString().contains(taskStatus.toUpperCase())) {
                 result.append(story.print()).append(System.lineSeparator());
             }
@@ -109,18 +108,18 @@ public class ListTasksWithAssigneeCommand implements Command {
     }
 
     private void displayAllTasksWithSpecificStatusAndAssignee(
-            StringBuilder result, String taskStatus, String taskAssignee) {
+            List<Bug> bugs, List<Story> stories, StringBuilder result, String taskStatus, String taskAssignee) {
         result.append(SEPARATOR).append(System.lineSeparator());
         result.append(TASKS_HEADER).append(System.lineSeparator());
         result.append(SEPARATOR).append(System.lineSeparator());
-        for (Bug bug : teamManagementRepository.getBugs()) {
+        for (Bug bug : bugs) {
             if (bug.getStatus().toString().contains(taskStatus.toUpperCase())
                     && bug.getAssignee() != null
                     && bug.getAssignee().getName().contains(taskAssignee)) {
                 result.append(bug.print()).append(System.lineSeparator());
             }
         }
-        for (Story story : teamManagementRepository.getStories()) {
+        for (Story story : stories) {
             if (story.getStatus().toString().contains(taskStatus.toUpperCase())
                     && story.getAssignee() != null
                     && story.getAssignee().getName().contains(taskAssignee)) {
@@ -129,6 +128,4 @@ public class ListTasksWithAssigneeCommand implements Command {
         }
         result.append(System.lineSeparator());
     }
-
-
 }
