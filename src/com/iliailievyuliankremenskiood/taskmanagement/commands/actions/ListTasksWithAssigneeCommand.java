@@ -28,6 +28,12 @@ public class ListTasksWithAssigneeCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
+        /*TODO We have to implement sort method in this command. Sorting has to be by title only.
+        *  This is the method: ** tasks.sort(Comparator.comparing(Task::getTitle)); **
+        * To work properly my idea is to firstly unite getBugs() & getStories() into 1 collection.
+        * Then sort the collection, and after that use that collection in the filter methods below. */
+
+
         String taskStatus = parameters.get(0);
         String taskAssignee = parameters.get(1);
         if (teamManagementRepository.getBugs().isEmpty()

@@ -3,7 +3,6 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
-import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
