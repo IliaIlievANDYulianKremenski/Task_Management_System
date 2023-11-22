@@ -2,10 +2,12 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Feedback;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ListAllFeedbacksCommand implements Command {
@@ -28,6 +30,10 @@ public class ListAllFeedbacksCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String statusFilter = parameters.get(0);
         List<Feedback> feedbacksList = teamManagementRepository.getFeedbacks();
+        feedbacksList.sort(Comparator.comparing(
+                Feedback::getTitle)
+                .thenComparing(Feedback::getRating)
+        );
         feedbacksList = FilterHelpers.filterFeedbacksByStatus(
                 statusFilter,
                 feedbacksList,

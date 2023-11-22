@@ -3,9 +3,11 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ListAllBugsCommand implements Command {
@@ -29,6 +31,11 @@ public class ListAllBugsCommand implements Command {
         String statusFilter = parameters.get(0);
         String assigneeFilter = parameters.get(1);
         List<Bug> bugList = teamManagementRepository.getBugs();
+        bugList.sort(Comparator.comparing(
+                Bug::getTitle)
+                .thenComparing(Bug::getPriority)
+                .thenComparing(Bug::getSeverity)
+        );
         bugList = FilterHelpers.filterBugsByStatus(
                 statusFilter,
                 bugList,

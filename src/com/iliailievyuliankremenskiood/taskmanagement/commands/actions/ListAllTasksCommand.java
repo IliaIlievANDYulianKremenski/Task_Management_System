@@ -5,6 +5,7 @@ import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagem
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Task;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ListAllTasksCommand implements Command {
@@ -26,6 +27,7 @@ public class ListAllTasksCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         List<Task> tasks = teamManagementRepository.getTasks();
+        tasks.sort(Comparator.comparing(Task::getTitle));
         String taskTitle = parameters.get(0);
         if (tasks.isEmpty()) {
             throw new IllegalArgumentException(String.format(NO_TASKS_ERROR,taskTitle));

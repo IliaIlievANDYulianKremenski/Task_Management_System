@@ -2,10 +2,12 @@ package com.iliailievyuliankremenskiood.taskmanagement.commands.actions;
 
 import com.iliailievyuliankremenskiood.taskmanagement.commands.contracts.Command;
 import com.iliailievyuliankremenskiood.taskmanagement.core.contracts.TeamManagementRepository;
+import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Bug;
 import com.iliailievyuliankremenskiood.taskmanagement.models.contracts.Story;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.FilterHelpers;
 import com.iliailievyuliankremenskiood.taskmanagement.utils.ValidationHelpers;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ListAllStoriesCommand implements Command {
@@ -28,6 +30,11 @@ public class ListAllStoriesCommand implements Command {
         String statusFilter = parameters.get(0);
         String assigneeFilter = parameters.get(1);
         List<Story> storyList = teamManagementRepository.getStories();
+        storyList.sort(Comparator.comparing(
+                Story::getTitle)
+                .thenComparing(Story::getPriority)
+                .thenComparing(Story::getSize)
+        );
         storyList = FilterHelpers.filterStoriesByStatus(
                 statusFilter,
                 storyList,
