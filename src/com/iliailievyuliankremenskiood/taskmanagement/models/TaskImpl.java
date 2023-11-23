@@ -127,10 +127,6 @@ public abstract class TaskImpl implements Task {
                 attributeOldContent,
                 attributeNewContent));
 
-       /* DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-
-        eventSb.append(String.format("The change was done on the following date and time: %s.", dtf.format(now)));*/
         activityHistory.add(eventSb.toString());
     }
 
